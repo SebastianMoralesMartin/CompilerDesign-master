@@ -1,4 +1,5 @@
-/*A01745219 Eduardo R. Muller Romero
+/*
+A01745219 Eduardo R. Muller Romero
 A01376228 Sebastian Morales Martin
 A01746645 Guillermo Adrian Urbina A.
 */
@@ -17,7 +18,7 @@ namespace Falak {
         CARRIAGE_RETURN,
         CHARACTER,
         COMMA,
-        COMMENT,
+        //COMMENT, Used only for debugging Purposes, now deprecated
         DEC,
         DIV,
         DO,
@@ -73,7 +74,6 @@ namespace Falak {
         TRUE,
         UNARY_PLUS,
         UNARY_MINUS,
-
         VAR,
         WHILE,
         WHITE_SPACE,
