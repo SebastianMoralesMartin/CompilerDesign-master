@@ -18,7 +18,7 @@ namespace Falak {
         CARRIAGE_RETURN,
         CHARACTER,
         COMMA,
-        //COMMENT, Used only for debugging Purposes, now deprecated
+        //COMMENT,              Used only for debugging Purposes, now deprecated
         DEC,
         DIV,
         DO,
@@ -45,7 +45,7 @@ namespace Falak {
         LESS_EQUAL_THAN,
         MAIN,
         MUL,
-        //MULTI_LINE_COMMENT,  used only for debugging purposes, now deprecated
+        //MULTI_LINE_COMMENT,   used only for debugging purposes, now deprecated
         NEW_LINE,
         NEG,
         NEW,
