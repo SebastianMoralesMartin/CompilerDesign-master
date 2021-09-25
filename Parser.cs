@@ -5,7 +5,7 @@
 */
 
 /*
- *  BNF to EBNF:
+ *  LL(1):
  *
  *  Program ::= defList
  *  defList ::= (varDef | funDef)* 
@@ -16,7 +16,9 @@
  *
  *  varDefList ::= ( varDef )*
  * 
- *  stmtList ::= ( stmtAssign | stmtIncr | stmtDecr | stmtFunCall | stmtIf | stmtWhile | stmtDoWhile | stmtBreak | stmtReturn | stmtEmpty )*
+ *  stmtList ::= ( id ( ( '=' expr ';' ) | ( '(' exprList ')' ) |
+ *                  stmtIncr | stmtDecr | stmtIf | stmtWhile |
+ *                  stmtDoWhile | stmtBreak | stmtReturn | stmtEmpty )*
  *  *stmtAssign ::= id '=' expr ';'
  *  stmtIncr ::= 'inc' id ';'
  *  stmtDecr ::= 'dec' id ';'
@@ -46,7 +48,7 @@
  *
  *
  * 
- *  exprPrimary ::= ( id | funCall | array | lit | ( '(' expr ')' ) )
+ *  exprPrimary ::= ( id ( '(' exprList ')' )?  | array | lit | ( '(' expr ')' ) )
  *  array ::= '[' exprList ']'
  *  lit ::= ( litBool | litInt | litChar | litStr )
  * 
