@@ -19,11 +19,13 @@
  *  stmtList ::= ( id ( ( '=' expr ';' ) | ( '(' exprList ')' ) |
  *                  stmtIncr | stmtDecr | stmtIf | stmtWhile |
  *                  stmtDoWhile | stmtBreak | stmtReturn | stmtEmpty )*
- *  *stmtAssign ::= id '=' expr ';'
+ *
+ * 
+ *          *stmtAssign ::= id '=' expr ';'
  *  stmtIncr ::= 'inc' id ';'
  *  stmtDecr ::= 'dec' id ';'
  *  stmtFunCall ::= funCall ';'
- *  *funCall ::= id '(' exprList ')'
+ *          *funCall ::= id '(' exprList ')'
  *  exprList ::= expr exprListCont
  *  exprListCont ::= ',' expr exprListcont
  *  stmtIf ::= 'if' '(' expr ')' '{' stmtList '}' (elseIfList else)?
