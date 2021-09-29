@@ -57,180 +57,213 @@
  */
 
 using System;
-using System.Collecitons.Generic;
-public class Parser{
-    IEnumerator<Token> tokenStream;
+using System.Collections.Generic;
 
-    public Parser(IEnumerator<Token> tokenStream) {
-        this.tokenStream = tokenStream;
-        this.tokenStream.MoveNext();
-    }
+namespace Falak
+{
+    class Parser{
+        IEnumerator<Token> tokenStream;
 
-    public TokenCategory Current {
-        get {
-            return tokenStream.Current.Category;
+        public Parser(IEnumerator<Token> tokenStream) {
+            this.tokenStream = tokenStream;
+            this.tokenStream.MoveNext();
         }
-    }
 
-    public Token Expect(TokenCategory category) {
-        if (Current == category) {
-            Token current = tokenStream.Current;
-            tokenStream.MoveNext();
-            return current;
-        } else {
-            throw new SyntaxError();
+        public TokenCategory Current {
+            get {
+                return tokenStream.Current.Category;
+            }
         }
-    }
 
-    public void Program()
-    {
-        defList();
-    }
-
-    public void defList()
-    {
-        switch (Current){
-            case TokenCategory.VAR: 
-                varDef();
-                break;
-            
-            case TokenCategory.IDENTIFIER: 
-                funDef();
-                break;
-            
-            default: throw new SyntaxError();
-
+        public Token Expect(TokenCategory category) {
+            if (Current == category) {
+                Token current = tokenStream.Current;
+                tokenStream.MoveNext();
+                return current;
+            } else {
+                throw new SyntaxError(category, tokenStream.Current);
+            }
         }
-    }
 
-    public void varDef(){
-        Expect(TokenCategory.VAR);
-        idList();
-        Expect(TokenCategory.SEMICOLON);
-    }
+        public void Program()
+        {
+            defList();
+        }
 
-    public void idList(){
-        Expect(TokenCategory.IDENTIFIER);
-        idListCont();
-    }
+        public void defList()
+        {
+            switch (Current){
+                case TokenCategory.VAR: 
+                    varDef();
+                    break;
+                
+                case TokenCategory.IDENTIFIER: 
+                    funDef();
+                    break;
+                
+                default: throw new SyntaxError(Current, tokenStream.Current);
 
-    public void idListCont(){
-        if(Current == TokenCategory.COMMA){
-            Expect(TokenCategory.COMMA)
+            }
+        }
+
+        public void varDef(){
+            Expect(TokenCategory.VAR);
+            idList();
+            Expect(TokenCategory.SEMICOLON);
+        }
+
+        public void idList(){
             Expect(TokenCategory.IDENTIFIER);
             idListCont();
         }
-    }
-    
-    public void funDef(){
-        Expect(TokenCategory.IDENTIFIER);
-        Expect(TokenCategory.PARENTHESIS_OPEN);
-        idList();
-        Expect(TokenCategory.PARENTHESIS_CLOSE);
-        Expect(TokenCategory.KEY_LEFT);
-        varDefList();
-        stmtList();
-        Expect(TokenCategory.KEY_RIGHT); 
-    }
 
-    public void stmtList(){
-        switch (Current){
-            case TokenCategory.IDENTIFIER:
-                switch (Current){
-                    case TokenCategory.ASSIGN:
-                        Expect(TokenCategory.ASSIGN);
-                        expr();
-                        Expect(TokenCategory.SEMICOLON);
-                        break;
-                    case TokenCategory.PARENTHESIS_OPEN:
-                        Expect(TokenCategory.PARENTHESIS_OPEN);
-                        exprList();
-                        Expect(TokenCategory.PARENTHESIS_CLOSE);
-                    default: throw new SyntaxError()
-                }
-                break;
-
-
-            case TokenCategory.INC:
-                stmtIncr();
-                break;
-
-
-            case TokenCategory.DEC:
-                stmtDecr();
-                break;
-
-            case TokenCategory.IF:
-                stmtIf();
-                break;
-
-            case TokenCategory.WHILE: 
-                stmtWhile();
-                break;
-
-            case TokenCategory.DO:
-                stmtDoWhile();
-                break;
-            
-            case TokenCategory.BREAK:
-                stmtBreak();
-                break;
-            
-            case TokenCategory.RETURN:
-                stmtReturn();
-                break;
-
-            case TokenCategory.SEMICOLON:
-                stmtEmpty();
-                break;
-
-            default: throw new SyntaxError();
+        public void idListCont(){
+            if(Current == TokenCategory.COMMA)
+            {
+                Expect(TokenCategory.COMMA);
+                Expect(TokenCategory.IDENTIFIER);
+                idListCont();
+            }
         }
-    }
+        
+        public void funDef(){
+            Expect(TokenCategory.IDENTIFIER);
+            Expect(TokenCategory.PARENTHESIS_OPEN);
+            idList();
+            Expect(TokenCategory.PARENTHESIS_CLOSE);
+            Expect(TokenCategory.KEY_LEFT);
+            varDefList();
+            stmtList();
+            Expect(TokenCategory.KEY_RIGHT); 
+        }
 
-    public void stmtIncr(){
-        Expect(TokenCategory.INC);
-        Expect(TokenCategory.IDENTIFIER);
-        Expect(TokenCategory.SEMICOLON);
-    }
+        public void varDefList()
+        {
+            while (Current == TokenCategory.VAR)
+            {
+                varDef();
+            }
+        }
 
-    public void stmtDecr(){
-        Expect(TokenCategory.DEC);
-        Expect(TokenCategory.IDENTIFIER);
-        Expect(TokenCategory.SEMICOLON);
-    }
+        public void stmtList(){
+            switch (Current){
+                case TokenCategory.IDENTIFIER:
+                    Expect(TokenCategory.IDENTIFIER);
+                    switch (Current){
+                        case TokenCategory.ASSIGN:
+                            Expect(TokenCategory.ASSIGN);
+                            expr();
+                            Expect(TokenCategory.SEMICOLON);
+                            break;
+                        case TokenCategory.PARENTHESIS_OPEN:
+                            Expect(TokenCategory.PARENTHESIS_OPEN);
+                            exprList();
+                            Expect(TokenCategory.PARENTHESIS_CLOSE);
+                            break;
+                        default: throw new SyntaxError(Current, tokenStream.Current);
+                    }
+                    break;
 
-    public void exprList(){
-        expr();
-        exprListCont();
-    } 
 
-    public void exprListCont(){
-        if(Current == TokenCategory.COMMA){
-            Expect(TokenCategory.COMMA)
+                case TokenCategory.INC:
+                    stmtIncr();
+                    break;
+
+
+                case TokenCategory.DEC:
+                    stmtDecr();
+                    break;
+
+                case TokenCategory.IF:
+                    stmtIf();
+                    break;
+
+                case TokenCategory.WHILE: 
+                    stmtWhile();
+                    break;
+
+                case TokenCategory.DO:
+                    stmtDoWhile();
+                    break;
+                
+                case TokenCategory.BREAK:
+                    stmtBreak();
+                    break;
+                
+                case TokenCategory.RETURN:
+                    stmtReturn();
+                    break;
+
+                case TokenCategory.SEMICOLON:
+                    stmtEmpty();
+                    break;
+
+                default: throw new SyntaxError(Current, tokenStream.Current);
+            }
+        }
+
+        public void stmtIncr(){
+            Expect(TokenCategory.INC);
+            Expect(TokenCategory.IDENTIFIER);
+            Expect(TokenCategory.SEMICOLON);
+        }
+
+        public void stmtDecr(){
+            Expect(TokenCategory.DEC);
+            Expect(TokenCategory.IDENTIFIER);
+            Expect(TokenCategory.SEMICOLON);
+        }
+
+        public void exprList(){
             expr();
             exprListCont();
+        } 
+
+        public void exprListCont(){
+            if(Current == TokenCategory.COMMA)
+            {
+                Expect(TokenCategory.COMMA);
+                expr();
+                exprListCont();
+            }
         }
-    }
 
-    public void stmtIf(){
-        Expect(TokenCategory.IF);
-        Expect(TokenCategory.PARENTHESIS_OPEN);
-        expr();
-        Expect(TokenCategory.PARENTHESIS_CLOSE);
-        Expect(TokenCategory.KEY_LEFT);
-        stmtList();
-        Expect(TokenCategory.KEY_RIGHT);
+        public void stmtIf(){
+            Expect(TokenCategory.IF);
+            Expect(TokenCategory.PARENTHESIS_OPEN);
+            expr();
+            Expect(TokenCategory.PARENTHESIS_CLOSE);
+            Expect(TokenCategory.KEY_LEFT);
+            stmtList();
+            Expect(TokenCategory.KEY_RIGHT);
 
-        if(Current == TokenCategory.ELSEIF){
-            elseIfList();
-            stmtElse();
+            if(Current == TokenCategory.ELSEIF){
+                elseIfList();
+                stmtElse();
+            }
         }
-    }
 
-    public void elseIfList(){
-        while(Current == TokenCategory.ELSEIF){
-            Expect(TokenCategory.ELSEIF);
+        public void elseIfList(){
+            while(Current == TokenCategory.ELSEIF){
+                Expect(TokenCategory.ELSEIF);
+                Expect(TokenCategory.PARENTHESIS_OPEN);
+                expr();
+                Expect(TokenCategory.PARENTHESIS_CLOSE);
+                Expect(TokenCategory.KEY_LEFT);
+                stmtList();
+                Expect(TokenCategory.KEY_RIGHT);
+            }
+        }
+
+        public void stmtElse(){
+            Expect(TokenCategory.ELSE);
+            Expect(TokenCategory.KEY_LEFT);
+            stmtList();
+            Expect(TokenCategory.KEY_RIGHT);
+        }
+
+        public void stmtWhile(){
+            Expect(TokenCategory.WHILE);
             Expect(TokenCategory.PARENTHESIS_OPEN);
             expr();
             Expect(TokenCategory.PARENTHESIS_CLOSE);
@@ -238,241 +271,224 @@ public class Parser{
             stmtList();
             Expect(TokenCategory.KEY_RIGHT);
         }
-    }
 
-    public void stmtElse(){
-        Expect(TokenCategory.ELSE);
-        Expect(TokenCategory.KEY_LEFT);
-        stmtList();
-        Expect(TokenCategory.KEY_RIGHT);
-    }
+        public void stmtDoWhile(){
+            Expect(TokenCategory.DO);
+            Expect(TokenCategory.KEY_LEFT);
+            stmtList();
+            Expect(TokenCategory.KEY_RIGHT);
+            Expect(TokenCategory.WHILE);
+            Expect(TokenCategory.PARENTHESIS_OPEN);
+            stmtList();
+            Expect(TokenCategory.PARENTHESIS_CLOSE);
+            Expect(TokenCategory.SEMICOLON);
+        }
 
-    public void stmtWhile(){
-        Expect(TokenCategory.WHILE);
-        Expect(TokenCategory.PARENTHESIS_OPEN);
-        expr();
-        Expect(TokenCategory.PARENTHESIS_CLOSE);
-        Expect(TokenCategory.KEY_LEFT);
-        stmtList();
-        Expect(TokenCategory.KEY_RIGHT);
-    }
+        public void stmtBreak(){
+            Expect(TokenCategory.BREAK);
+            Expect(TokenCategory.SEMICOLON);
+        }
 
-    public void stmtDoWhile(){
-        Expect(TokenCategory.DO);
-        Expect(TokenCategory.KEY_LEFT);
-        stmtList();
-        Expect(TokenCategory.KEY_RIGHT);
-        Expect(TokenCategory.WHILE);
-        Expect(TokenCategory.PARENTHESIS_OPEN);
-        stmtList();
-        Expect(TokenCategory.PARENTHESIS_CLOSE);
-        Expect(TokenCategory.SEMICOLON);
-    }
+        public void stmtReturn(){
+            Expect(TokenCategory.RETURN);
+            expr();
+            Expect(TokenCategory.SEMICOLON);
+        }
 
-    public void stmtBreak(){
-        Expect(TokenCategory.BREAK);
-        Expect(TokenCategory.SEMICOLON);
-    }
+        public void stmtEmpty(){
+            Expect(TokenCategory.SEMICOLON);
+        }
 
-    public void stmtReturn(){
-        Expect(TokenCategory.RETURN);
-        expr();
-        Expect(TokenCategory.SEMICOLON);
-    }
+        public void expr(){
+            exprOr();
+        }
 
-    public void stmtEmpty(){
-        Expect(TokenCategory.SEMICOLON);
-    }
-
-    public void expr(){
-        exprOr();
-    }
-
-    public void exprOr(){
-        exprAnd();
-        while(Current == TokenCategory.OR || 
-                Current == TokenCategory.XOR){
-            switch (Current){
-                case TokenCategory.OR:
-                    Expect(TokenCategory.OR);
-                    break;
-                case TokenCategory.XOR:
-                    Expect(TokenCategory.XOR);
-                    break;
-                default: throw new SyntaxError();
-            }
+        public void exprOr(){
             exprAnd();
-        }
-
-    }
-
-    public void exprAnd(){
-        exprComp();
-        while(Current == TokenCategory.AND){
-            Expect(TokenCategory.AND);
-            exprComp();
-        }
-    }
-
-    public void exprComp(){
-        exprRel();
-        while(Current == TokenCategory.EQUALS_TO || 
-                Current == TokenCategory.NOT_EQUAL){
-            switch(Current){
-                case TokenCategory.EQUALS_TO:
-                    Expect(TokenCategory.EQUALS_TO);
-                    break;
-                case TokenCategory.NOT_EQUAL:
-                    Expect(TokenCategory.NOT_EQUAL);
-                    break;
-                default: throw new SyntaxError();
-            }
-            exprRel();
-        }
-    }
-
-    public void exprRel(){
-        exprAdd();
-        while(Current == TokenCategory.GREATER_THAN ||
-                Current == TokenCategory.GREATER_EQUAL_THAN ||
-                Current == TokenCategory.LESS_THAN || 
-                Current == TokenCategory.LESS_EQUAL_THAN){
-            switch(Current){
-                case TokenCategory.GREATER_EQUAL_THAN:
-                    Expect(TokenCategory.GREATER_THAN);
-                    break;
-                case TokenCategory.GREATER_EQUAL_THAN:
-                    Expect(TokenCategory.GREATER_EQUAL_THAN);
-                    break;
-                case TokenCategory.LESS_THAN:
-                    Exoect(TokenCategory.LESS_THAN);
-                    break;
-                case TokenCategory.LESS_EQUAL_THAN:
-                    Expect(TokenCategory.LESS_EQUAL_THAN);
-                    break;
-                default: throw new SyntaxError();
-            }
-            exprAdd();
-        }
-    }
-
-    public void exprAdd(){
-        exprMul();
-        while(Current == TokenCategory.PLUS || Current == TokenCategory.NEG){
-            switch(Current){
-                case TokenCategory.PLUS:
-                    Expect(TokenCategory.PLUS);
-                    break;
-                case TokenCategory.NEG:
-                    Expect(TokenCategory.NEG);
-                    break;
-                default: throw new SyntaxError();
-            }
-            exprMul();
-        }
-    }
-
-    public void exprMul(){
-        exprUnary();
-        while(Current == TokenCategory.MUL ||
-                Current == TokenCategory.DIV ||
-                Current == TokenCategory.REMAINDER){
-            switch(Current){
-                case TokenCategory.MUL:
-                    Expect(TokenCategory.MUL);
-                    break;
-                case TokenCategory.DIV:
-                    Expect(TokenCategory.DIV);
-                    break;
-                case TokenCategory.REMAINDER:
-                    Expect(TokenCategory.REMAINDER);
-                    break;
-                default: throw new SyntaxError();
-            }
-            exprUnary();
-        }
-    }
-
-    public void exprUnary(){
-        exprPrimary();
-        while(Current == TokenCategory.PLUS ||
-                Current == TokenCategory.NEG ||
-                Current == TokenCategory.NOT){
-            switch(Current){
-                case TokenCategory.PLUS:
-                    Expect(TokenCategory.PLUS);
-                    break;
-                case TokenCategory.NEG:
-                    Expect(TokenCategory.NEG);
-                    break;
-                case TokenCategory.NOT:
-                    Expect(TokenCategory.NOT);
-                    break;
-                default: throw new SyntaxError();
-            }
-            exprPrimary();    
-        }
-    }
-
-    public void exprPrimary(){
-        switch (Current){
-            case TokenCategory.IDENTIFIER:
-                Expect(TokenCategory.IDENTIFIER);
-                if(Current == TokenCategory.PARENTHESIS_OPEN){
-                    Expect(TokenCategory.PARENTHESIS_OPEN);
-                    exprList();
-                    Expect(TokenCategory.CLOSE);
+            while(Current == TokenCategory.OR || 
+                    Current == TokenCategory.XOR){
+                switch (Current){
+                    case TokenCategory.OR:
+                        Expect(TokenCategory.OR);
+                        break;
+                    case TokenCategory.XOR:
+                        Expect(TokenCategory.XOR);
+                        break;
+                    default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                break;
-            case TokenCategory.BRACKET_LEFT:
-                array();
-                break;
-            case TokenCategory.BOOL:
-                lit();
-                break;
-            case TokenCategory.INT:
-                lit();
-                break;
-            case TokenCategory.CHARACTER:
-                lit();
-                break;
-            case TokenCategory.STRING:
-                lit();
-                break;
+                exprAnd();
+            }
 
-            case TokenCategory.PARENTHESIS_OPEN:
-                Expect(TokenCategory.PARENTHESIS_OPEN);
-                expr();
-                Expect(TokenCategory.CLOSE);
-                break;
-            default: throw new SyntaxError();
         }
-    }
 
-    public void array(){
-        Expect(TokenCategory.BRACKET_LEFT);
-        exprList();
-        Expect(TokenCategory.BRACKET_RIGHT);
-    }
-
-    public void lit(){
-        switch(Current){
-            case TokenCategory.BOOL:
-                Expect(TokenCategory.BOOL);
-                break;
-            case TokenCategory.INT:
-                Expect(TokenCategory.INT);
-                break;
-            case TokenCategory.CHARACTER:
-                Expect(TokenCategory.CHARACTER);
-                break;
-            case TokenCategory.STRING:
-                Expect(TokenCategory.STRING);
-                break;
-            default: throw new SyntaxError();
+        public void exprAnd(){
+            exprComp();
+            while(Current == TokenCategory.AND){
+                Expect(TokenCategory.AND);
+                exprComp();
+            }
         }
-    }
+
+        public void exprComp(){
+            exprRel();
+            while(Current == TokenCategory.EQUALS_TO || 
+                    Current == TokenCategory.NOT_EQUAL){
+                switch(Current){
+                    case TokenCategory.EQUALS_TO:
+                        Expect(TokenCategory.EQUALS_TO);
+                        break;
+                    case TokenCategory.NOT_EQUAL:
+                        Expect(TokenCategory.NOT_EQUAL);
+                        break;
+                    default: throw new SyntaxError(Current, tokenStream.Current);
+                }
+                exprRel();
+            }
+        }
+
+        public void exprRel(){
+            exprAdd();
+            while(Current == TokenCategory.GREATER_THAN ||
+                    Current == TokenCategory.GREATER_EQUAL_THAN ||
+                    Current == TokenCategory.LESS_THAN || 
+                    Current == TokenCategory.LESS_EQUAL_THAN){
+                switch(Current){
+                    case TokenCategory.GREATER_THAN:
+                        Expect(TokenCategory.GREATER_THAN);
+                        break;
+                    case TokenCategory.GREATER_EQUAL_THAN:
+                        Expect(TokenCategory.GREATER_EQUAL_THAN);
+                        break;
+                    case TokenCategory.LESS_THAN:
+                        Expect(TokenCategory.LESS_THAN);
+                        break;
+                    case TokenCategory.LESS_EQUAL_THAN:
+                        Expect(TokenCategory.LESS_EQUAL_THAN);
+                        break;
+                    default: throw new SyntaxError(Current, tokenStream.Current);
+                }
+                exprAdd();
+            }
+        }
+
+        public void exprAdd(){
+            exprMul();
+            while(Current == TokenCategory.PLUS || Current == TokenCategory.NEG){
+                switch(Current){
+                    case TokenCategory.PLUS:
+                        Expect(TokenCategory.PLUS);
+                        break;
+                    case TokenCategory.NEG:
+                        Expect(TokenCategory.NEG);
+                        break;
+                    default: throw new SyntaxError(Current, tokenStream.Current);
+                }
+                exprMul();
+            }
+        }
+
+        public void exprMul(){
+            exprUnary();
+            while(Current == TokenCategory.MUL ||
+                    Current == TokenCategory.DIV ||
+                    Current == TokenCategory.REMAINDER){
+                switch(Current){
+                    case TokenCategory.MUL:
+                        Expect(TokenCategory.MUL);
+                        break;
+                    case TokenCategory.DIV:
+                        Expect(TokenCategory.DIV);
+                        break;
+                    case TokenCategory.REMAINDER:
+                        Expect(TokenCategory.REMAINDER);
+                        break;
+                    default: throw new SyntaxError(Current, tokenStream.Current);
+                }
+                exprUnary();
+            }
+        }
+
+        public void exprUnary(){
+            exprPrimary();
+            while(Current == TokenCategory.PLUS ||
+                    Current == TokenCategory.NEG ||
+                    Current == TokenCategory.NOT){
+                switch(Current){
+                    case TokenCategory.PLUS:
+                        Expect(TokenCategory.PLUS);
+                        break;
+                    case TokenCategory.NEG:
+                        Expect(TokenCategory.NEG);
+                        break;
+                    case TokenCategory.NOT:
+                        Expect(TokenCategory.NOT);
+                        break;
+                    default: throw new SyntaxError(Current, tokenStream.Current);
+                }
+                exprPrimary();    
+            }
+        }
+
+        public void exprPrimary(){
+            switch (Current){
+                case TokenCategory.IDENTIFIER:
+                    Expect(TokenCategory.IDENTIFIER);
+                    if(Current == TokenCategory.PARENTHESIS_OPEN){
+                        Expect(TokenCategory.PARENTHESIS_OPEN);
+                        exprList();
+                        Expect(TokenCategory.PARENTHESIS_CLOSE);
+                    }
+                    break;
+                case TokenCategory.BRACKET_LEFT:
+                    array();
+                    break;
+                case TokenCategory.BOOL:
+                    lit();
+                    break;
+                case TokenCategory.INT:
+                    lit();
+                    break;
+                case TokenCategory.CHARACTER:
+                    lit();
+                    break;
+                case TokenCategory.STRING:
+                    lit();
+                    break;
+
+                case TokenCategory.PARENTHESIS_OPEN:
+                    Expect(TokenCategory.PARENTHESIS_OPEN);
+                    expr();
+                    Expect(TokenCategory.PARENTHESIS_CLOSE);
+                    break;
+                default: throw new SyntaxError(Current, tokenStream.Current);
+            }
+        }
+
+        public void array(){
+            Expect(TokenCategory.BRACKET_LEFT);
+            exprList();
+            Expect(TokenCategory.BRACKET_RIGHT);
+        }
+
+        public void lit(){
+            switch(Current){
+                case TokenCategory.BOOL:
+                    Expect(TokenCategory.BOOL);
+                    break;
+                case TokenCategory.INT:
+                    Expect(TokenCategory.INT);
+                    break;
+                case TokenCategory.CHARACTER:
+                    Expect(TokenCategory.CHARACTER);
+                    break;
+                case TokenCategory.STRING:
+                    Expect(TokenCategory.STRING);
+                    break;
+                default: throw new SyntaxError(Current, tokenStream.Current);
+            }
+        }
 
 
 
+}
 }

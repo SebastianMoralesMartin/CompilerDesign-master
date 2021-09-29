@@ -3,6 +3,9 @@ A01745219 Eduardo R. Muller Romero
     A01376228 Sebastian Morales Martin
     A01746645 Guillermo Adrian Urbina A.
 */
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Falak
 {

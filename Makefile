@@ -1,7 +1,7 @@
 
-falak.exe: Driver.cs Scanner.cs Token.cs TokenCategory.cs
+falak.exe: Driver.cs Scanner.cs Token.cs TokenCategory.cs Parser.cs SyntaxError.cs
 
-	mcs -out:falak.exe Driver.cs Scanner.cs Token.cs TokenCategory.cs
+	mcs -out:falak.exe Driver.cs Scanner.cs Token.cs TokenCategory.cs Parser.cs SyntaxError.cs
 
 clean:
 
