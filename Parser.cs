@@ -16,7 +16,7 @@
  *
  *  varDefList ::= ( varDef )*
  * 
- *  stmtList ::= ( id ( ( '=' expr ';' ) | ( '(' exprList ')' ) |
+ *  stmtList ::= ( id ( ( '=' expr ';' ) | ( '(' exprList ';' ')' ) |
  *                  stmtIncr | stmtDecr | stmtIf | stmtWhile |
  *                  stmtDoWhile | stmtBreak | stmtReturn | stmtEmpty )*
  *
@@ -113,8 +113,12 @@ namespace Falak
         }
 
         public void idList(){
-            Expect(TokenCategory.IDENTIFIER);
-            idListCont();
+            if (Current == TokenCategory.IDENTIFIER)
+            {
+                Expect(TokenCategory.IDENTIFIER);
+                idListCont();
+            }
+            
         }
 
         public void idListCont(){
@@ -146,59 +150,63 @@ namespace Falak
         }
 
         public void stmtList(){
-            switch (Current){
-                case TokenCategory.IDENTIFIER:
-                    Expect(TokenCategory.IDENTIFIER);
-                    switch (Current){
-                        case TokenCategory.ASSIGN:
-                            Expect(TokenCategory.ASSIGN);
-                            expr();
-                            Expect(TokenCategory.SEMICOLON);
-                            break;
-                        case TokenCategory.PARENTHESIS_OPEN:
-                            Expect(TokenCategory.PARENTHESIS_OPEN);
-                            exprList();
-                            Expect(TokenCategory.PARENTHESIS_CLOSE);
-                            break;
-                        default: throw new SyntaxError(Current, tokenStream.Current);
-                    }
-                    break;
+            while (Current != TokenCategory.KEY_RIGHT)
+            {
+                switch (Current){
+                    case TokenCategory.IDENTIFIER:
+                        Expect(TokenCategory.IDENTIFIER);
+                        switch (Current){
+                            case TokenCategory.ASSIGN:
+                                Expect(TokenCategory.ASSIGN);
+                                expr();
+                                Expect(TokenCategory.SEMICOLON);
+                                break;
+                            case TokenCategory.PARENTHESIS_OPEN:
+                                Expect(TokenCategory.PARENTHESIS_OPEN);
+                                exprList();
+                                Expect(TokenCategory.PARENTHESIS_CLOSE);
+                                Expect(TokenCategory.SEMICOLON);
+                                break;
+                            default: throw new SyntaxError(Current, tokenStream.Current);
+                        }
+                        break;
 
 
-                case TokenCategory.INC:
-                    stmtIncr();
-                    break;
+                    case TokenCategory.INC:
+                        stmtIncr();
+                        break;
 
 
-                case TokenCategory.DEC:
-                    stmtDecr();
-                    break;
+                    case TokenCategory.DEC:
+                        stmtDecr();
+                        break;
 
-                case TokenCategory.IF:
-                    stmtIf();
-                    break;
+                    case TokenCategory.IF:
+                        stmtIf();
+                        break;
 
-                case TokenCategory.WHILE: 
-                    stmtWhile();
-                    break;
+                    case TokenCategory.WHILE: 
+                        stmtWhile();
+                        break;
 
-                case TokenCategory.DO:
-                    stmtDoWhile();
-                    break;
+                    case TokenCategory.DO:
+                        stmtDoWhile();
+                        break;
                 
-                case TokenCategory.BREAK:
-                    stmtBreak();
-                    break;
+                    case TokenCategory.BREAK:
+                        stmtBreak();
+                        break;
                 
-                case TokenCategory.RETURN:
-                    stmtReturn();
-                    break;
+                    case TokenCategory.RETURN:
+                        stmtReturn();
+                        break;
 
-                case TokenCategory.SEMICOLON:
-                    stmtEmpty();
-                    break;
+                    case TokenCategory.SEMICOLON:
+                        stmtEmpty();
+                        break;
 
-                default: throw new SyntaxError(Current, tokenStream.Current);
+                    default: throw new SyntaxError(Current, tokenStream.Current);
+                }
             }
         }
 
