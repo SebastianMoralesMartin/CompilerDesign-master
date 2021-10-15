@@ -198,7 +198,7 @@ namespace Falak
                         break;
                 
                     case TokenCategory.RETURN:
-                        stmtReturn();
+                        stmtReturn(); 
                         break;
 
                     case TokenCategory.SEMICOLON:
@@ -244,12 +244,9 @@ namespace Falak
             Expect(TokenCategory.KEY_LEFT);
             stmtList();
             Expect(TokenCategory.KEY_RIGHT);
-
-            if(Current == TokenCategory.ELSEIF){
-                elseIfList();
-                stmtElse();
-            }
-        }
+            elseIfList();
+            stmtElse();
+        }   
 
         public void elseIfList(){
             while(Current == TokenCategory.ELSEIF){
@@ -264,10 +261,14 @@ namespace Falak
         }
 
         public void stmtElse(){
-            Expect(TokenCategory.ELSE);
-            Expect(TokenCategory.KEY_LEFT);
-            stmtList();
-            Expect(TokenCategory.KEY_RIGHT);
+            if (Current == TokenCategory.ELSE)
+            {
+                Expect(TokenCategory.ELSE);
+                Expect(TokenCategory.KEY_LEFT);
+                stmtList();
+                Expect(TokenCategory.KEY_RIGHT);  
+            }
+            
         }
 
         public void stmtWhile(){
@@ -450,7 +451,10 @@ namespace Falak
                 case TokenCategory.BRACKET_LEFT:
                     array();
                     break;
-                case TokenCategory.BOOL:
+                case TokenCategory.TRUE:
+                    lit();
+                    break;
+                case TokenCategory.FALSE:
                     lit();
                     break;
                 case TokenCategory.INT:
@@ -480,8 +484,11 @@ namespace Falak
 
         public void lit(){
             switch(Current){
-                case TokenCategory.BOOL:
-                    Expect(TokenCategory.BOOL);
+                case TokenCategory.TRUE:
+                    Expect(TokenCategory.TRUE);
+                    break;
+                case TokenCategory.FALSE:
+                    Expect(TokenCategory.FALSE);
                     break;
                 case TokenCategory.INT:
                     Expect(TokenCategory.INT);
