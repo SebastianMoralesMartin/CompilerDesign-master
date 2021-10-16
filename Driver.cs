@@ -12,12 +12,13 @@ namespace Falak {
 	
     public class Driver {
 
-        const string VERSION = "0.2";
+        const string VERSION = "0.3";
 
         //-----------------------------------------------------------
         static readonly string[] ReleaseIncludes = {
             "Lexical analysis",
-            "Syntactic analysis"
+            "Syntactic analysis",
+            "AST construction"
         };
 
         //-----------------------------------------------------------
@@ -59,8 +60,8 @@ namespace Falak {
                 var input = File.ReadAllText(inputPath);
                 var parser = new Parser(
                     new Scanner(input).Scan().GetEnumerator());
-                parser.Program();
-                Console.WriteLine("Syntax OK.");
+                var program = parser.Program();
+                Console.Write(program.ToStringTree());
 
             } catch (Exception e) {
 
