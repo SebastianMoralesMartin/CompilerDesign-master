@@ -23,14 +23,8 @@ namespace Falak {
 
         //-----------------------------------------------------------
         void PrintAppHeader() {
-            Console.WriteLine("Buttercup compiler, version " + VERSION);
-            Console.WriteLine(
-                "Copyright \u00A9 2013-2021 by A. Ortiz, ITESM CEM.");
-            Console.WriteLine("This program is free software; you may "
-                + "redistribute it under the terms of");
-            Console.WriteLine("the GNU General Public License version 3 or "
-                + "later.");
-            Console.WriteLine("This program has absolutely no warranty.");
+            Console.WriteLine("Falak compiler, version " + VERSION);
+            
         }
 
         //-----------------------------------------------------------
