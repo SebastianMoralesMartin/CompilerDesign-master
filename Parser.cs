@@ -85,12 +85,12 @@ namespace Falak
             }
         }
 
-        public void Program()
+        public Node Program()
         {
             defList();
         }
 
-        public void defList()
+        public Node defList()
         {
             switch (Current){
                 case TokenCategory.VAR: 
@@ -106,13 +106,13 @@ namespace Falak
             }
         }
 
-        public void varDef(){
+        public Node varDef(){
             Expect(TokenCategory.VAR);
             idList();
             Expect(TokenCategory.SEMICOLON);
         }
 
-        public void idList(){
+        public Node idList(){
             if (Current == TokenCategory.IDENTIFIER)
             {
                 Expect(TokenCategory.IDENTIFIER);
@@ -121,7 +121,7 @@ namespace Falak
             
         }
 
-        public void idListCont(){
+        public Node idListCont(){
             if(Current == TokenCategory.COMMA)
             {
                 Expect(TokenCategory.COMMA);
@@ -130,7 +130,7 @@ namespace Falak
             }
         }
         
-        public void funDef(){
+        public Node funDef(){
             Expect(TokenCategory.IDENTIFIER);
             Expect(TokenCategory.PARENTHESIS_OPEN);
             idList();
@@ -141,7 +141,7 @@ namespace Falak
             Expect(TokenCategory.KEY_RIGHT); 
         }
 
-        public void varDefList()
+        public Node varDefList()
         {
             while (Current == TokenCategory.VAR)
             {
@@ -149,7 +149,7 @@ namespace Falak
             }
         }
 
-        public void stmtList(){
+        public Node stmtList(){
             while (Current != TokenCategory.KEY_RIGHT)
             {
                 switch (Current){
@@ -210,24 +210,24 @@ namespace Falak
             }
         }
 
-        public void stmtIncr(){
+        public Node stmtIncr(){
             Expect(TokenCategory.INC);
             Expect(TokenCategory.IDENTIFIER);
             Expect(TokenCategory.SEMICOLON);
         }
 
-        public void stmtDecr(){
+        public Node stmtDecr(){
             Expect(TokenCategory.DEC);
             Expect(TokenCategory.IDENTIFIER);
             Expect(TokenCategory.SEMICOLON);
         }
 
-        public void exprList(){
+        public Node exprList(){
             expr();
             exprListCont();
         } 
 
-        public void exprListCont(){
+        public Node exprListCont(){
             if(Current == TokenCategory.COMMA)
             {
                 Expect(TokenCategory.COMMA);
@@ -236,7 +236,7 @@ namespace Falak
             }
         }
 
-        public void stmtIf(){
+        public Node stmtIf(){
             Expect(TokenCategory.IF);
             Expect(TokenCategory.PARENTHESIS_OPEN);
             expr();
@@ -248,7 +248,7 @@ namespace Falak
             stmtElse();
         }   
 
-        public void elseIfList(){
+        public Node elseIfList(){
             while(Current == TokenCategory.ELSEIF){
                 Expect(TokenCategory.ELSEIF);
                 Expect(TokenCategory.PARENTHESIS_OPEN);
@@ -260,7 +260,7 @@ namespace Falak
             }
         }
 
-        public void stmtElse(){
+        public Node stmtElse(){
             if (Current == TokenCategory.ELSE)
             {
                 Expect(TokenCategory.ELSE);
@@ -271,7 +271,7 @@ namespace Falak
             
         }
 
-        public void stmtWhile(){
+        public Node stmtWhile(){
             Expect(TokenCategory.WHILE);
             Expect(TokenCategory.PARENTHESIS_OPEN);
             expr();
@@ -281,7 +281,7 @@ namespace Falak
             Expect(TokenCategory.KEY_RIGHT);
         }
 
-        public void stmtDoWhile(){
+        public Node stmtDoWhile(){
             Expect(TokenCategory.DO);
             Expect(TokenCategory.KEY_LEFT);
             stmtList();
@@ -293,26 +293,26 @@ namespace Falak
             Expect(TokenCategory.SEMICOLON);
         }
 
-        public void stmtBreak(){
+        public Node stmtBreak(){
             Expect(TokenCategory.BREAK);
             Expect(TokenCategory.SEMICOLON);
         }
 
-        public void stmtReturn(){
+        public Node stmtReturn(){
             Expect(TokenCategory.RETURN);
             expr();
             Expect(TokenCategory.SEMICOLON);
         }
 
-        public void stmtEmpty(){
+        public Node stmtEmpty(){
             Expect(TokenCategory.SEMICOLON);
         }
 
-        public void expr(){
+        public Node expr(){
             exprOr();
         }
 
-        public void exprOr(){
+        public Node exprOr(){
             exprAnd();
             while(Current == TokenCategory.OR || 
                     Current == TokenCategory.XOR){
@@ -330,7 +330,7 @@ namespace Falak
 
         }
 
-        public void exprAnd(){
+        public Node exprAnd(){
             exprComp();
             while(Current == TokenCategory.AND){
                 Expect(TokenCategory.AND);
@@ -338,7 +338,7 @@ namespace Falak
             }
         }
 
-        public void exprComp(){
+        public Node exprComp(){
             exprRel();
             while(Current == TokenCategory.EQUALS_TO || 
                     Current == TokenCategory.NOT_EQUAL){
@@ -355,7 +355,7 @@ namespace Falak
             }
         }
 
-        public void exprRel(){
+        public Node exprRel(){
             exprAdd();
             while(Current == TokenCategory.GREATER_THAN ||
                     Current == TokenCategory.GREATER_EQUAL_THAN ||
@@ -380,7 +380,7 @@ namespace Falak
             }
         }
 
-        public void exprAdd(){
+        public Node exprAdd(){
             exprMul();
             while(Current == TokenCategory.PLUS || Current == TokenCategory.NEG){
                 switch(Current){
@@ -396,7 +396,7 @@ namespace Falak
             }
         }
 
-        public void exprMul(){
+        public Node exprMul(){
             exprUnary();
             while(Current == TokenCategory.MUL ||
                     Current == TokenCategory.DIV ||
@@ -417,7 +417,7 @@ namespace Falak
             }
         }
 
-        public void exprUnary(){
+        public Node exprUnary(){
             exprPrimary();
             while(Current == TokenCategory.PLUS ||
                     Current == TokenCategory.NEG ||
@@ -438,7 +438,7 @@ namespace Falak
             }
         }
 
-        public void exprPrimary(){
+        public Node exprPrimary(){
             switch (Current){
                 case TokenCategory.IDENTIFIER:
                     Expect(TokenCategory.IDENTIFIER);
@@ -476,13 +476,13 @@ namespace Falak
             }
         }
 
-        public void array(){
+        public Node array(){
             Expect(TokenCategory.BRACKET_LEFT);
             exprList();
             Expect(TokenCategory.BRACKET_RIGHT);
         }
 
-        public void lit(){
+        public Node lit(){
             switch(Current){
                 case TokenCategory.TRUE:
                     Expect(TokenCategory.TRUE);
