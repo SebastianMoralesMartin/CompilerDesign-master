@@ -1,3 +1,9 @@
+/   *
+A01745219 Eduardo R. Muller Romero
+A01376228 Sebastian Morales Martin
+A01746645 Guillermo Adrian Urbina A.
+*/
+
 namespace Falak
 {
     public class SpecificNodes
@@ -18,5 +24,22 @@ namespace Falak
         class stmtIf: Node{ }
         class elseIfList: Node{ }
         class stmtElse: Node{ }
+        
+        class stmtWhile: Node{ }
+        class stmtDoWhile: Node{ }
+        class stmtBreak: Node{ }
+        class stmtReturn: Node{ }
+        class stmtEmpty: Node{ }
+        class expr: Node{ }
+        class exprOr: Node{ }
+        class exprAnd: Node{ }
+        class exprComp: Node{ }
+        class exprRel: Node{ }
+        class exprAdd: Node{ }
+        class exprMul: Node{ }
+        class exprUnary: Node{ }
+        class exprPrimary: Node{ }
+        class array: Node{ }
+        class lit: Node{ }
     }
 }
