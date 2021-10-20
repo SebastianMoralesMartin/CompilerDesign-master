@@ -447,13 +447,13 @@ namespace Falak
                         result.Add(new or(){
                             AnchorToken = Expect(TokenCategory.OR)
                         });
-                        return result;
+                        break;
                     case TokenCategory.XOR:
                         result.Add(new xor()
                         {
                             AnchorToken = Expect(TokenCategory.XOR)
                         });
-                        return result;
+                        break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
@@ -487,13 +487,13 @@ namespace Falak
                         {
                             AnchorToken = Expect(TokenCategory.EQUALS_TO)
                         });
-                        return result;
+                        break;
                     case TokenCategory.NOT_EQUAL:
                         result.Add(new not_equal()
                         {
                             AnchorToken = Expect(TokenCategory.NOT_EQUAL)
                         });
-                        return result;
+                        break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
@@ -521,19 +521,19 @@ namespace Falak
                         {
                             AnchorToken = Expect(TokenCategory.GREATER_EQUAL_THAN)
                         });
-                        return result;
+                        break;
                     case TokenCategory.LESS_THAN:
                         result.Add(new less_than()
                     {
                         AnchorToken = Expect(TokenCategory.LESS_THAN)
                     });
-                        return result;
+                        break;
                     case TokenCategory.LESS_EQUAL_THAN:
                         result.Add(new less_equal_than()
                     {
                         AnchorToken = Expect(TokenCategory.LESS_EQUAL_THAN)
                     });
-                        return result;
+                        break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
@@ -552,13 +552,13 @@ namespace Falak
                         {
                             AnchorToken = Expect(TokenCategory.PLUS)
                         });
-                        return result;
+                        break;
                     case TokenCategory.NEG:
                         result.Add(new neg()
                         {
                             AnchorToken = Expect(TokenCategory.NEG)
                         });
-                        return result;
+                        break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
@@ -579,19 +579,19 @@ namespace Falak
                         {
                             AnchorToken = Expect(TokenCategory.MUL)
                         });
-                        return result;
+                        break;
                     case TokenCategory.DIV:
                         result.Add(new div()
                         {
                             AnchorToken = Expect(TokenCategory.DIV)
                         });
-                        return result;
+                        break;
                     case TokenCategory.REMAINDER:
                         result.Add(new remainder()
                         {
                             AnchorToken = Expect(TokenCategory.REMAINDER)
                         });
-                        return result;
+                        break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
@@ -612,19 +612,19 @@ namespace Falak
                         {
                             AnchorToken = Expect(TokenCategory.PLUS)
                         });
-                        return result;
+                        break;
                     case TokenCategory.NEG:
                         result.Add(new neg()
                         {
                             AnchorToken = Expect(TokenCategory.NEG)
                         });
-                        return result;
+                        break;
                     case TokenCategory.NOT:
                         result.Add(new not()
                         {
                             AnchorToken = Expect(TokenCategory.NOT)
-                        });
-                        return result;
+                        }); 
+                        break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
@@ -645,35 +645,36 @@ namespace Falak
                         Expect(TokenCategory.PARENTHESIS_OPEN);
                         result.Add(exprList());
                         Expect(TokenCategory.PARENTHESIS_CLOSE);
-                        return result;
                     }
-                    return result;
+                    break;
                 case TokenCategory.BRACKET_LEFT:
                     result.Add(array());
-                    return result;
+                    break;
                 case TokenCategory.TRUE:
                     result.Add(lit());
-                    return result;
+                    break;
                 case TokenCategory.FALSE:
                     result.Add(lit());
-                    return result;
+                    break;
                 case TokenCategory.INT:
                     result.Add(lit());
-                    return result;
+                    break;
                 case TokenCategory.CHARACTER:
                     result.Add(lit());
-                    return result;
+                    break;
                 case TokenCategory.STRING:
                     result.Add(lit());
-                    return result;
+                    break;
                 
                 case TokenCategory.PARENTHESIS_OPEN:
                     Expect(TokenCategory.PARENTHESIS_OPEN);
                     result.Add(expr());
                     Expect(TokenCategory.PARENTHESIS_CLOSE);
-                    return result;
+                    break;
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
+
+            return result;
         }
 
         public Node array()
@@ -694,33 +695,35 @@ namespace Falak
                 {
                     AnchorToken = Expect(TokenCategory.TRUE)
                 });
-                    return result;
+                    break;
                 case TokenCategory.FALSE:
                     result.Add(new FALSE()
                     {
                         AnchorToken = Expect(TokenCategory.FALSE)
                     });
-                    return result;
+                    break;
                 case TokenCategory.INT:
                     result.Add(new INT()
                     {
                         AnchorToken = Expect(TokenCategory.INT)
                     });
-                    return result;
+                    break;
                 case TokenCategory.CHARACTER:
                     result.Add(new character()
                     {
                         AnchorToken = Expect(TokenCategory.CHARACTER)
                     });
-                    return result;
+                    break;
                 case TokenCategory.STRING:
                     result.Add(new STRING()
                     {
                         AnchorToken = Expect(TokenCategory.STRING)
                     });
-                    return result;
+                    break;
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
+
+            return result;
         }
 }
 }
