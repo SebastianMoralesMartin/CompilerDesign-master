@@ -26,6 +26,7 @@ namespace Falak
         class stmtElse: Node{ }
         class var: Node { }
         class identifier: Node { }
+        class assign: Node { }
         class plus: Node { }
         class neg: Node { }
         class mul: Nodes { }

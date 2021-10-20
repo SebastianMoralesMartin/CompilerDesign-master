@@ -87,51 +87,52 @@ namespace Falak
 
         public Node Program()
         {
-            var result = defList();
-            var newNode = new Program();
+            var result = defList();    
+            Expect(TokenCategory.EOF);
+            var newNode = new Progam();
             newNode.Add(result);
             return newNode;
         }
 
         public Node defList()
         {
-            var result = 0;
-            var newNode = defList();
+            var result = new defList();
             switch (Current){
-                case TokenCategory.VAR: 
-                    result = varDef();
-                    newNode.Add(result);
-                    return newNode;
-                    break;
+                case TokenCategory.VAR:
+                    result.Add(varDef());
+                    return result;
                 
                 case TokenCategory.IDENTIFIER: 
-                    result = funDef();
-                    newNode.Add(result);
-                    return newNode;
-                    break;
-                    
+                    result.Add(funDef());
+                    return result;
+                
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
         }
 
         public Node varDef(){
-            Expect(TokenCategory.VAR);
-            var result = idList();
+            var result = new varDef()
+            {
+                AnchorToken = Expect(TokenCategory.VAR);    
+            }
+            result.Add(idList());
             Expect(TokenCategory.SEMICOLON);
             return result;
         }
 
         public Node idList()
         {
-            var newNode = new idList();
+            var result = new idList();
             if (Current == TokenCategory.IDENTIFIER)
             {
-                Expect(TokenCategory.IDENTIFIER);
-                var result = idListCont();
-                newNode.Add(result);
+                result.Add(new identifier()
+                {
+                    AnchorToken = Expect(TokenCategory.IDENTIFIER)
+                });
+                result.Add(idListCont());
             }
 
-            return newNode;
+            return result;
         }
 
         public Node idListCont(){
@@ -173,76 +174,71 @@ namespace Falak
 
         public Node stmtList()
         {
-            var newNode = new stmtList();
+            var result = new stmtList();
             while (Current != TokenCategory.KEY_RIGHT)
             {
                 switch (Current){
                     case TokenCategory.IDENTIFIER:
-                        Expect(TokenCategory.IDENTIFIER);
+                        result.Add(new identifier()
+                        {
+                            AnchorToken = Expect(TokenCategory.IDENTIFIER);
+                        });
                         switch (Current){
                             case TokenCategory.ASSIGN:
-                                Expect(TokenCategory.ASSIGN);
-                                var result = expr();
-                                newNode.Add(result);
+                                result.Add(new assign()
+                                {
+                                    AnchorToken = Expect(TokenCategory.ASSIGN);
+                                });
+                                result.Add(expr());
                                 Expect(TokenCategory.SEMICOLON);
-                                return newNode;
+                                return result;
                             case TokenCategory.PARENTHESIS_OPEN:
                                 Expect(TokenCategory.PARENTHESIS_OPEN);
-                                var result = exprList();
-                                newNode.Add(result);
+                                result.Add(exprList());
                                 Expect(TokenCategory.PARENTHESIS_CLOSE);
                                 Expect(TokenCategory.SEMICOLON);
-                                return newNode;
+                                return result;
                             default: throw new SyntaxError(Current, tokenStream.Current);
                         }
-                        break;
+                        return result;
 
 
                     case TokenCategory.INC:
-                        var result = stmtIncr();
-                        newNode.Add(result);
-                        return newNode;
+                        result.Add(stmtIncr());
+                        return result;
 
 
                     case TokenCategory.DEC:
-                        var result = stmtDecr();
-                        newNode.Add(result);
-                        return newNode;
+                        result.Add(stmtDecr());
+                        return result;
 
                     case TokenCategory.IF:
-                        var result = stmtIf();
-                        newNode.Add(result);
-                        return newNode;
+                        result.Add(stmtIf());
+                        return result;
                     case TokenCategory.WHILE: 
-                        var result = stmtWhile();
-                        newNode.Add(result);
-                        return newNode;
-
+                        result.Add(stmtWhile());
+                        return result;
+                    
                     case TokenCategory.DO:
-                        var result = stmtDoWhile();
-                        newNode.Add(result);
-                        return newNode;
+                        result.Add(stmtDoWhile());
+                        return result;
                 
                     case TokenCategory.BREAK:
-                        var result = stmtBreak();
-                        newNode.Add(result);
-                        return newNode;
+                        result.Add(stmtBreak());
+                        return result;
                 
                     case TokenCategory.RETURN:
-                        var result = stmtReturn();
-                        newNode.Add(result);
-                        return newNode;
+                        result.Add(stmtReturn());
+                        return result;
 
-                    case TokenCategory.SEMICOLON:
-                        var result = stmtEmpty();
-                        newNode.Add(result);
-                        return newNode;
+                    case TokenCategory.SEMICOLON: //Empty statement case
+                        result.Add(stmtEmpty());
+                        return result;
 
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
         }
-// --------------------------------------------------------
         public Node stmtIncr(){
             var result = new stmtIncr()
             {
@@ -250,8 +246,8 @@ namespace Falak
             }
             result.Add(new identifier()
             {
-                AnchorToken = Expect(TokenCategory.IDENTIFIER);
-            })        
+                AnchorToken = Expect(TokenCategory.IDENTIFIER)
+            });
             
             Expect(TokenCategory.SEMICOLON);
         }
@@ -263,8 +259,8 @@ namespace Falak
             }
             result.Add(new identifier()
             {
-                AnchorToken = Expect(TokenCategory.IDENTIFIER);
-            })
+                AnchorToken = Expect(TokenCategory.IDENTIFIER)
+            });
             
             Expect(TokenCategory.SEMICOLON);
         }
@@ -400,14 +396,16 @@ namespace Falak
             return result;
         }
 
-        public Node expr(){
-            result = exprOr();
+        public Node expr()
+        {
+            var result = new expr();
+            result.Add(exprOr);
             return result;
         }
 
         public Node exprOr()
         {
-            var newNode = null;
+            var result = null;
             result = exprAnd();
             while(Current == TokenCategory.OR || 
                     Current == TokenCategory.XOR){
@@ -628,7 +626,7 @@ namespace Falak
         }
 
         public Node exprPrimary(){
-            var NewNode, token, result = null;
+            var NewNode, token, result = null;  
             switch (Current){
                 case TokenCategory.IDENTIFIER:
                     Expect(TokenCategory.IDENTIFIER);
