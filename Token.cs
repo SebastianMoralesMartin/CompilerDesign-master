@@ -6,7 +6,7 @@
 
 namespace Falak {
 
-    class Token {
+     class Token {
 
         readonly string lexeme;
 
@@ -14,7 +14,7 @@ namespace Falak {
 
         readonly int row;
 
-        readonly int column;
+        public int column;
 
         public string Lexeme {
             get { return lexeme; }

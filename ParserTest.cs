@@ -61,7 +61,7 @@ using System.Collections.Generic;
 
 namespace Falak
 {
-    class ParserTest{
+    public class ParserTest{
         IEnumerator<Token> tokenStream;
 
         public ParserTest(IEnumerator<Token> tokenStream) {
