@@ -29,21 +29,21 @@ namespace Falak
         class assign: Node { }
         class plus: Node { }
         class neg: Node { }
-        class mul: Nodes { }
-        class div: Nodes { }
-        class remainder: Nodes { }
-        class not: Nodes { }
-        class TRUE: Nodes { }
-        class FALSE: Nodes { }
-        class INT: Nodes { }
-        class character: Nodes { }
-        class STRING: Nodes { }
-        class greater_than: Nodes { }
-        class greater_equal_than: Nodes { }
-        class less_than: Nodes { }
-        class less_equal_than: Nodes { }
-        class equals_to: Nodes { }
-        class not_equal: Nodes { }
+        class mul: Node { }
+        class div: Node { }
+        class remainder: Node { }
+        class not: Node { }
+        class TRUE: Node { }
+        class FALSE: Node { }
+        class INT: Node { }
+        class character: Node { }
+        class STRING: Node { }
+        class greater_than: Node { }
+        class greater_equal_than: Node { }
+        class less_than: Node { }
+        class less_equal_than: Node { }
+        class equals_to: Node { }
+        class not_equal: Node { }
         class semicolon: Node { }
         class stmtWhile: Node{ }
         class stmtDoWhile: Node{ }
@@ -55,7 +55,7 @@ namespace Falak
 
         class or : Node { }
 
-        class xor: Nodes { }
+        class xor: Node { }
         class exprAnd: Node{ }
 
         class and : Node { }

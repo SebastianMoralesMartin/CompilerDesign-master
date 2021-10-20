@@ -10,16 +10,19 @@ using System.Text;
 
 namespace Falak
 {
-    public class node: IEnumerable<Node> {
+    class Node: IEnumerable<Node> {
+
         IList<Node> children = new List<Node>();
 
         public Node this[int index] {
             get {
                 return children[index];
             }
-            public Token AnchorToken { get; set; }
+        }
+        
+        public Token AnchorToken { get; set; }
 
-            public void Add(Node node) {
+        public void Add(Node node) {
             children.Add(node);
         }
 

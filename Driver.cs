@@ -52,7 +52,7 @@ namespace Falak {
             try {
                 var inputPath = args[0];
                 var input = File.ReadAllText(inputPath);
-                var parser = new Parser(
+                var parser = new ParserTest(
                     new Scanner(input).Scan().GetEnumerator());
                 var program = parser.Program();
                 Console.Write(program.ToStringTree());

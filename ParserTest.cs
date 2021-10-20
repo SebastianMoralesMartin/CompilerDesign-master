@@ -89,7 +89,7 @@ namespace Falak
         {
             var result = defList();    
             Expect(TokenCategory.EOF);
-            var newNode = new Progam();
+            var newNode = new Program();
             newNode.Add(result);
             return newNode;
         }
@@ -110,11 +110,12 @@ namespace Falak
             }
         }
 
-        public Node varDef(){
+        public Node varDef()
+        {
             var result = new varDef()
             {
-                AnchorToken = Expect(TokenCategory.VAR);    
-            }
+                AnchorToken = Expect(TokenCategory.VAR)
+            };
             result.Add(idList());
             Expect(TokenCategory.SEMICOLON);
             return result;
@@ -191,13 +192,13 @@ namespace Falak
                     case TokenCategory.IDENTIFIER:
                         result.Add(new identifier()
                         {
-                            AnchorToken = Expect(TokenCategory.IDENTIFIER);
+                            AnchorToken = Expect(TokenCategory.IDENTIFIER)
                         });
                         switch (Current){
                             case TokenCategory.ASSIGN:
                                 result.Add(new assign()
                                 {
-                                    AnchorToken = Expect(TokenCategory.ASSIGN);
+                                    AnchorToken = Expect(TokenCategory.ASSIGN)
                                 });
                                 result.Add(expr());
                                 Expect(TokenCategory.SEMICOLON);
@@ -249,11 +250,12 @@ namespace Falak
                 }
             }
         }
-        public Node stmtIncr(){
+        public Node stmtIncr()
+        {
             var result = new stmtIncr()
             {
-                AnchorToken = Expect(TokenCategory.INC);
-            }
+                AnchorToken = Expect(TokenCategory.INC)
+            };
             result.Add(new identifier()
             {
                 AnchorToken = Expect(TokenCategory.IDENTIFIER)
@@ -263,10 +265,10 @@ namespace Falak
         }
 
         public Node stmtDecr(){
-            var result = stmtDecr()
+            var result = new stmtDecr()
             {
-                AnchorToken = Expect(TokenCategory.DEC);
-            }
+                AnchorToken = Expect(TokenCategory.DEC)
+            };
             result.Add(new identifier()
             {
                 AnchorToken = Expect(TokenCategory.IDENTIFIER)
@@ -296,11 +298,12 @@ namespace Falak
             return result;
         }
 
-        public Node stmtIf(){
+        public Node stmtIf()
+        {
             var result = new stmtIf()
             {
-                AnchorToken = Expect(TokenCategory.IF);
-            }
+                AnchorToken = Expect(TokenCategory.IF)
+            };
             Expect(TokenCategory.PARENTHESIS_OPEN);
             result.Add(expr());
             Expect(TokenCategory.PARENTHESIS_CLOSE);
@@ -313,11 +316,12 @@ namespace Falak
         }   
 
         public Node elseIfList(){
-            while(Current == TokenCategory.ELSEIF){
+            while(Current == TokenCategory.ELSEIF)
+            {
                 var result = new elseIfList()
                 {
-                    AnchorToken = Expect(TokenCategory.ELSEIF);
-                }
+                    AnchorToken = Expect(TokenCategory.ELSEIF)
+                };
                 
                 Expect(TokenCategory.PARENTHESIS_OPEN);
                 result.Add(expr());
@@ -335,8 +339,8 @@ namespace Falak
             {
                 var result = new stmtElse()
                 {
-                    AnchorToken = Expect(TokenCategory.ELSE);
-                }
+                    AnchorToken = Expect(TokenCategory.ELSE)
+                };
                 
                 Expect(TokenCategory.KEY_LEFT);
                 result.Add(stmtList());
@@ -345,11 +349,12 @@ namespace Falak
             
         }
 
-        public Node stmtWhile(){
+        public Node stmtWhile()
+        {
             var result = new stmtWhile()
             {
-                AnchorToken = Expect(TokenCategory.WHILE);
-            }
+                AnchorToken = Expect(TokenCategory.WHILE)
+            };
             
             Expect(TokenCategory.PARENTHESIS_OPEN);
             result.Add(expr());
@@ -361,11 +366,12 @@ namespace Falak
             return result;
         }
 
-        public Node stmtDoWhile(){
+        public Node stmtDoWhile()
+        {
             var result = new stmtDoWhile()
             {
-                AnchorToken = Expect(TokenCategory.DO);
-            }
+                AnchorToken = Expect(TokenCategory.DO)
+            };
             
             Expect(TokenCategory.KEY_LEFT);
             
@@ -386,27 +392,29 @@ namespace Falak
         {
             var result = new stmtBreak()
             {
-                AnchorToken = Expect(TokenCategory.BREAK);
-            }
+                AnchorToken = Expect(TokenCategory.BREAK)
+            };
             Expect(TokenCategory.SEMICOLON);
             return result;
         }
 
-        public Node stmtReturn(){
+        public Node stmtReturn()
+        {
             var result = new stmtReturn
             {
-                AnchorToken = Expect(TokenCategory.RETURN);
-            }
+                AnchorToken = Expect(TokenCategory.RETURN)
+            };
             result.Add(expr());
             Expect(TokenCategory.SEMICOLON);
             return result;
         }
 
-        public Node stmtEmpty(){
+        public Node stmtEmpty()
+        {
             var result = new stmtEmpty()
             {
-                AnchorToken = Expect(TokenCategory.SEMICOLON);
-            }
+                AnchorToken = Expect(TokenCategory.SEMICOLON)
+            };
             return result;
         }
 
@@ -425,7 +433,7 @@ namespace Falak
                     Current == TokenCategory.XOR){
                 switch (Current){
                     case TokenCategory.OR:
-                        result.Add(new or()){
+                        result.Add(new or(){
                             AnchorToken = Expect(TokenCategory.OR)
                         });
                         return result;
@@ -587,7 +595,7 @@ namespace Falak
                     case TokenCategory.NEG:
                         result.Add(new neg()
                         {
-                            AnchorToken Expect(TokenCategory.NEG)
+                            AnchorToken = Expect(TokenCategory.NEG)
                         });
                         return result;
                     case TokenCategory.NOT:
@@ -645,10 +653,11 @@ namespace Falak
             }
         }
 
-        public Node array(){
-            result
+        public Node array()
+        {
+            var result = new array();
             Expect(TokenCategory.BRACKET_LEFT);
-            var result = exprList();
+            result.Add(exprList());
             Expect(TokenCategory.BRACKET_RIGHT);
             return result;
         }
@@ -658,7 +667,7 @@ namespace Falak
             var result = new lit();
             switch(Current){
                 case TokenCategory.TRUE:
-                    result.Add(TRUE()
+                    result.Add(new TRUE()
                 {
                     AnchorToken = Expect(TokenCategory.TRUE)
                 });
