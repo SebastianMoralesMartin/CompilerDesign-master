@@ -100,14 +100,16 @@ namespace Falak
             switch (Current){
                 case TokenCategory.VAR:
                     result.Add(varDef());
-                    return result;
+                    break;
                 
                 case TokenCategory.IDENTIFIER: 
                     result.Add(funDef());
-                    return result;
+                    break;
                 
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
+
+            return result;
         }
 
         public Node varDef()
