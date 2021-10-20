@@ -52,8 +52,14 @@ namespace Falak
         class stmtEmpty: Node{ }
         class expr: Node{ }
         class exprOr: Node{ }
-        class exprXor: Nodes { }
+
+        class or : Node { }
+
+        class xor: Nodes { }
         class exprAnd: Node{ }
+
+        class and : Node { }
+
         class exprComp: Node{ }
         class exprRel: Node{ }
         class exprAdd: Node{ }

@@ -135,39 +135,49 @@ namespace Falak
             return result;
         }
 
-        public Node idListCont(){
+        public Node idListCont()
+        {
+            var result = new idListCont();
             if(Current == TokenCategory.COMMA)
             {
                 Expect(TokenCategory.COMMA);
-                Expect(TokenCategory.IDENTIFIER);
-                var result = idListCont();
+                result.Add(new identifier()
+                {
+                    AnchorToken = Expect(TokenCategory.IDENTIFIER)
+                });
+                result.Add(idListCont());
             }
-
             return result;
         }
         
         public Node funDef()
         {
-            var newNode = new funDef();
-            Expect(TokenCategory.IDENTIFIER);
+            var result = new funDef();
+            result.Add(new identifier()
+            {
+                AnchorToken = Expect(TokenCategory.IDENTIFIER)
+            });
             Expect(TokenCategory.PARENTHESIS_OPEN);
-            var result = idList();
-            newNode.Add(result);
+            
+            result.Add(idList());
+            
             Expect(TokenCategory.PARENTHESIS_CLOSE);
+            
             Expect(TokenCategory.KEY_LEFT);
-            var result = varDefList();
-            newNode.Add(result);
-            var result = stmtList();
-            newNode.Add(result);
+            result.Add(varDefList());
+            
+            result.Add(stmtList());
+            
             Expect(TokenCategory.KEY_RIGHT);
-            return newNode;
+            return result;
         }
 
         public Node varDefList()
         {
+            var result = new varDefList();
             while (Current == TokenCategory.VAR)
             {
-                result = varDef();
+                result.Add(varDef());
                 return result;
             }
         }
@@ -267,19 +277,23 @@ namespace Falak
 
         public Node exprList()
         {
-            var newNode = new exprList();
-            var result = expr();
-            newNode.Add(result);
-            var result = exprListCont();
+            var result = new exprList();
+            result.Add(expr());
+            result.Add(exprListCont());
+            return result;
         } 
 
-        public Node exprListCont(){
+        public Node exprListCont()
+        {
+            var result = new exprListCont();
             if(Current == TokenCategory.COMMA)
             {
                 Expect(TokenCategory.COMMA);
-                expr();
-                exprListCont();
+                result.Add(expr());
+                result.Add(exprListCont());
             }
+
+            return result;
         }
 
         public Node stmtIf(){
@@ -405,259 +419,226 @@ namespace Falak
 
         public Node exprOr()
         {
-            var result = null;
-            result = exprAnd();
+            var result = new exprOr();
+            result.Add(exprAnd());
             while(Current == TokenCategory.OR || 
                     Current == TokenCategory.XOR){
                 switch (Current){
                     case TokenCategory.OR:
-                        AnchorToken = Expect(TokenCategory.OR);
-                        newNode = new exprOr();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprAnd());
-                        result =  newNode;
-                        break;
+                        result.Add(new or()){
+                            AnchorToken = Expect(TokenCategory.OR)
+                        });
+                        return result;
                     case TokenCategory.XOR:
-                        Expect(TokenCategory.XOR);
-                        newNode = new exprXor();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprAnd());
-                        result =  newNode;
-                        break;
+                        result.Add(new xor()
+                        {
+                            AnchorToken = Expect(TokenCategory.XOR)
+                        });
+                        return result;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                return result;
             }
 
         }
 
-        public Node exprAnd(){
-            result = exprComp();
-            while(Current == TokenCategory.AND){
-                var token = Expect(TokenCategory.AND);
-                var newNode = new exprAnd();
-                newNode.AnchorToken = token;
-                newNode.Add(result);
-                newNode.Add(exprComp());
-                result =  newNode;
+        public Node exprAnd()
+        {
+            var result = new exprAnd();
+            result.Add(exprComp());
+            while(Current == TokenCategory.AND)
+            {
+                result.Add(new and()
+                {
+                    AnchorToken = Expect(TokenCategory.AND)
+                });
             }
             return result;
         }
         public Node exprComp()
         {
-            var token = null;
-            var NewNode = null;
-            result = exprRel();
+            var result = new exprComp();
+            result.Add(exprRel());
             while(Current == TokenCategory.EQUALS_TO || 
-                    Current == TokenCategory.NOT_EQUAL){
+                  Current == TokenCategory.NOT_EQUAL){
                 switch(Current){
                     case TokenCategory.EQUALS_TO:
-                        token = Expect(TokenCategory.EQUALS_TO);
-                        newNode = new equals_to();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprRel());
-                        result =  newNode;
-                        break;
+                        result.Add(new equals_to()
+                        {
+                            AnchorToken = Expect(TokenCategory.EQUALS_TO)
+                        });
+                        return result;
                     case TokenCategory.NOT_EQUAL:
-                        token = Expect(TokenCategory.NOT_EQUAL);
-                        newNode = new not_equal();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprRel());
-                        result =  newNode;
-                        break;
+                        result.Add(new not_equal()
+                        {
+                            AnchorToken = Expect(TokenCategory.NOT_EQUAL)
+                        });
+                        return result;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                return result;
             }
         }
 
         public Node exprRel()
         {
-            var newNode = null;
-            var token = null;
-            var result = exprAdd();
-            while(Current == TokenCategory.GREATER_THAN ||
-                    Current == TokenCategory.GREATER_EQUAL_THAN ||
-                    Current == TokenCategory.LESS_THAN || 
-                    Current == TokenCategory.LESS_EQUAL_THAN){
+            var result = new exprRel();
+            result.Add(exprAdd());
+            while(Current == TokenCategory.GREATER_THAN || 
+                  Current == TokenCategory.GREATER_EQUAL_THAN ||
+                  Current == TokenCategory.LESS_THAN || 
+                  Current == TokenCategory.LESS_EQUAL_THAN){ 
                 switch(Current){
                     case TokenCategory.GREATER_THAN:
-                        token = Expect(TokenCategory.GREATER_THAN);
-                        newNode = new greater_than();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprAdd());
-                        result = newNode;
-                        break;
+                        result.Add(new greater_than()
+                        {
+                            AnchorToken = Expect(TokenCategory.GREATER_THAN)
+                        });
+                        return result;
                     case TokenCategory.GREATER_EQUAL_THAN:
-                        token = Expect(TokenCategory.GREATER_EQUAL_THAN);
-                        newNode = new greater_equal_than();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprAdd());
-                        result = newNode;
-                        break;
+                        result.Add(new greater_equal_than()
+                        {
+                            Expect(TokenCategory.GREATER_EQUAL_THAN)
+                        });
+                        return result;
                     case TokenCategory.LESS_THAN:
-                        token = Expect(TokenCategory.LESS_THAN);
-                        newNode = new less_than();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprAdd());
-                        result = newNode;
-                        break;
+                        result.Add(new less_than()
+                    {
+                        Expect(TokenCategory.LESS_THAN)
+                    });
+                        return result;
                     case TokenCategory.LESS_EQUAL_THAN:
-                        token = Expect(TokenCategory.LESS_EQUAL_THAN);
-                        newNode = new less_equal_than();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprAdd());
-                        result = newNode;
-                        break;
+                        result.Add(new less_equal_than()
+                    {
+                        AnchorToken = Expect(TokenCategory.LESS_EQUAL_THAN)
+                    });
+                        return result;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                return result;
             }
         }
 
         public Node exprAdd()
         {
-            var NewNode, token = null;
-            var result = exprMul();
+            var result = new exprAdd();
+            result.Add(exprMul());
             while(Current == TokenCategory.PLUS || Current == TokenCategory.NEG){
                 switch(Current){
                     case TokenCategory.PLUS:
-                        token = Expect(TokenCategory.PLUS);
-                        newNode = new plus();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprMul());
-                        result = newNode;
-                        break;
+                        result.Add(new plus()
+                        {
+                            AnchorToken = Expect(TokenCategory.PLUS)
+                        });
+                        return result;
                     case TokenCategory.NEG:
-                        token = Expect(TokenCategory.NEG);
-                        newNode = new neg();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprMul());
-                        result = newNode;
-                        break;
+                        result.Add(new neg()
+                        {
+                            AnchorToken = Expect(TokenCategory.NEG)
+                        });
+                        return result;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                return result;
             }
         }
 
-        public Node exprMul(){
-            var NewNode, token = null;
-            var result = exprUnary();
+        public Node exprMul()
+        {
+            var result = new exprMul();
+            result.Add(exprUnary());
             while(Current == TokenCategory.MUL ||
                     Current == TokenCategory.DIV ||
                     Current == TokenCategory.REMAINDER){
                 switch(Current){
                     case TokenCategory.MUL:
-                        token = Expect(TokenCategory.MUL);
-                        newNode = new mul();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprUnary());
-                        result = newNode;
-                        break;
+                        result.Add(new mul()
+                        {
+                            AnchorToken = Expect(TokenCategory.MUL)
+                        });
+                        return result;
                     case TokenCategory.DIV:
-                        token = Expect(TokenCategory.DIV);
-                        newNode = new div();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprUnary);
-                        result = newNode;
-                        break;
+                        result.Add(new dev()
+                        {
+                            AnchorToken = Expect(TokenCategory.DIV)
+                        });
+                        return result;
                     case TokenCategory.REMAINDER:
-                        token = Expect(TokenCategory.REMAINDER);
-                        newNode = new remainder();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprUnary());
-                        result = newNode;
-                        break;
+                        result.Add(new remainder()
+                        {
+                            AnchorToken = Expect(TokenCategory.REMAINDER)
+                        });
+                        return result;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                return result;
             }
         }
 
-        public Node exprUnary(){
-            var NewNode, token = null;
-            var result = exprPrimary();
+        public Node exprUnary()
+        {
+            var result = new exprUnary();
+            result.Add(exprPrimary());
             while(Current == TokenCategory.PLUS ||
                     Current == TokenCategory.NEG ||
                     Current == TokenCategory.NOT){
                 switch(Current){
                     case TokenCategory.PLUS:
-                        token = Expect(TokenCategory.PLUS);
-                        newNode = new plus();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprPrimary());
-                        result = newNode;
-                        break;
+                        result.Add(new plus()
+                        {
+                            AnchorToken = Expect(TokenCategory.PLUS)
+                        });
+                        return result;
                     case TokenCategory.NEG:
-                        token = Expect(TokenCategory.NEG);
-                        newNode = new neg();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprPrimary());
-                        result = newNode;
-                        break;
+                        result.Add(new neg()
+                        {
+                            AnchorToken Expect(TokenCategory.NEG)
+                        });
+                        return result;
                     case TokenCategory.NOT:
-                        token = Expect(TokenCategory.NOT);
-                        newNode = new not();
-                        newNode.AnchorToken = token;
-                        newNode.Add(result);
-                        newNode.Add(exprPrimary());
-                        result = newNode;
-                        break;
+                        result.Add(new not()
+                        {
+                            AnchorToken = Expect(TokenCategory.NOT)
+                        });
+                        return result;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                return result;    
             }
         }
 
-        public Node exprPrimary(){
-            var NewNode, token, result = null;  
+        public Node exprPrimary()
+        {
+            var result = new exprPrimary();
             switch (Current){
                 case TokenCategory.IDENTIFIER:
-                    Expect(TokenCategory.IDENTIFIER);
+                    result.Add(new identifier()
+                    {
+                        AnchorToken = Expect(TokenCategory.IDENTIFIER)
+                    });
                     if(Current == TokenCategory.PARENTHESIS_OPEN){
                         Expect(TokenCategory.PARENTHESIS_OPEN);
-                        result = exprList();
+                        result.Add(exprList());
                         Expect(TokenCategory.PARENTHESIS_CLOSE);
                         return result;
                     }
-                    break;
+                    return result;
                 case TokenCategory.BRACKET_LEFT:
-                    result = array();
+                    result.Add(array());
                     return result;
                 case TokenCategory.TRUE:
-                    result = lit();
+                    result.Add(lit());
                     return result;
                 case TokenCategory.FALSE:
-                    result = lit();
+                    result.Add(lit());
                     return result;
                 case TokenCategory.INT:
-                    result = lit();
+                    result.Add(lit());
                     return result;
                 case TokenCategory.CHARACTER:
-                    result = lit();
+                    result.Add(lit());
                     return result;
                 case TokenCategory.STRING:
-                    result = lit();
+                    result.Add(lit());
                     return result;
+                
                 case TokenCategory.PARENTHESIS_OPEN:
                     Expect(TokenCategory.PARENTHESIS_OPEN);
-                    result = expr();
+                    result.Add(expr());
                     Expect(TokenCategory.PARENTHESIS_CLOSE);
                     return result;
                 default: throw new SyntaxError(Current, tokenStream.Current);
@@ -665,40 +646,47 @@ namespace Falak
         }
 
         public Node array(){
+            result
             Expect(TokenCategory.BRACKET_LEFT);
             var result = exprList();
             Expect(TokenCategory.BRACKET_RIGHT);
             return result;
         }
 
-        public Node lit(){
-            var NewNode, token = null;
+        public Node lit()
+        {
+            var result = new lit();
             switch(Current){
                 case TokenCategory.TRUE:
-                    token = Expect(TokenCategory.TRUE);
-                    newNode = new TRUE();
-                    newNode.AnchorToken = token;
-                    return newNode;
+                    result.Add(TRUE()
+                {
+                    AnchorToken = Expect(TokenCategory.TRUE)
+                });
+                    return result;
                 case TokenCategory.FALSE:
-                    token = Expect(TokenCategory.FALSE);
-                    newNode = new FALSE();
-                    newNode.AnchorToken = token;
-                    return newNode;
+                    result.Add(new FALSE()
+                    {
+                        AnchorToken = Expect(TokenCategory.FALSE)
+                    });
+                    return result;
                 case TokenCategory.INT:
-                    token = Expect(TokenCategory.INT);
-                    newNode = new INT();
-                    newNode.AnchorToken = token;
-                    return newNode;
+                    result.Add(new INT()
+                    {
+                        AnchorToken = Expect(TokenCategory.INT)
+                    });
+                    return result;
                 case TokenCategory.CHARACTER:
-                    token = Expect(TokenCategory.CHARACTER);
-                    newNode = new character();
-                    newNode.AnchorToken = token;
-                    return newNode;
+                    result.Add(new character()
+                    {
+                        AnchorToken = Expect(TokenCategory.CHARACTER)
+                    });
+                    return result;
                 case TokenCategory.STRING:
-                    token = Expect(TokenCategory.STRING);
-                    newNode = new STRING();
-                    newNode.AnchorToken = token;
-                    return newNode;
+                    result.Add(new STRING()
+                    {
+                        AnchorToken = Expect(TokenCategory.STRING)
+                    });
+                    return result;
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
         }

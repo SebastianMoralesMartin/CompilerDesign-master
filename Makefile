@@ -1,8 +1,8 @@
 falak.exe: Driver.cs Scanner.cs Token.cs TokenCategory.cs ParserTest.cs \
-    SyntaxError.cs Node.cs SpecificNodes.cs
+    SyntaxError.cs Node.cs SpecificNodesTest.cs
 
     mcs -out:falak.exe Driver.cs Scanner.cs Token.cs TokenCategory.cs \
-    ParserTest.cs SyntaxError.cs Node.cs SpecificNodes.cs
+    ParserTest.cs SyntaxError.cs Node.cs SpecificNodesTest.cs
 
 clean:
 
