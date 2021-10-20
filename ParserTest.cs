@@ -220,7 +220,7 @@ namespace Falak
                             default: throw new SyntaxError(Current, tokenStream.Current);
                         }
 
-                        Expect(TokenCategory.SEMICOLON);
+                        
 
                         break;
                         
@@ -260,6 +260,7 @@ namespace Falak
 
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
+                Expect(TokenCategory.SEMICOLON);
             }
 
             return result;
