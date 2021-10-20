@@ -20,8 +20,9 @@ namespace Falak
 
         public SyntaxError(ISet<TokenCategory> expectedCategories,
             Token token):
-            //$"but found {token.Category} (\"{token.Lexeme}\") at "
+            //
             base($"Syntax Error: Expecting one of {Elements(expectedCategories)}\n"
+                 +$"but found {token.Category} (\"{token.Lexeme}\") at "
                  + $"row {token.Row}, column {token.Column}.") {
         }
 

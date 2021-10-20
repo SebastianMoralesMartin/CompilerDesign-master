@@ -181,6 +181,8 @@ namespace Falak
                 result.Add(varDef());
                 return result;
             }
+
+            return result;
         }
 
         public Node stmtList()
@@ -211,7 +213,7 @@ namespace Falak
                                 return result;
                             default: throw new SyntaxError(Current, tokenStream.Current);
                         }
-                        return result;
+                        
 
 
                     case TokenCategory.INC:
@@ -249,6 +251,8 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
+
+            return result;
         }
         public Node stmtIncr()
         {
@@ -262,6 +266,7 @@ namespace Falak
             });
             
             Expect(TokenCategory.SEMICOLON);
+            return result;
         }
 
         public Node stmtDecr(){
@@ -275,6 +280,7 @@ namespace Falak
             });
             
             Expect(TokenCategory.SEMICOLON);
+            return result;
         }
 
         public Node exprList()
@@ -316,12 +322,13 @@ namespace Falak
         }   
 
         public Node elseIfList(){
+            var result = new elseIfList(){
+                AnchorToken = Expect(TokenCategory.ELSEIF)
+            };
             while(Current == TokenCategory.ELSEIF)
             {
-                var result = new elseIfList()
-                {
-                    AnchorToken = Expect(TokenCategory.ELSEIF)
-                };
+                
+                
                 
                 Expect(TokenCategory.PARENTHESIS_OPEN);
                 result.Add(expr());
@@ -329,24 +336,26 @@ namespace Falak
                 Expect(TokenCategory.KEY_LEFT);
                 result.Add(stmtList());
                 Expect(TokenCategory.KEY_RIGHT);
-            }
+                
+            }return result;
 
-            return result;
         }
 
         public Node stmtElse(){
+            var result = new stmtElse()
+            {
+                AnchorToken = Expect(TokenCategory.ELSE)
+            };
             if (Current == TokenCategory.ELSE)
             {
-                var result = new stmtElse()
-                {
-                    AnchorToken = Expect(TokenCategory.ELSE)
-                };
+                
                 
                 Expect(TokenCategory.KEY_LEFT);
                 result.Add(stmtList());
                 Expect(TokenCategory.KEY_RIGHT);  
             }
-            
+
+            return result;
         }
 
         public Node stmtWhile()
@@ -421,7 +430,7 @@ namespace Falak
         public Node expr()
         {
             var result = new expr();
-            result.Add(exprOr);
+            result.Add(exprOr());
             return result;
         }
 
@@ -446,6 +455,8 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
+
+            return result;
 
         }
 
@@ -484,6 +495,8 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
+
+            return result;
         }
 
         public Node exprRel()
@@ -504,13 +517,13 @@ namespace Falak
                     case TokenCategory.GREATER_EQUAL_THAN:
                         result.Add(new greater_equal_than()
                         {
-                            Expect(TokenCategory.GREATER_EQUAL_THAN)
+                            AnchorToken = Expect(TokenCategory.GREATER_EQUAL_THAN)
                         });
                         return result;
                     case TokenCategory.LESS_THAN:
                         result.Add(new less_than()
                     {
-                        Expect(TokenCategory.LESS_THAN)
+                        AnchorToken = Expect(TokenCategory.LESS_THAN)
                     });
                         return result;
                     case TokenCategory.LESS_EQUAL_THAN:
@@ -522,6 +535,8 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
+
+            return result;
         }
 
         public Node exprAdd()
@@ -545,6 +560,8 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
+
+            return result;
         }
 
         public Node exprMul()
@@ -562,7 +579,7 @@ namespace Falak
                         });
                         return result;
                     case TokenCategory.DIV:
-                        result.Add(new dev()
+                        result.Add(new div()
                         {
                             AnchorToken = Expect(TokenCategory.DIV)
                         });
@@ -576,6 +593,8 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
+
+            return result;
         }
 
         public Node exprUnary()
@@ -607,6 +626,8 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
+
+            return result;
         }
 
         public Node exprPrimary()
