@@ -143,6 +143,7 @@ namespace Falak
             var result = new idListCont();
             if(Current == TokenCategory.COMMA)
             {
+                Console.WriteLine("why?");
                 Expect(TokenCategory.COMMA);
                 result.Add(new identifier()
                 {
@@ -200,21 +201,26 @@ namespace Falak
                         });
                         switch (Current){
                             case TokenCategory.ASSIGN:
+                                Console.WriteLine("Sebo dice 3");
                                 result.Add(new assign()
                                 {
                                     AnchorToken = Expect(TokenCategory.ASSIGN)
                                 });
+                                
                                 result.Add(expr());
-                                Expect(TokenCategory.SEMICOLON);
+                                Console.WriteLine("Y el semicolon apa?");
+                                //Expect(TokenCategory.SEMICOLON);
                                 break;
                             case TokenCategory.PARENTHESIS_OPEN:
                                 Expect(TokenCategory.PARENTHESIS_OPEN);
                                 result.Add(exprList());
                                 Expect(TokenCategory.PARENTHESIS_CLOSE);
-                                Expect(TokenCategory.SEMICOLON);
+                                //Expect(TokenCategory.SEMICOLON);
                                 break;
                             default: throw new SyntaxError(Current, tokenStream.Current);
                         }
+
+                        Expect(TokenCategory.SEMICOLON);
 
                         break;
                         
@@ -289,6 +295,7 @@ namespace Falak
 
         public Node exprList()
         {
+            Console.WriteLine("Sebo dice");
             var result = new exprList();
             result.Add(expr());
             result.Add(exprListCont());
@@ -297,6 +304,7 @@ namespace Falak
 
         public Node exprListCont()
         {
+            Console.WriteLine("Sebo dice 2");
             var result = new exprListCont();
             if(Current == TokenCategory.COMMA)
             {
@@ -433,6 +441,7 @@ namespace Falak
 
         public Node expr()
         {
+            Console.WriteLine("Muller dice");
             var result = new expr();
             result.Add(exprOr());
             return result;
@@ -441,7 +450,7 @@ namespace Falak
         public Node exprOr()
         {
             var result = new exprOr();
-            result.Add(exprAnd());
+            
             while(Current == TokenCategory.OR || 
                     Current == TokenCategory.XOR){
                 switch (Current){
@@ -459,7 +468,7 @@ namespace Falak
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
-
+            result.Add(exprAnd());
             return result;
 
         }
@@ -467,7 +476,7 @@ namespace Falak
         public Node exprAnd()
         {
             var result = new exprAnd();
-            result.Add(exprComp());
+            
             while(Current == TokenCategory.AND)
             {
                 result.Add(new and()
@@ -475,12 +484,13 @@ namespace Falak
                     AnchorToken = Expect(TokenCategory.AND)
                 });
             }
+            result.Add(exprComp());
             return result;
         }
         public Node exprComp()
         {
             var result = new exprComp();
-            result.Add(exprRel());
+            
             while(Current == TokenCategory.EQUALS_TO || 
                   Current == TokenCategory.NOT_EQUAL){
                 switch(Current){
@@ -500,13 +510,14 @@ namespace Falak
                 }
             }
 
+            result.Add(exprRel());
             return result;
         }
 
         public Node exprRel()
         {
             var result = new exprRel();
-            result.Add(exprAdd());
+            
             while(Current == TokenCategory.GREATER_THAN || 
                   Current == TokenCategory.GREATER_EQUAL_THAN ||
                   Current == TokenCategory.LESS_THAN || 
@@ -540,14 +551,17 @@ namespace Falak
                 }
             }
 
+            result.Add(exprAdd());
             return result;
         }
 
         public Node exprAdd()
         {
             var result = new exprAdd();
-            result.Add(exprMul());
-            while(Current == TokenCategory.PLUS || Current == TokenCategory.NEG){
+            
+            while(Current == TokenCategory.PLUS || Current == TokenCategory.NEG)
+            {
+                
                 switch(Current){
                     case TokenCategory.PLUS:
                         result.Add(new plus()
@@ -565,13 +579,14 @@ namespace Falak
                 }
             }
 
+            result.Add(exprMul());
             return result;
         }
 
         public Node exprMul()
         {
             var result = new exprMul();
-            result.Add(exprUnary());
+            
             while(Current == TokenCategory.MUL ||
                     Current == TokenCategory.DIV ||
                     Current == TokenCategory.REMAINDER){
@@ -598,13 +613,14 @@ namespace Falak
                 }
             }
 
+            result.Add(exprUnary());
             return result;
         }
 
         public Node exprUnary()
         {
             var result = new exprUnary();
-            result.Add(exprPrimary());
+            //result.Add(exprPrimary());
             while(Current == TokenCategory.PLUS ||
                     Current == TokenCategory.NEG ||
                     Current == TokenCategory.NOT){
@@ -631,6 +647,7 @@ namespace Falak
                 }
             }
 
+            result.Add(exprPrimary());
             return result;
         }
 
