@@ -6,67 +6,65 @@ A01746645 Guillermo Adrian Urbina A.
 
 namespace Falak
 {
-    public class SpecificNodesTest
-    {
-        public class Program : Node { }
+        class Program : Node { }
 
-        public class defList : Node { }
-        public class varDef: Node{ }
-        public class idList: Node{ }
-        public class idListCont: Node{ }
-        public class funDef: Node{ }
-        public class varDefList: Node{ }
-        public class stmtList: Node{ }
-        public class stmtIncr: Node{ }
-        public class stmtDecr: Node{ }
-        public class exprList: Node{ }
-        public class exprListCont: Node{ }
-        public class stmtIf: Node{ }
-        public class elseIfList: Node{ }
-        public class stmtElse: Node{ }
-        public class var: Node { }
-        public class identifier: Node { }
-        public class assign: Node { }
-        public class plus: Node { }
-        public class neg: Node { }
-        public class mul: Node { }
-        public class div: Node { }
-        public class remainder: Node { }
-        public class not: Node { }
-        public class TRUE: Node { }
-        public class FALSE: Node { }
-        public class INT: Node { }
-        public class character: Node { }
-        public class STRING: Node { }
-        public class greater_than: Node { }
-        public class greater_equal_than: Node { }
-        public class less_than: Node { }
-        public class less_equal_than: Node { }
-        public class equals_to: Node { }
-        public class not_equal: Node { }
-        public class semicolon: Node { }
-        public class stmtWhile: Node{ }
-        public class stmtDoWhile: Node{ }
-        public class stmtBreak: Node{ }
-        public class stmtReturn: Node{ }
-        public class stmtEmpty: Node{ }
-        public class expr: Node{ }
-        public class exprOr: Node{ }
+        class defList : Node { }
+        class varDef: Node{ }
+        class idList: Node{ }
+        class idListCont: Node{ }
+        class funDef: Node{ }
+        class varDefList: Node{ }
+        class stmtList: Node{ }
+        class stmtIncr: Node{ }
+        class stmtDecr: Node{ }
+        class exprList: Node{ }
+        class exprListCont: Node{ }
+        class stmtIf: Node{ }
+        class elseIfList: Node{ }
+        class stmtElse: Node{ }
+        class var: Node { }
+        class identifier: Node { }
+        class assign: Node { }
+        class plus: Node { }
+        class neg: Node { }
+        class mul: Node { }
+        class div: Node { }
+        class remainder: Node { }
+        class not: Node { }
+        class TRUE: Node { }
+        class FALSE: Node { }
+        class INT: Node { }
+        class character: Node { }
+        class STRING: Node { }
+        class greater_than: Node { }
+        class greater_equal_than: Node { }
+        class less_than: Node { }
+        class less_equal_than: Node { }
+        class equals_to: Node { }
+        class not_equal: Node { }
+        class semicolon: Node { }
+        class stmtWhile: Node{ }
+        class stmtDoWhile: Node{ }
+        class stmtBreak: Node{ }
+        class stmtReturn: Node{ }
+        class stmtEmpty: Node{ }
+        class expr: Node{ }
+        class exprOr: Node{ }
 
-        public class or : Node { }
+        class or : Node { }
 
-        public class xor: Node { }
-        public class exprAnd: Node{ }
+        class xor: Node { }
+        class exprAnd: Node{ }
 
-        public class and : Node { }
+        class and : Node { }
 
-        public class exprComp: Node{ }
-        public class exprRel: Node{ }
-        public class exprAdd: Node{ }
-        public class exprMul: Node{ }
-        public class exprUnary: Node{ }
-        public class exprPrimary: Node{ }
-        public class array: Node{ }
-        public class lit: Node{ }
-    }
+        class exprComp: Node{ }
+        class exprRel: Node{ }
+        class exprAdd: Node{ }
+        class exprMul: Node{ }
+        class exprUnary: Node{ }
+        class exprPrimary: Node{ }
+        class array: Node{ }
+        class lit: Node{ }
+    
 }
