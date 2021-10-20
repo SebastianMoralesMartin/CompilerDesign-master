@@ -61,7 +61,7 @@ using System.Collections.Generic;
 
 namespace Falak
 {
-    public class ParserTest{
+    class ParserTest{
         IEnumerator<Token> tokenStream;
 
         public ParserTest(IEnumerator<Token> tokenStream) {
@@ -179,7 +179,7 @@ namespace Falak
             while (Current == TokenCategory.VAR)
             {
                 result.Add(varDef());
-                return result;
+                
             }
 
             return result;
@@ -204,49 +204,51 @@ namespace Falak
                                 });
                                 result.Add(expr());
                                 Expect(TokenCategory.SEMICOLON);
-                                return result;
+                                break;
                             case TokenCategory.PARENTHESIS_OPEN:
                                 Expect(TokenCategory.PARENTHESIS_OPEN);
                                 result.Add(exprList());
                                 Expect(TokenCategory.PARENTHESIS_CLOSE);
                                 Expect(TokenCategory.SEMICOLON);
-                                return result;
+                                break;
                             default: throw new SyntaxError(Current, tokenStream.Current);
                         }
+
+                        break;
                         
 
 
                     case TokenCategory.INC:
                         result.Add(stmtIncr());
-                        return result;
+                        break;
 
 
                     case TokenCategory.DEC:
                         result.Add(stmtDecr());
-                        return result;
+                        break;
 
                     case TokenCategory.IF:
                         result.Add(stmtIf());
-                        return result;
+                        break;
                     case TokenCategory.WHILE: 
                         result.Add(stmtWhile());
-                        return result;
+                        break;
                     
                     case TokenCategory.DO:
                         result.Add(stmtDoWhile());
-                        return result;
+                        break;
                 
                     case TokenCategory.BREAK:
                         result.Add(stmtBreak());
-                        return result;
+                        break;
                 
                     case TokenCategory.RETURN:
                         result.Add(stmtReturn());
-                        return result;
+                        break;
 
                     case TokenCategory.SEMICOLON: //Empty statement case
                         result.Add(stmtEmpty());
-                        return result;
+                        break;
 
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
@@ -720,6 +722,7 @@ namespace Falak
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
         }
-    }
 }
-//EOF
+}
+//pa pushear
+//2

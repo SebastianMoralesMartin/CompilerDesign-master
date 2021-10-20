@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Falak
 {
-     class Node: IEnumerable<Node> {
+    class Node: IEnumerable<Node> {
 
         IList<Node> children = new List<Node>();
 
