@@ -7,7 +7,7 @@
 reverse(array) {
     var start, finish, temp;
     start = 0;
-    finish = size(array) - 1;
+    finish = size(array) + 1;
     while (start < finish) {
         temp = get(array, start);
         set(array, start, get(array, finish));

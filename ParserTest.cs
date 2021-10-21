@@ -143,7 +143,7 @@ namespace Falak
             var result = new idListCont();
             if(Current == TokenCategory.COMMA)
             {
-                Console.WriteLine("why?");
+                Console.WriteLine("idListCon inside if (current == comma), Current: " + Current);
                 Expect(TokenCategory.COMMA);
                 result.Add(new identifier()
                 {
@@ -201,14 +201,14 @@ namespace Falak
                         });
                         switch (Current){
                             case TokenCategory.ASSIGN:
-                                Console.WriteLine("Sebo dice 3");
+                                Console.WriteLine("Case Assign Current: " + Current);
                                 result.Add(new assign()
                                 {
                                     AnchorToken = Expect(TokenCategory.ASSIGN)
                                 });
                                 
                                 result.Add(expr());
-                                Console.WriteLine("Y el semicolon apa?");
+                                Console.WriteLine("After ADD Current: " + Current);
                                 //Expect(TokenCategory.SEMICOLON);
                                 break;
                             case TokenCategory.PARENTHESIS_OPEN:
@@ -220,13 +220,12 @@ namespace Falak
                             default: throw new SyntaxError(Current, tokenStream.Current);
                         }
 
-                        
-
                         break;
                         
 
 
                     case TokenCategory.INC:
+                        Console.WriteLine("case INC Current: " + Current);
                         result.Add(stmtIncr());
                         break;
 
@@ -260,7 +259,7 @@ namespace Falak
 
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
-                Expect(TokenCategory.SEMICOLON);
+                
             }
 
             return result;
@@ -296,7 +295,7 @@ namespace Falak
 
         public Node exprList()
         {
-            Console.WriteLine("Sebo dice");
+            Console.WriteLine("exprList Running Current: " + Current);
             var result = new exprList();
             result.Add(expr());
             result.Add(exprListCont());
@@ -305,7 +304,7 @@ namespace Falak
 
         public Node exprListCont()
         {
-            Console.WriteLine("Sebo dice 2");
+            Console.WriteLine("exprListCont running Current: " + Current);
             var result = new exprListCont();
             if(Current == TokenCategory.COMMA)
             {
@@ -442,7 +441,7 @@ namespace Falak
 
         public Node expr()
         {
-            Console.WriteLine("Muller dice");
+            Console.WriteLine("expr running Current: "+  Current);
             var result = new expr();
             result.Add(exprOr());
             return result;
@@ -456,12 +455,12 @@ namespace Falak
                     Current == TokenCategory.XOR){
                 switch (Current){
                     case TokenCategory.OR:
-                        result.Add(new or(){
+                        result.Add(new Or(){
                             AnchorToken = Expect(TokenCategory.OR)
                         });
                         break;
                     case TokenCategory.XOR:
-                        result.Add(new xor()
+                        result.Add(new Xor()
                         {
                             AnchorToken = Expect(TokenCategory.XOR)
                         });
@@ -480,7 +479,7 @@ namespace Falak
             
             while(Current == TokenCategory.AND)
             {
-                result.Add(new and()
+                result.Add(new And()
                 {
                     AnchorToken = Expect(TokenCategory.AND)
                 });
@@ -558,29 +557,36 @@ namespace Falak
 
         public Node exprAdd()
         {
-            var result = new exprAdd();
+            var result = exprMul();
             
             while(Current == TokenCategory.PLUS || Current == TokenCategory.NEG)
             {
                 
                 switch(Current){
                     case TokenCategory.PLUS:
-                        result.Add(new plus()
+                        Console.WriteLine("case plus Current: " + Current);
+                       var node1 = new Plus()
                         {
                             AnchorToken = Expect(TokenCategory.PLUS)
-                        });
+                        };
+                        node1.Add(result);
+                        node1.Add(exprMul());
+                        result = node1;
                         break;
                     case TokenCategory.NEG:
-                        result.Add(new neg()
+                        var node2 = new Minus()
                         {
                             AnchorToken = Expect(TokenCategory.NEG)
-                        });
+                        };
+                        node2.Add(result);
+                        node2.Add(exprMul());
+                        result = node2;
                         break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
 
-            result.Add(exprMul());
+            
             return result;
         }
 
@@ -593,19 +599,19 @@ namespace Falak
                     Current == TokenCategory.REMAINDER){
                 switch(Current){
                     case TokenCategory.MUL:
-                        result.Add(new mul()
+                        result.Add(new Mul()
                         {
                             AnchorToken = Expect(TokenCategory.MUL)
                         });
                         break;
                     case TokenCategory.DIV:
-                        result.Add(new div()
+                        result.Add(new Div()
                         {
                             AnchorToken = Expect(TokenCategory.DIV)
                         });
                         break;
                     case TokenCategory.REMAINDER:
-                        result.Add(new remainder()
+                        result.Add(new Remainder()
                         {
                             AnchorToken = Expect(TokenCategory.REMAINDER)
                         });
@@ -627,19 +633,19 @@ namespace Falak
                     Current == TokenCategory.NOT){
                 switch(Current){
                     case TokenCategory.PLUS:
-                        result.Add(new plus()
+                        result.Add(new Plus()
                         {
                             AnchorToken = Expect(TokenCategory.PLUS)
                         });
                         break;
                     case TokenCategory.NEG:
-                        result.Add(new neg()
+                        result.Add(new Neg()
                         {
                             AnchorToken = Expect(TokenCategory.NEG)
                         });
                         break;
                     case TokenCategory.NOT:
-                        result.Add(new not()
+                        result.Add(new Not()
                         {
                             AnchorToken = Expect(TokenCategory.NOT)
                         }); 
@@ -729,7 +735,7 @@ namespace Falak
                     });
                     break;
                 case TokenCategory.CHARACTER:
-                    result.Add(new character()
+                    result.Add(new Character()
                     {
                         AnchorToken = Expect(TokenCategory.CHARACTER)
                     });

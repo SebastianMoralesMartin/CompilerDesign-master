@@ -15,6 +15,8 @@ namespace Falak
     class varDefList: Node{ }
     class stmtList: Node{ }
     class stmtIncr: Node{ }
+    class Inc: Node { }
+    class Minus: Node { }
     class stmtDecr: Node{ }
     class exprList: Node{ }
     class exprListCont: Node{ }
@@ -24,16 +26,16 @@ namespace Falak
     class Var: Node { }
     class identifier: Node { }
     class assign: Node { }
-    class plus: Node { }
-    class neg: Node { }
-    class mul: Node { }
-    class div: Node { }
-    class remainder: Node { }
-    class not: Node { }
+    class Plus: Node { }
+    class Neg: Node { }
+    class Mul: Node { }
+    class Div: Node { }
+    class Remainder: Node { }
+    class Not: Node { }
     class TRUE: Node { }
     class FALSE: Node { }
     class INT: Node { }
-    class character: Node { }
+    class Character: Node { }
     class STRING: Node { }
     class greater_than: Node { }
     class greater_equal_than: Node { }
@@ -50,12 +52,12 @@ namespace Falak
     class expr: Node{ }
     class exprOr: Node{ }
 
-    class or : Node { }
+    class Or : Node { }
 
-    class xor: Node { }
+    class Xor: Node { }
     class exprAnd: Node{ }
 
-    class and : Node { }
+    class And : Node { }
 
     class exprComp: Node{ }
     class exprRel: Node{ }
