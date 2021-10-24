@@ -449,74 +449,89 @@ namespace Falak
 
         public Node exprOr()
         {
-            var result = new exprOr();
+            var result = exprAnd();
             
             while(Current == TokenCategory.OR || 
                     Current == TokenCategory.XOR){
                 switch (Current){
                     case TokenCategory.OR:
-                        result.Add(new Or(){
+                        var node1 = new Or()
+                        {
                             AnchorToken = Expect(TokenCategory.OR)
-                        });
+                        };
+                        node1.Add(result);
+                        node1.Add(exprAnd());
+                        result = node1;
                         break;
                     case TokenCategory.XOR:
-                        result.Add(new Xor()
+                        var node2 = new Xor()
                         {
-                            AnchorToken = Expect(TokenCategory.XOR)
-                        });
+                            AnchorToken = Expect(TokenCategory.EQUALS_TO)
+                        };
+                        node2.Add(result);
+                        node2.Add(exprAnd());
+                        result = node2;
                         break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
-            result.Add(exprAnd());
+
             return result;
 
         }
 
         public Node exprAnd()
         {
-            var result = new exprAnd();
+            var result = exprComp();
             
             while(Current == TokenCategory.AND)
             {
-                result.Add(new And()
+                var node = new and()
                 {
                     AnchorToken = Expect(TokenCategory.AND)
-                });
+                };
+                node.Add(result);
+                node.Add(exprComp());
+                result = node;
             }
-            result.Add(exprComp());
+
             return result;
         }
         public Node exprComp()
         {
-            var result = new exprComp();
+            var result = exprComp();
             
             while(Current == TokenCategory.EQUALS_TO || 
                   Current == TokenCategory.NOT_EQUAL){
                 switch(Current){
                     case TokenCategory.EQUALS_TO:
-                        result.Add(new equals_to()
+                        var node1 = new equals_to()
                         {
                             AnchorToken = Expect(TokenCategory.EQUALS_TO)
-                        });
+                        };
+                        node1.Add(result);
+                        node1.Add(exprRel());
+                        result = node1;
                         break;
                     case TokenCategory.NOT_EQUAL:
-                        result.Add(new not_equal()
+                        var node2 = new not_equal()
                         {
                             AnchorToken = Expect(TokenCategory.NOT_EQUAL)
-                        });
+                        };
+                        node2.Add(result);
+                        node2.Add(exprRel());
+                        result = node2;
                         break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
 
-            result.Add(exprRel());
             return result;
         }
 
         public Node exprRel()
         {
-            var result = new exprRel();
+            var result = exprRel();
             
             while(Current == TokenCategory.GREATER_THAN || 
                   Current == TokenCategory.GREATER_EQUAL_THAN ||
@@ -524,34 +539,44 @@ namespace Falak
                   Current == TokenCategory.LESS_EQUAL_THAN){ 
                 switch(Current){
                     case TokenCategory.GREATER_THAN:
-                        result.Add(new greater_than()
+                        var node1 = new greater_than()()
                         {
                             AnchorToken = Expect(TokenCategory.GREATER_THAN)
-                        });
-                        return result;
+                        };
+                        node1.Add(result);
+                        node1.Add(exprAdd());
+                        result = node1;
+                        break;
                     case TokenCategory.GREATER_EQUAL_THAN:
-                        result.Add(new greater_equal_than()
+                        var node2 = new greater_equal_than()
                         {
                             AnchorToken = Expect(TokenCategory.GREATER_EQUAL_THAN)
-                        });
+                        };
+                        node2.Add(result);
+                        node2.Add(exprAdd());
+                        result = node2;
                         break;
                     case TokenCategory.LESS_THAN:
-                        result.Add(new less_than()
-                    {
-                        AnchorToken = Expect(TokenCategory.LESS_THAN)
-                    });
+                        var node3 = new less_than()
+                        {
+                            AnchorToken = Expect(TokenCategory.LESS_THAN)
+                        };
+                        node3.Add(result);
+                        node3.Add(exprAdd());
+                        result = node3;
                         break;
                     case TokenCategory.LESS_EQUAL_THAN:
-                        result.Add(new less_equal_than()
-                    {
-                        AnchorToken = Expect(TokenCategory.LESS_EQUAL_THAN)
-                    });
+                        var node4 = new less_equal_than()
+                        {
+                            AnchorToken = Expect(TokenCategory.LESS_EQUAL_THAN)
+                        };
+                        node4.Add(result);
+                        node4.Add(exprAdd());
+                        result = node4;
                         break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
-
-            result.Add(exprAdd());
             return result;
         }
 
@@ -592,41 +617,48 @@ namespace Falak
 
         public Node exprMul()
         {
-            var result = new exprMul();
+            var result = exprUnary();
             
             while(Current == TokenCategory.MUL ||
                     Current == TokenCategory.DIV ||
                     Current == TokenCategory.REMAINDER){
                 switch(Current){
                     case TokenCategory.MUL:
-                        result.Add(new Mul()
+                        var node1 = new Mul()
                         {
                             AnchorToken = Expect(TokenCategory.MUL)
-                        });
+                        };
+                        node1.Add(result);
+                        node1.Add(exprUnary());
+                        result = node1;
                         break;
                     case TokenCategory.DIV:
-                        result.Add(new Div()
+                        var node2 = new Div()
                         {
                             AnchorToken = Expect(TokenCategory.DIV)
-                        });
+                        };
+                        node2.Add(result);
+                        node2.Add(exprUnary());
+                        result = node2;
                         break;
                     case TokenCategory.REMAINDER:
-                        result.Add(new Remainder()
+                        var node3 = new Remainder()
                         {
                             AnchorToken = Expect(TokenCategory.REMAINDER)
-                        });
+                        };
+                        node3.Add(result);
+                        node3.Add(exprUnary());
+                        result = node3;
                         break;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
-
-            result.Add(exprUnary());
             return result;
         }
 
         public Node exprUnary()
         {
-            var result = new exprUnary();
+            var result =  exprPrimary();
             //result.Add(exprPrimary());
             while(Current == TokenCategory.PLUS ||
                     Current == TokenCategory.NEG ||
@@ -660,18 +692,10 @@ namespace Falak
 
         public Node exprPrimary()
         {
-            var result = new exprPrimary();
+            var result = exprPrimary();
             switch (Current){
                 case TokenCategory.IDENTIFIER:
-                    result.Add(new identifier()
-                    {
-                        AnchorToken = Expect(TokenCategory.IDENTIFIER)
-                    });
-                    if(Current == TokenCategory.PARENTHESIS_OPEN){
-                        Expect(TokenCategory.PARENTHESIS_OPEN);
-                        result.Add(exprList());
-                        Expect(TokenCategory.PARENTHESIS_CLOSE);
-                    }
+                    var node1 = new
                     break;
                 case TokenCategory.BRACKET_LEFT:
                     result.Add(array());
