@@ -179,7 +179,7 @@ namespace Falak
             result.Add(varDefList());
             
             result.Add(stmtList());
-            
+
             Expect(TokenCategory.KEY_RIGHT);
             return result;
         }
@@ -208,6 +208,7 @@ namespace Falak
                             AnchorToken = Expect(TokenCategory.IDENTIFIER)
                         });
                         switch (Current){
+
                             case TokenCategory.ASSIGN:
                                 Console.WriteLine("Case Assign Current: " + Current);
                                 result.Add(new assign()
@@ -358,9 +359,10 @@ namespace Falak
             var result = new elseIfList(){
                 AnchorToken = Expect(TokenCategory.ELSEIF)
             };
-            while(Current == TokenCategory.ELSEIF)
+            Console.WriteLine(result);
+            while(Current == TokenCategory.PARENTHESIS_OPEN)
             {
-                
+                Console.WriteLine("Current Should be a open parenthesis: " + Current);
                 
                 
                 Expect(TokenCategory.PARENTHESIS_OPEN);
@@ -369,6 +371,10 @@ namespace Falak
                 Expect(TokenCategory.KEY_LEFT);
                 result.Add(stmtList());
                 Expect(TokenCategory.KEY_RIGHT);
+
+                if(Current == TokenCategory.ELSEIF){
+                    result.Add(elseIfList());
+                }
                 
             }
             
@@ -419,8 +425,8 @@ namespace Falak
             Expect(TokenCategory.KEY_RIGHT);
             Expect(TokenCategory.WHILE);
             Expect(TokenCategory.PARENTHESIS_OPEN);
-            
-            result.Add(stmtList());
+            //Console.WriteLine(result);
+            result.Add(expr());
             
             Expect(TokenCategory.PARENTHESIS_CLOSE);
             Expect(TokenCategory.SEMICOLON);
@@ -484,7 +490,7 @@ namespace Falak
                     case TokenCategory.XOR:
                         var node2 = new Xor()
                         {
-                            AnchorToken = Expect(TokenCategory.EQUALS_TO)
+                            AnchorToken = Expect(TokenCategory.XOR)
                         };
                         node2.Add(result);
                         node2.Add(exprAnd());
@@ -517,12 +523,13 @@ namespace Falak
         }
         public Node exprComp()
         {
+
             
             var result = exprRel();
-            Console.WriteLine("EQUALSTO Current: " + Current);
+            Console.WriteLine("EQUALSTO before Switch case Current: " + Current);
             while(Current == TokenCategory.EQUALS_TO || 
                   Current == TokenCategory.NOT_EQUAL){
-                Console.WriteLine("Before Switch EQUALSTO Current: " + Current);
+                //Console.WriteLine("Before Switch EQUALSTO Current: " + Current);
                 switch(Current){
                     case TokenCategory.EQUALS_TO:
                         Console.WriteLine("EQUALSTO Current: " + Current);
@@ -679,8 +686,10 @@ namespace Falak
 
         public Node exprUnary()
         {
+            Console.WriteLine("Unary Expresison: " + Current);
             var result =  exprPrimary();
             //result.Add(exprPrimary());
+            
             while(Current == TokenCategory.PLUS ||
                     Current == TokenCategory.NEG ||
                     Current == TokenCategory.NOT){
@@ -711,7 +720,26 @@ namespace Falak
 
         public Node exprPrimary()
         {
+            Console.WriteLine("expr Primary: " + Current);
             switch (Current){
+                case TokenCategory.PLUS:
+                        var posTokenPlus = Expect(TokenCategory.PLUS);
+                        var exprPlus = exprPrimary();
+                        var result1 = new Positive() {exprPlus};
+                        result1.AnchorToken = posTokenPlus;
+                        return result1;
+                    case TokenCategory.NEG:
+                        var posTokenNeg = Expect(TokenCategory.NEG);
+                        var exprNeg = exprPrimary();
+                        var result2 = new Negative() {exprNeg};
+                        result2.AnchorToken = posTokenNeg;
+                        return result2;
+                    case TokenCategory.NOT:
+                        var posTokenNot = Expect(TokenCategory.NOT);
+                        var exprNot = exprPrimary();
+                        var result3 = new Not() {exprNot};
+                        result3.AnchorToken = posTokenNot;
+                        return result3;
                 case TokenCategory.IDENTIFIER:
                     var nodeId = new identifier()
                     {
