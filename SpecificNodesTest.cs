@@ -65,6 +65,9 @@ namespace Falak
     class exprMul: Node{ }
     class exprUnary: Node{ }
     class exprPrimary: Node{ }
+    class Positive: Node { }
+    class Negative: Node { }
+    
     class array: Node{ }
     class lit: Node{ }
 

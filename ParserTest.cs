@@ -87,8 +87,7 @@ namespace Falak
 
         public Node Program()
         {
-            var result = defList();    
-            Expect(TokenCategory.EOF);
+            var result = defList();
             var newNode = new Program();
             newNode.Add(result);
             return newNode;
@@ -97,17 +96,22 @@ namespace Falak
         public Node defList()
         {
             var result = new defList();
-            switch (Current){
-                case TokenCategory.VAR:
-                    result.Add(varDef());
-                    break;
+            while (Current == TokenCategory.VAR || 
+                   Current == TokenCategory.IDENTIFIER)
+            {
+                switch (Current){
+                    case TokenCategory.VAR:
+                        result.Add(varDef());
+                        break;
                 
-                case TokenCategory.IDENTIFIER: 
-                    result.Add(funDef());
-                    break;
+                    case TokenCategory.IDENTIFIER: 
+                        result.Add(funDef());
+                        break;
                 
-                default: throw new SyntaxError(Current, tokenStream.Current);
+                    default: throw new SyntaxError(Current, tokenStream.Current);
+                }
             }
+            
 
             return result;
         }
@@ -132,7 +136,11 @@ namespace Falak
                 {
                     AnchorToken = Expect(TokenCategory.IDENTIFIER)
                 });
-                result.Add(idListCont());
+                if (Current == TokenCategory.COMMA)
+                {
+                    result.Add(idListCont()); 
+                }
+                
             }
 
             return result;
@@ -208,10 +216,10 @@ namespace Falak
                                 });
                                 
                                 result.Add(expr());
-                                Console.WriteLine("After ADD Current: " + Current);
+                                Console.WriteLine("After ADD ASIGN Current: " + Current);
                                 //Expect(TokenCategory.SEMICOLON);
                                 break;
-                            case TokenCategory.PARENTHESIS_OPEN:
+                            case TokenCategory.PARENTHESIS_OPEN: //funCall
                                 Expect(TokenCategory.PARENTHESIS_OPEN);
                                 result.Add(exprList());
                                 Expect(TokenCategory.PARENTHESIS_CLOSE);
@@ -297,8 +305,11 @@ namespace Falak
         {
             Console.WriteLine("exprList Running Current: " + Current);
             var result = new exprList();
-            result.Add(expr());
-            result.Add(exprListCont());
+            if (Current != TokenCategory.PARENTHESIS_CLOSE)
+            {
+                result.Add(expr());
+                result.Add(exprListCont());
+            }
             return result;
         } 
 
@@ -328,8 +339,18 @@ namespace Falak
             Expect(TokenCategory.KEY_LEFT);
             result.Add(stmtList());
             Expect(TokenCategory.KEY_RIGHT);
-            result.Add(elseIfList());
-            result.Add(stmtElse());
+            if (Current == TokenCategory.ELSEIF)
+            {
+                result.Add(elseIfList());
+            }
+
+            if (Current == TokenCategory.ELSE)
+            {
+                result.Add(stmtElse());
+            }
+
+
+
             return result;
         }   
 
@@ -349,7 +370,9 @@ namespace Falak
                 result.Add(stmtList());
                 Expect(TokenCategory.KEY_RIGHT);
                 
-            }return result;
+            }
+            
+            return result;
 
         }
 
@@ -358,14 +381,9 @@ namespace Falak
             {
                 AnchorToken = Expect(TokenCategory.ELSE)
             };
-            if (Current == TokenCategory.ELSE)
-            {
-                
-                
-                Expect(TokenCategory.KEY_LEFT);
-                result.Add(stmtList());
-                Expect(TokenCategory.KEY_RIGHT);  
-            }
+            Expect(TokenCategory.KEY_LEFT);
+            result.Add(stmtList());
+            Expect(TokenCategory.KEY_RIGHT);
 
             return result;
         }
@@ -486,7 +504,7 @@ namespace Falak
             
             while(Current == TokenCategory.AND)
             {
-                var node = new and()
+                var node = new And()
                 {
                     AnchorToken = Expect(TokenCategory.AND)
                 };
@@ -499,12 +517,15 @@ namespace Falak
         }
         public Node exprComp()
         {
-            var result = exprComp();
             
+            var result = exprRel();
+            Console.WriteLine("EQUALSTO Current: " + Current);
             while(Current == TokenCategory.EQUALS_TO || 
                   Current == TokenCategory.NOT_EQUAL){
+                Console.WriteLine("Before Switch EQUALSTO Current: " + Current);
                 switch(Current){
                     case TokenCategory.EQUALS_TO:
+                        Console.WriteLine("EQUALSTO Current: " + Current);
                         var node1 = new equals_to()
                         {
                             AnchorToken = Expect(TokenCategory.EQUALS_TO)
@@ -531,7 +552,7 @@ namespace Falak
 
         public Node exprRel()
         {
-            var result = exprRel();
+            var result = exprAdd();
             
             while(Current == TokenCategory.GREATER_THAN || 
                   Current == TokenCategory.GREATER_EQUAL_THAN ||
@@ -539,7 +560,7 @@ namespace Falak
                   Current == TokenCategory.LESS_EQUAL_THAN){ 
                 switch(Current){
                     case TokenCategory.GREATER_THAN:
-                        var node1 = new greater_than()()
+                        var node1 = new greater_than()
                         {
                             AnchorToken = Expect(TokenCategory.GREATER_THAN)
                         };
@@ -665,66 +686,65 @@ namespace Falak
                     Current == TokenCategory.NOT){
                 switch(Current){
                     case TokenCategory.PLUS:
-                        result.Add(new Plus()
-                        {
-                            AnchorToken = Expect(TokenCategory.PLUS)
-                        });
-                        break;
+                        var posTokenPlus = Expect(TokenCategory.PLUS);
+                        var exprPlus = exprPrimary();
+                        result = new Positive() {exprPlus};
+                        result.AnchorToken = posTokenPlus;
+                        return result;
                     case TokenCategory.NEG:
-                        result.Add(new Neg()
-                        {
-                            AnchorToken = Expect(TokenCategory.NEG)
-                        });
-                        break;
+                        var posTokenNeg = Expect(TokenCategory.NEG);
+                        var exprNeg = exprPrimary();
+                        result = new Negative() {exprNeg};
+                        result.AnchorToken = posTokenNeg;
+                        return result;
                     case TokenCategory.NOT:
-                        result.Add(new Not()
-                        {
-                            AnchorToken = Expect(TokenCategory.NOT)
-                        }); 
-                        break;
+                        var posTokenNot = Expect(TokenCategory.NOT);
+                        var exprNot = exprPrimary();
+                        result = new Not() {exprNot};
+                        result.AnchorToken = posTokenNot;
+                        return result;
                     default: throw new SyntaxError(Current, tokenStream.Current);
                 }
             }
-
-            result.Add(exprPrimary());
             return result;
         }
 
         public Node exprPrimary()
         {
-            var result = exprPrimary();
             switch (Current){
                 case TokenCategory.IDENTIFIER:
-                    var node1 = new
-                    break;
+                    var nodeId = new identifier()
+                    {
+                        AnchorToken = Expect(TokenCategory.IDENTIFIER)
+                    };
+                    if(Current == TokenCategory.PARENTHESIS_OPEN){
+                        Expect(TokenCategory.PARENTHESIS_OPEN);
+                        nodeId.Add(exprList());
+                        Expect(TokenCategory.PARENTHESIS_CLOSE);
+                    }
+                    return nodeId;
                 case TokenCategory.BRACKET_LEFT:
-                    result.Add(array());
-                    break;
+                    var nodeArr = array();
+                    return nodeArr;
                 case TokenCategory.TRUE:
-                    result.Add(lit());
-                    break;
+                    return lit();
                 case TokenCategory.FALSE:
-                    result.Add(lit());
-                    break;
+                    return lit();
                 case TokenCategory.INT:
-                    result.Add(lit());
-                    break;
+                    return lit();
                 case TokenCategory.CHARACTER:
-                    result.Add(lit());
-                    break;
+                    return lit();
                 case TokenCategory.STRING:
-                    result.Add(lit());
-                    break;
+                    return lit();
                 
                 case TokenCategory.PARENTHESIS_OPEN:
                     Expect(TokenCategory.PARENTHESIS_OPEN);
-                    result.Add(expr());
+                    var nodePar = exprList();
                     Expect(TokenCategory.PARENTHESIS_CLOSE);
-                    break;
+                    return nodePar;
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
 
-            return result;
         }
 
         public Node array()
