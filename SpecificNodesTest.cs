@@ -12,6 +12,10 @@ namespace Falak
     class idList: Node{ }
     class idListCont: Node{ }
     class funDef: Node{ }
+    
+    class exprFunCall: Node { }
+
+    class funCall: Node { }
     class varDefList: Node{ }
     class stmtList: Node{ }
     class stmtIncr: Node{ }

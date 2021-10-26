@@ -10,9 +10,9 @@
  *  Program ::= defList
  *  defList ::= (varDef | funDef)* 
  *  varDef ::= 'var' idList ';'
- *  idList ::= id idListCont
- *  idListCont ::= (',' id idListCont)?
- *  *funDef ::= id '(' idList ')' '{' varDefList stmtList '}'
+ *  idList ::= id (',' id)*
+ *  
+ *  *funDef ::= id '(' idList? ')' '{' varDefList stmtList '}'
  *
  *  varDefList ::= ( varDef )*
  * 
@@ -26,8 +26,7 @@
  *  stmtDecr ::= 'dec' id ';'
  *          *stmtFunCall ::= funCall ';'
  *          *funCall ::= id '(' exprList ')'
- *  exprList ::= expr exprListCont
- *  exprListCont ::= ',' expr exprListcont
+ *  exprList ::= (expr (',' expr)*)?
  *  stmtIf ::= 'if' '(' expr ')' '{' stmtList '}' (elseIfList else)?
  *  elseIfList ::= ( 'elseif' '(' expr ')' '{' stmtList '}' )*
  *  else ::= 'else' '{' stmtlist '}'
@@ -136,9 +135,13 @@ namespace Falak
                 {
                     AnchorToken = Expect(TokenCategory.IDENTIFIER)
                 });
-                if (Current == TokenCategory.COMMA)
+                while (Current == TokenCategory.COMMA)
                 {
-                    result.Add(idListCont()); 
+                    Expect(TokenCategory.COMMA);
+                    result.Add(new identifier()
+                    {
+                        AnchorToken = Expect(TokenCategory.IDENTIFIER)
+                    });
                 }
                 
             }
@@ -146,7 +149,7 @@ namespace Falak
             return result;
         }
 
-        public Node idListCont()
+        /*public Node idListCont()
         {
             var result = new idListCont();
             if(Current == TokenCategory.COMMA)
@@ -160,7 +163,7 @@ namespace Falak
                 result.Add(idListCont());
             }
             return result;
-        }
+        }*/
         
         public Node funDef()
         {
@@ -203,27 +206,32 @@ namespace Falak
             {
                 switch (Current){
                     case TokenCategory.IDENTIFIER:
-                        result.Add(new identifier()
+                        var nodeIdentifier = new identifier()
                         {
                             AnchorToken = Expect(TokenCategory.IDENTIFIER)
-                        });
+                        };
+                        
                         switch (Current){
 
                             case TokenCategory.ASSIGN:
-                                Console.WriteLine("Case Assign Current: " + Current);
-                                result.Add(new assign()
+                                //Console.WriteLine("Case Assign Current: " + Current);
+                                var AssignNode = new assign()
                                 {
                                     AnchorToken = Expect(TokenCategory.ASSIGN)
-                                });
-                                
-                                result.Add(expr());
-                                Console.WriteLine("After ADD ASIGN Current: " + Current);
+                                };
+                                AssignNode.Add(nodeIdentifier);
+                                AssignNode.Add(expr());
+                                result.Add(AssignNode);
+                                //Console.WriteLine("After ADD ASIGN Current: " + Current);
                                 //Expect(TokenCategory.SEMICOLON);
                                 break;
                             case TokenCategory.PARENTHESIS_OPEN: //funCall
+                                var funCallNode = new funCall();
+                                funCallNode.Add(nodeIdentifier);
                                 Expect(TokenCategory.PARENTHESIS_OPEN);
-                                result.Add(exprList());
+                                funCallNode.Add(exprList());
                                 Expect(TokenCategory.PARENTHESIS_CLOSE);
+                                result.Add(funCallNode);
                                 //Expect(TokenCategory.SEMICOLON);
                                 break;
                             default: throw new SyntaxError(Current, tokenStream.Current);
@@ -304,13 +312,26 @@ namespace Falak
 
         public Node exprList()
         {
-            Console.WriteLine("exprList Running Current: " + Current);
+            //Console.WriteLine("exprList Running Current: " + Current);
             var result = new exprList();
             if (Current != TokenCategory.PARENTHESIS_CLOSE)
             {
                 result.Add(expr());
-                result.Add(exprListCont());
+                while (Current == TokenCategory.COMMA)
+                {
+                    Expect(TokenCategory.COMMA);
+                    result.Add(expr());
+                }
             }
+
+            
+
+            /*if (Current != TokenCategory.PARENTHESIS_CLOSE)
+            {
+                result.Add(expr());
+                result.Add(exprListCont());
+            }*/
+
             return result;
         } 
 
@@ -686,7 +707,7 @@ namespace Falak
 
         public Node exprUnary()
         {
-            Console.WriteLine("Unary Expresison: " + Current);
+            //Console.WriteLine("Unary Expresison: " + Current);
             var result =  exprPrimary();
             //result.Add(exprPrimary());
             
@@ -720,7 +741,7 @@ namespace Falak
 
         public Node exprPrimary()
         {
-            Console.WriteLine("expr Primary: " + Current);
+            //Console.WriteLine("expr Primary: " + Current);
             switch (Current){
                 case TokenCategory.PLUS:
                         var posTokenPlus = Expect(TokenCategory.PLUS);
@@ -745,12 +766,17 @@ namespace Falak
                     {
                         AnchorToken = Expect(TokenCategory.IDENTIFIER)
                     };
-                    if(Current == TokenCategory.PARENTHESIS_OPEN){
+                    if(Current == TokenCategory.PARENTHESIS_OPEN)
+                    {
+                        var NodeexprFunCall = new exprFunCall();
                         Expect(TokenCategory.PARENTHESIS_OPEN);
-                        nodeId.Add(exprList());
+                        NodeexprFunCall.Add(exprList());
                         Expect(TokenCategory.PARENTHESIS_CLOSE);
+                        nodeId.Add(NodeexprFunCall);
                     }
                     return nodeId;
+                    ;
+                    
                 case TokenCategory.BRACKET_LEFT:
                     var nodeArr = array();
                     return nodeArr;
