@@ -10,21 +10,28 @@ using System.Text;
 
 namespace Falak {
 	
-    public class Driver {
+     public class Driver {
 
-        const string VERSION = "0.3";
+        const string VERSION = "0.4";
 
         //-----------------------------------------------------------
         static readonly string[] ReleaseIncludes = {
             "Lexical analysis",
             "Syntactic analysis",
-            "AST construction"
+            "AST construction",
+            "Semantic analysis"
         };
 
         //-----------------------------------------------------------
         void PrintAppHeader() {
             Console.WriteLine("Falak compiler, version " + VERSION);
-            
+            Console.WriteLine(
+                "Copyright \u00A9 2013-2021 by A. Ortiz, ITESM CEM.");
+            Console.WriteLine("This program is free software; you may "
+                + "redistribute it under the terms of");
+            Console.WriteLine("the GNU General Public License version 3 or "
+                + "later.");
+            Console.WriteLine("This program has absolutely no warranty.");
         }
 
         //-----------------------------------------------------------
@@ -52,14 +59,27 @@ namespace Falak {
             try {
                 var inputPath = args[0];
                 var input = File.ReadAllText(inputPath);
-                var parser = new ParserTest(
+                var parser = new Parser(
                     new Scanner(input).Scan().GetEnumerator());
                 var program = parser.Program();
-                Console.Write(program.ToStringTree());
+                Console.WriteLine("Syntax OK.");
+
+                var semantic = new SemanticVisitor();
+                semantic.Visit((dynamic) program);
+
+                Console.WriteLine("Semantics OK.");
+                Console.WriteLine();
+                Console.WriteLine("Symbol Table");
+                Console.WriteLine("============");
+                foreach (var entry in semantic.Table) {
+                    Console.WriteLine(entry);
+                }
 
             } catch (Exception e) {
 
-                if (e is FileNotFoundException || e is SyntaxError) {
+                if (e is FileNotFoundException
+                    || e is SyntaxError
+                    || e is SemanticError) {
                     Console.Error.WriteLine(e.Message);
                     Environment.Exit(1);
                 }

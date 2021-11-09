@@ -11,7 +11,7 @@ x(b) {
     prints("Function x\n");
     prints("a = ");
     printi(a);
-    println();
+    println();  
     prints("b = ");
     printi(b);
     println();
