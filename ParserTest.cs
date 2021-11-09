@@ -223,16 +223,19 @@ namespace Falak
                                 AssignNode.Add(expr());
                                 result.Add(AssignNode);
                                 //Console.WriteLine("After ADD ASIGN Current: " + Current);
-                                //Expect(TokenCategory.SEMICOLON);
+                                Expect(TokenCategory.SEMICOLON);
                                 break;
                             case TokenCategory.PARENTHESIS_OPEN: //funCall
                                 var funCallNode = new funCall();
                                 funCallNode.Add(nodeIdentifier);
                                 Expect(TokenCategory.PARENTHESIS_OPEN);
-                                funCallNode.Add(exprList());
+                                if (Current != TokenCategory.PARENTHESIS_CLOSE)
+                                {
+                                    funCallNode.Add(exprList());
+                                }
                                 Expect(TokenCategory.PARENTHESIS_CLOSE);
                                 result.Add(funCallNode);
-                                //Expect(TokenCategory.SEMICOLON);
+                                Expect(TokenCategory.SEMICOLON);
                                 break;
                             default: throw new SyntaxError(Current, tokenStream.Current);
                         }
@@ -770,7 +773,11 @@ namespace Falak
                     {
                         var NodeexprFunCall = new exprFunCall();
                         Expect(TokenCategory.PARENTHESIS_OPEN);
-                        NodeexprFunCall.Add(exprList());
+                        if (Current != TokenCategory.PARENTHESIS_CLOSE)
+                        {
+                            NodeexprFunCall.Add(exprList());
+                        }
+                        
                         Expect(TokenCategory.PARENTHESIS_CLOSE);
                         nodeId.Add(NodeexprFunCall);
                     }
@@ -810,45 +817,47 @@ namespace Falak
             return result;
         }
 
+       
         public Node lit()
         {
-            var result = new lit();
             switch(Current){
                 case TokenCategory.TRUE:
-                    result.Add(new TRUE()
+                    var out1 = new TRUE()
                 {
                     AnchorToken = Expect(TokenCategory.TRUE)
-                });
-                    break;
+                };
+                    return out1;
                 case TokenCategory.FALSE:
-                    result.Add(new FALSE()
+                    var out2 = new FALSE()
                     {
                         AnchorToken = Expect(TokenCategory.FALSE)
-                    });
-                    break;
+                    };
+                    return out2;
                 case TokenCategory.INT:
-                    result.Add(new INT()
+                    
+                    var out3 = new INT()
                     {
                         AnchorToken = Expect(TokenCategory.INT)
-                    });
-                    break;
+                    };
+                    return out3;
                 case TokenCategory.CHARACTER:
-                    result.Add(new Character()
+                    var out4 = new Character()
                     {
                         AnchorToken = Expect(TokenCategory.CHARACTER)
-                    });
-                    break;
+                    };
+                    return out4;
                 case TokenCategory.STRING:
-                    result.Add(new STRING()
+                    var out5 = new STRING()
                     {
                         AnchorToken = Expect(TokenCategory.STRING)
-                    });
-                    break;
+                    };
+                    return out5;
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
-
-            return result;
+            
         }
+
+        
 }
 }
 //pa pushear
