@@ -19,20 +19,20 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Program node) {
+        public void Visit(Program node) {
             Visit((dynamic) node[0]);
             Visit((dynamic) node[1]);
             return Type.VOID;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(DeclarationList node) {
+        public void Visit(DeclarationList node) {
             VisitChildren(node);
             return Type.VOID;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Declaration node) {
+        public void Visit(Declaration node) {
 
             var variableName = node[0].AnchorToken.Lexeme;
 
@@ -50,13 +50,13 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(StatementList node) {
+        public void Visit(StatementList node) {
             VisitChildren(node);
             return Type.VOID;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Assignment node) {
+        public void Visit(Assignment node) {
 
             var variableName = node.AnchorToken.Lexeme;
 
@@ -81,7 +81,7 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Print node) {
+        public void Visit(Print node) {
             // Print expects a node of type int or bool, so we can
             // safely ignore the return type of this Visit call.
             Visit((dynamic) node[0]);
@@ -89,7 +89,7 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(If node) {
+        public void Visit(If node) {
             if (Visit((dynamic) node[0]) != Type.BOOL) {
                 throw new SemanticError(
                     $"Expecting type {Type.BOOL} in conditional statement",
@@ -100,7 +100,7 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Identifier node) {
+        public void Visit(Identifier node) {
 
             var variableName = node.AnchorToken.Lexeme;
 
@@ -114,7 +114,7 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(IntLiteral node) {
+        public void Visit(IntLiteral node) {
 
             var intStr = node.AnchorToken.Lexeme;
             int value;
@@ -129,17 +129,17 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(True node) {
+        public void Visit(True node) {
             return Type.BOOL;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(False node) {
+        public void Visit(False node) {
             return Type.BOOL;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Neg node) {
+        public void Visit(Neg node) {
             if (Visit((dynamic) node[0]) != Type.INT) {
                 throw new SemanticError(
                     $"Operator - requires an operand of type {Type.INT}",
@@ -149,25 +149,25 @@
         }
 
         //-----------------------------------------------------------
-        public Type Visit(And node) {
+        public void Visit(And node) {
             VisitBinaryOperator('&', node, Type.BOOL);
             return Type.BOOL;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Less node) {
+        public void Visit(Less node) {
             VisitBinaryOperator('<', node, Type.INT);
             return Type.BOOL;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Plus node) {
+        public void Visit(Plus node) {
             VisitBinaryOperator('+', node, Type.INT);
             return Type.INT;
         }
 
         //-----------------------------------------------------------
-        public Type Visit(Mul node) {
+        public void Visit(Mul node) {
             VisitBinaryOperator('*', node, Type.INT);
             return Type.INT;
         }

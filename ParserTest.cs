@@ -466,7 +466,7 @@ namespace Falak
 
         public Node stmtReturn()
         {
-            var result = new stmtReturn
+            var result = new stmtReturn()
             {
                 AnchorToken = Expect(TokenCategory.RETURN)
             };
