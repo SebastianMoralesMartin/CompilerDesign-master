@@ -188,7 +188,7 @@ namespace Falak
         }
 
         //-----------------------------------------------------------
-        void VisitBinaryOperator(char op, Node node, Type type) {
+        void VisitBinaryOperator(string op, Node node, TokenCategory type) {
             if (Visit((dynamic) node[0]) != type ||
                 Visit((dynamic) node[1]) != type) {
                 throw new SemanticError(
@@ -282,7 +282,7 @@ namespace Falak
         public void Visit(stmtBreak node) {   
             VisitChildren(node);
         }
-        public void Visit(stmtRetur node) {   
+        public void Visit(stmtReturn node) {   
             VisitChildren(node);
         }
         public void Visit(stmtEmpty node) {   
@@ -321,6 +321,97 @@ namespace Falak
         public void Visit(lit node) {   
             VisitChildren(node);
         }
+
+        public void Visit(exprFunCall node)
+        {
+            
+        }
+
+        public void Visit(funCall node)
+        {
+            
+        }
+
+        public void Visit(Minus node)
+        {
+            
+        }
+
+        public void Visit(assign node)
+        {
+            
+        }
+        
+        public void Visit(Plus node){}        public void Visit(){}
+        public void Visit(Neg node){}
+        public void Visit(Mul node){}        public void Visit(){}
+        public void Visit(Div node){}        public void Visit(){}
+        public void Visit(Remainder node){}        public void Visit(){}
+        public void Visit(Not node){}        public void Visit(){}
+        public void Visit(True node){}        public void Visit(){}
+        public void Visit(False node){}
+        public void Visit(){}
+
+        public void Visit(greater_than node)
+        {
+            
+        }
+
+        public void Visit(greater_equal_than node)
+        {
+            
+        }
+        
+        public void Visit(less_than node){}        public void Visit(){}
+        public void Visit(less_equal_than node){}        public void Visit(){}
+        public void Visit(equals_to){}        public void Visit(){}
+        public void Visit(not_equal){}        public void Visit(){}
+        public void Visit(Positive node){}
+        public void Visit(Negative node){}
+
+
+        public void Visit(Or node)
+        {
+            
+        }
+
+        public void Visit(Xor node)
+        {
+            
+        }
+
+        public void Visit(And node)
+        {
+            
+        }
+        
+        //API primitives
+        public void Visit(printI node){}
+        public void Visit(printC node){}
+        public void Visit(printS node){}
+        public void Visit(printLN node){}
+        public void Visit(readI node){}
+        public void Visit(readS node){}
+        public void Visit(New node){}
+        public void Visit(Size node){}
+        public void Visit(Add node){}
+        public void Visit(Get node){}        public void Visit(){}
+        public void Visit(Set node){}
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        
+        
     }
 
     public struct Primitives()
