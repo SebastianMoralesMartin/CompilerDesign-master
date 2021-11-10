@@ -286,10 +286,10 @@ namespace Falak
             VisitChildren(node);
         }
         public void Visit(stmtEmpty node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(expr node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(exprOr node) {   
             
@@ -310,16 +310,16 @@ namespace Falak
             
         }
         public void Visit(exprUnary node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(exprPrimary node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(array node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(lit node) {   
-            
+            VisitChildren(node);
         }
     }
 
