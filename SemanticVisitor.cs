@@ -214,7 +214,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(stmtElse node) 
         {   
@@ -224,7 +223,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(stmtWhile node) 
         {   
@@ -234,7 +232,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(stmtDoWhile node) 
         {
@@ -244,7 +241,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(stmtBreak node) 
         {   
@@ -258,7 +254,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(stmtEmpty node) 
         {   
@@ -272,7 +267,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprOr node) 
         {   
@@ -282,7 +276,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprAnd node) 
         {   
@@ -292,7 +285,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprComp node) 
         {   
@@ -302,7 +294,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprRel node) 
         {   
@@ -312,7 +303,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprAdd node) 
         {   
@@ -322,7 +312,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprMul node) 
         {   
@@ -332,7 +321,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprUnary node) 
         {   
@@ -342,7 +330,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(exprPrimary node) 
         {   
@@ -391,7 +378,6 @@ namespace Falak
                     node.AnchorToken);
             }
 
-            return Type.VOID;
         }
         
         public void Visit(Plus node)
@@ -401,7 +387,6 @@ namespace Falak
                     $"Operator - requires an operand of type {Type.INT}",
                     node.AnchorToken);
             }
-            return Type.INT;
         }        
         public void Visit(Neg node)
         {
@@ -410,125 +395,119 @@ namespace Falak
                     $"Operator - requires an operand of type {Type.INT}",
                     node.AnchorToken);
             }
-            return Type.INT;
         }
         }       
         public void Visit(Div node)
         {
             VisitBinaryOperator('/', node, Type.INT);
-            return Type.INT;
         }        
-        public Type Visit(Inc node) {
+        public void Visit(Inc node) {
             VisitBinaryOperator('+', node, Type.INT);
-            return Type.INT;
         }
-        public Type Visit(Minus node) {
+        public void Visit(Minus node) {
             VisitBinaryOperator('-', node, Type.INT);
-            return Type.INT;
         }
         public void Visit(Remainder node)
         {
             VisitBinaryOperator('%', node, Type.INT);
-            return Type.INT;
         }        
         public void Visit(Not node)
         {
             VisitBinaryOperator('!', node, Type.BOOL);
-            return Type.BOOL;
         }        
         public void Visit(True node)
         {
-            return Type.BOOL;
+            //return Type.BOOL;
         }        
         public void Visit(False node)
         {
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         public void Visit(greater_than node)
         {
             VisitBinaryOperator('>', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         public void Visit(greater_equal_than node)
         {
             VisitBinaryOperator('>' + '=', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         public void Visit(less_than node)
         {
             VisitBinaryOperator('<', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }        
         public void Visit(less_equal_than node)
         {
             VisitBinaryOperator('<' + '=', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }        
         public void Visit(equals_to node)
         {
             VisitBinaryOperator('=' + '=', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }        
         public void Visit(not_equal node)
         {
             VisitBinaryOperator('!' + '=', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }        
         public void Visit(Positive node)
         {
             VisitBinaryOperator('+', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         public void Visit(Negative node)
         {
             VisitBinaryOperator('-', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         public void Visit(Or node)
         {
             VisitBinaryOperator('||', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         public void Visit(Xor node)
         {
             VisitBinaryOperator('^', node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         public void Visit(And node)
         {
             VisitBinaryOperator("&&", node, Type.BOOL);
-            return Type.BOOL;
+            //return Type.BOOL;
         }
         //API primitives
         public void Visit(printI node)
         {
             Visit((dynamic) node[0]);
-            return Type.VOID;
+            //return Type.VOID;
         }
         public void Visit(printC node)
         {
             Visit((dynamic) node[0]);
-            return Type.VOID;
+            //return Type.VOID;
         }
         public void Visit(printS node)
         {
             Visit((dynamic) node[0]);
-            return Type.VOID;
+            //return Type.VOID;
         }
         public void Visit(printLN node)
         {
             Visit((dynamic) node[0]);
-            return Type.VOID;
+            //return Type.VOID;
         }
         public void Visit(readI node)
         {
             Visit((dynamic) node[0]);
-            return Type.VOID;
+            //return Type.VOID;
         }
         public void Visit(readS node)
         {
             Visit((dynamic) node[0]);
-            return Type.VOID;
+            //return Type.VOID;
         }
         public void Visit(New node)
         {
