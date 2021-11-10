@@ -197,226 +197,109 @@ namespace Falak
             }
         }
 
-                //--------------------------NODOS----------------------------
-        public void Visit(ADD node) {
+                //--------------------------Specific Nodes----------------------------
+        public void Visit(Program node) {
             
         }
 
-        public void Visit(AND node) {
+        public void Visit(defList node) {
             
         }
 
-        public void Visit(ASSIGN node) {   
+        public void Visit(varDef node) {   
             
         }
 
-        public void Visit(BACK_SLASH node) {   
+        public void Visit(idList node) {   
             
         }
 
-        public void Visit(BOOL node) {   
+        public void Visit(idListCont node) {   
             
         }
 
-        public void Visit(BRACKET_LEFT node) {   
+        public void Visit(funDef node) {   
             
         }
 
-        public void Visit(BRACKET_RIGHT node) {   
+        public void Visit(varDefList node) {   
             
         }
 
-        public void Visit(BREAK node) {   
+        public void Visit(stmtList node) {   
             
         }
 
-        public void Visit(CARRIAGE_RETURN node) {   
+        public void Visit(stmtIncr node) {   
             
         }
 
-        public void Visit(CHARACTER node) {   
+        public void Visit(stmtDecr node) {   
             
         }
 
-        public void Visit(COMMA node) {   
+        public void Visit(exprList node) {   
             
         }
 
-        public void Visit(DEC node) {   
+        public void Visit(exprListCont node) {   
             
         }
-        public void Visit(DIV node) {   
+        public void Visit(stmtIf node) {   
             
         }
-        public void Visit(DO node) {   
+        public void Visit(elseIfList node) {   
             
         }
-        public void Visit(DOUBLE_QUOTE node) {   
+        public void Visit(stmtElse node) {   
             
         }
-        public void Visit(DOUBLE_POINTS node) {   
+        public void Visit(stmtWhile node) {   
             
         }
-        public void Visit(ELSE node) {
+        public void Visit(stmtDoWhile node) {
             
         }
-        public void Visit(ELSEIF node) {   
+        public void Visit(stmtBreak node) {   
             
         }
-        public void Visit(EQUALS_TO node) {   
+        public void Visit(stmtRetur node) {   
             
         }
-        public void Visit(END node) {   
+        public void Visit(stmtEmpty node) {   
             
         }
-        public void Visit(EOF node) {   
+        public void Visit(expr node) {   
             
         }
-        public void Visit(FALSE node) {   
+        public void Visit(exprOr node) {   
             
         }
-        public void Visit(FUNCTION node) {   
+        public void Visit(exprAnd node) {   
             
         }
-        public void Visit(GET node) {   
+        public void Visit(exprComp node) {   
             
         }
-        public void Visit(GREATER_THAN node) {   
+        public void Visit(exprRel node) {   
             
         }
-        public void Visit(GREATER_EQUAL_THAN node) {   
+        public void Visit(exprAdd node) {   
             
         }
-        public void Visit(IDENTIFIER node) {   
+        public void Visit(exprMul node) {   
             
         }
-        public void Visit(IF node) {   
+        public void Visit(exprUnary node) {   
             
         }
-        public void Visit(INC node) {   
+        public void Visit(exprPrimary node) {   
             
         }
-        public void Visit(INT node) {   
+        public void Visit(array node) {   
             
         }
-        public void Visit(INT_LITERAL node) {   
-            
-        }
-        public void Visit(KEY_LEFT node) {   
-            
-        }
-        public void Visit(KEY_RIGHT node) {   
-            
-        }
-        public void Visit(LESS_THAN node) {   
-            
-        }
-        public void Visit(LESS_EQUAL_THAN node) {   
-            
-        }
-        public void Visit(MAIN node) {   
-            
-        }
-        public void Visit(MUL node) {   
-            
-        }
-        public void Visit(NEW_LINE node) {   
-            
-        }
-        public void Visit(NEG node) {   
-            
-        }
-        public void Visit(NEW node) {   
-            
-        }
-        public void Visit(NOT node) {
-            
-        }
-        public void Visit(NOT_EQUAL node) {   
-            
-        }
-        public void Visit(OR node) {   
-            
-        }
-        public void Visit(PARENTHESIS_OPEN node) {   
-            
-        }
-        public void Visit(PARENTHESIS_CLOSE node) {   
-            
-        }
-        public void Visit(PLUS node) {   
-            
-        }
-        public void Visit(PRINT node) {   
-            
-        }
-        public void Visit(PRINT_I node) {   
-            
-        }
-        public void Visit(PRINT_C node) {   
-            
-        }
-        public void Visit(PRINT_S node) {   
-            
-        }
-        public void Visit(PRINT_LINE node) {   
-            
-        }
-        public void Visit(READ_I node) {   
-            
-        }
-        public void Visit(READ_S node) {   
-            
-        }
-        public void Visit(REMINDER node) {   
-            
-        }
-        public void Visit(RETURN node) {   
-            
-        }
-        public void Visit(SEMICOLON node) {   
-            
-        }
-        public void Visit(SET node) {   
-            
-        }
-        public void Visit(SINGLE_QUOTE node) {   
-            
-        }
-        public void Visit(SIZE node) {   
-            
-        }
-        public void Visit(STRING node) {   
-            
-        }
-        public void Visit(TAB node) {   
-            
-        }
-        public void Visit(THEN node) {   
-            
-        }
-        public void Visit(TRUE node) {   
-            
-        }
-        public void Visit(UNARY_PLUS node) {   
-            
-        }
-        public void Visit(UNARY_MINUS node) {   
-            
-        }
-        public void Visit(VAR node) {   
-            
-        }
-        public void Visit(WHILE node) {
-            
-        }
-        public void Visit(WHITE_SPACE node) {   
-            
-        }
-        public void Visit(XOR node) {   
-            
-        }
-        public void Visit(ILLEGAL_CHAR node) {   
+        public void Visit(lit node) {   
             
         }
     }
