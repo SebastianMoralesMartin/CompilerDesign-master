@@ -16,14 +16,14 @@ namespace Falak
                 { TokenCategory.INT, Type.INT }
             };
         //-----------------------------------------------------------
-        public IDictionary<string, Type> Table {
+        public IDictionary<string, string> Table {
             get;
             private set;
         }
 
         //-----------------------------------------------------------
         public SemanticVisitor() {
-            Table = new SortedDictionary<string, Type>();
+            Table = new SortedDictionary<string, string>();
         }
 
         //-----------------------------------------------------------
@@ -198,25 +198,33 @@ namespace Falak
         }
 
                 //--------------------------Specific Nodes----------------------------
-        public void Visit(Program node) {
-            
+                public void Visit(Program node) {
+            Visit((dynamic) node[0]);
+            Visit((dynamic) node[1]);
         }
 
         public void Visit(defList node) {
-            
+            VisitChildren(node);
         }
 
         public void Visit(varDef node) {   
-            
+            var variableName = node[0].AnchorToken.Lexeme;
+
+            if (Table.ContainsKey(variableName)) {
+                throw new SemanticError(
+                    "Duplicated variable: " + variableName,
+                    node[0].AnchorToken);
+
+            } else {
+                Table[variableName] = string;
+            }
         }
 
         public void Visit(idList node) {   
-            
+            VisitChildren(node);
         }
 
-        public void Visit(idListCont node) {   
-            
-        }
+        //public void Visit(idListCont node) { }
 
         public void Visit(funDef node) {   
             
@@ -227,7 +235,7 @@ namespace Falak
         }
 
         public void Visit(stmtList node) {   
-            
+            VisitChildren(node);
         }
 
         public void Visit(stmtIncr node) {   
@@ -238,13 +246,12 @@ namespace Falak
             
         }
 
-        public void Visit(exprList node) {   
-            
+        public void Visit(exprList node)
+        {
+            VisitChildren(node);
         }
 
-        public void Visit(exprListCont node) {   
-            
-        }
+        //public void Visit(exprListCont node) { }
         public void Visit(stmtIf node) {   
             
         }
@@ -302,5 +309,26 @@ namespace Falak
         public void Visit(lit node) {   
             
         }
+    }
+
+    public struct Primitives()
+    {
+        // primitives, arity, reference
+
+        private string name;
+        private int arity;
+        private bool primitive;
+        private HashSet<string> reference = null;
+
+        public Primitives(string inputName, bool inputPrimitive, int inputArity, HashSet<string> inputReference)
+        {
+            name = inputName;
+            primitive = inputPrimitive;
+            arity = inputArity;
+            reference = inputReference;
+
+        }
+        
+        constructor
     }
 }
