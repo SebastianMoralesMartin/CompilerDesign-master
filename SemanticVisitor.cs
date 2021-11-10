@@ -198,7 +198,7 @@ namespace Falak
         }
 
                 //--------------------------Specific Nodes----------------------------
-                public void Visit(Program node) {
+        public void Visit(Program node) {
             Visit((dynamic) node[0]);
             Visit((dynamic) node[1]);
         }
@@ -227,11 +227,21 @@ namespace Falak
         //public void Visit(idListCont node) { }
 
         public void Visit(funDef node) {   
-            
+            var variableName = node[0].AnchorToken.Lexeme;
+
+            if (Table.ContainsKey(variableName)) {
+                throw new SemanticError(
+                    "Duplicated variable: " + variableName,
+                    node[0].AnchorToken);
+
+            } else {
+                Table[variableName] = node[0].AnchorToken;
+            }
         }
 
-        public void Visit(varDefList node) {   
-            
+        public void Visit(varDefList node)
+        {
+            VisitChildren(node);
         }
 
         public void Visit(stmtList node) {   
@@ -239,11 +249,11 @@ namespace Falak
         }
 
         public void Visit(stmtIncr node) {   
-            
+            VisitChildren(node);
         }
 
         public void Visit(stmtDecr node) {   
-            
+            VisitChildren(node);
         }
 
         public void Visit(exprList node)
@@ -252,26 +262,28 @@ namespace Falak
         }
 
         //public void Visit(exprListCont node) { }
+        
         public void Visit(stmtIf node) {   
             
         }
-        public void Visit(elseIfList node) {   
-            
+        public void Visit(elseIfList node)
+        {
+            VisitChildren(node);
         }
         public void Visit(stmtElse node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(stmtWhile node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(stmtDoWhile node) {
-            
+            VisitChildren(node);
         }
         public void Visit(stmtBreak node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(stmtRetur node) {   
-            
+            VisitChildren(node);
         }
         public void Visit(stmtEmpty node) {   
             
@@ -313,6 +325,7 @@ namespace Falak
 
     public struct Primitives()
     {
+        
         // primitives, arity, reference
 
         private string name;

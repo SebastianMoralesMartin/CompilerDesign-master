@@ -1,9 +1,3 @@
-/*
-    A01745219 Eduardo R. Muller Romero
-    A01376228 Sebastian Morales Martin
-    A01746645 Guillermo Adrian Urbina A.
-*/
-
 using System;
 using System.IO;
 using System.Text;
@@ -12,26 +6,19 @@ namespace Falak {
     
     public class Driver {
 
-        const string VERSION = "0.4";
+        const string VERSION = "0.3";
 
         //-----------------------------------------------------------
         static readonly string[] ReleaseIncludes = {
             "Lexical analysis",
             "Syntactic analysis",
-            "AST construction",
-            "Semantic analysis"
+            "AST construction"
         };
 
         //-----------------------------------------------------------
         void PrintAppHeader() {
-            Console.WriteLine("Buttercup compiler, version " + VERSION);
-            Console.WriteLine(
-                "Copyright \u00A9 2013-2021 by A. Ortiz, ITESM CEM.");
-            Console.WriteLine("This program is free software; you may "
-                + "redistribute it under the terms of");
-            Console.WriteLine("the GNU General Public License version 3 or "
-                + "later.");
-            Console.WriteLine("This program has absolutely no warranty.");
+            Console.WriteLine("Falak compiler, version " + VERSION);
+            
         }
 
         //-----------------------------------------------------------
@@ -62,24 +49,11 @@ namespace Falak {
                 var parser = new ParserTest(
                     new Scanner(input).Scan().GetEnumerator());
                 var program = parser.Program();
-                Console.WriteLine("Syntax OK.");
-
-                var semantic = new SemanticVisitor();
-                semantic.Visit((dynamic) program);
-
-                Console.WriteLine("Semantics OK.");
-                Console.WriteLine();
-                /*Console.WriteLine("Symbol Table");
-                Console.WriteLine("============");
-                foreach (var entry in semantic.Table) {
-                    Console.WriteLine(entry);
-                }*/
+                Console.Write(program.ToStringTree());
 
             } catch (Exception e) {
 
-                if (e is FileNotFoundException
-                    || e is SyntaxError
-                    || e is SemanticError) {
+                if (e is FileNotFoundException || e is SyntaxError) {
                     Console.Error.WriteLine(e.Message);
                     Environment.Exit(1);
                 }
