@@ -199,225 +199,225 @@ namespace Falak
 
                 //--------------------------NODOS----------------------------
         public void Visit(ADD node) {
-            return Type.ADD;
+            
         }
 
         public void Visit(AND node) {
-            return Type.AND;
+            
         }
 
         public void Visit(ASSIGN node) {   
-            return Type.ASSIGN;
+            
         }
 
         public void Visit(BACK_SLASH node) {   
-            return Type.BACK_SLASH;
+            
         }
 
         public void Visit(BOOL node) {   
-            return Type.BOOL;
+            
         }
 
         public void Visit(BRACKET_LEFT node) {   
-            return Type.BRACKET_LEFT;
+            
         }
 
         public void Visit(BRACKET_RIGHT node) {   
-            return Type.BRACKET_RIGHT;
+            
         }
 
         public void Visit(BREAK node) {   
-            return Type.BREAR;
+            
         }
 
         public void Visit(CARRIAGE_RETURN node) {   
-            return Type.CARRIAGE_RETURN;
+            
         }
 
         public void Visit(CHARACTER node) {   
-            return Type.CHARACTER;
+            
         }
 
         public void Visit(COMMA node) {   
-            return Type.COMMA;
+            
         }
 
         public void Visit(DEC node) {   
-            return Type.DEC;
+            
         }
         public void Visit(DIV node) {   
-            return Type.DIV;
+            
         }
         public void Visit(DO node) {   
-            return Type.DO;
+            
         }
         public void Visit(DOUBLE_QUOTE node) {   
-            return Type.DOUBLE_QUOTE;
+            
         }
         public void Visit(DOUBLE_POINTS node) {   
-            return Type.DOUBLE_POINTS;
+            
         }
-        public void Visit(ELSE node) {   
-            return Type.ELSE;
+        public void Visit(ELSE node) {
+            
         }
         public void Visit(ELSEIF node) {   
-            return Type.ELSEIF;
+            
         }
         public void Visit(EQUALS_TO node) {   
-            return Type.EQUALS_TO;
+            
         }
         public void Visit(END node) {   
-            return Type.END;
+            
         }
         public void Visit(EOF node) {   
-            return Type.EOF;
+            
         }
         public void Visit(FALSE node) {   
-            return Type.FALSE;
+            
         }
         public void Visit(FUNCTION node) {   
-            return Type.FUNCTION;
+            
         }
         public void Visit(GET node) {   
-            return Type.GET;
+            
         }
         public void Visit(GREATER_THAN node) {   
-            return Type.GREATER_THAN;
+            
         }
         public void Visit(GREATER_EQUAL_THAN node) {   
-            return Type.GREATER_EQUAL_THAN;
+            
         }
         public void Visit(IDENTIFIER node) {   
-            return Type.IDENTIFIER;
+            
         }
         public void Visit(IF node) {   
-            return Type.IF;
+            
         }
         public void Visit(INC node) {   
-            return Type.INC;
+            
         }
         public void Visit(INT node) {   
-            return Type.INT;
+            
         }
         public void Visit(INT_LITERAL node) {   
-            return Type.INT_LITERAL;
+            
         }
         public void Visit(KEY_LEFT node) {   
-            return Type.KEY_LEFT;
+            
         }
         public void Visit(KEY_RIGHT node) {   
-            return Type.KEY_RIGHT;
+            
         }
         public void Visit(LESS_THAN node) {   
-            return Type.LESS_THAN;
+            
         }
         public void Visit(LESS_EQUAL_THAN node) {   
-            return Type.LESS_EQUAL_THAN;
+            
         }
         public void Visit(MAIN node) {   
-            return Type.MAIN;
+            
         }
         public void Visit(MUL node) {   
-            return Type.MUL;
+            
         }
         public void Visit(NEW_LINE node) {   
-            return Type.NEW_LINE;
+            
         }
         public void Visit(NEG node) {   
-            return Type.NEG;
+            
         }
         public void Visit(NEW node) {   
-            return Type.NEW;
+            
         }
-        public void Visit(NOT node) {   
-            return Type.NOT;
+        public void Visit(NOT node) {
+            
         }
         public void Visit(NOT_EQUAL node) {   
-            return Type.NOT_EQUAL;
+            
         }
         public void Visit(OR node) {   
-            return Type.OR;
+            
         }
         public void Visit(PARENTHESIS_OPEN node) {   
-            return Type.PARENTHESIS_OPEN;
+            
         }
         public void Visit(PARENTHESIS_CLOSE node) {   
-            return Type.PARENTHESIS_CLOSE;
+            
         }
         public void Visit(PLUS node) {   
-            return Type.PLUS;
+            
         }
         public void Visit(PRINT node) {   
-            return Type.PRINT;
+            
         }
         public void Visit(PRINT_I node) {   
-            return Type.PRINT_I;
+            
         }
         public void Visit(PRINT_C node) {   
-            return Type.PRINC_C;
+            
         }
         public void Visit(PRINT_S node) {   
-            return Type.PRINT_S;
+            
         }
         public void Visit(PRINT_LINE node) {   
-            return Type.PRINT_LINE;
+            
         }
         public void Visit(READ_I node) {   
-            return Type.READ_I;
+            
         }
         public void Visit(READ_S node) {   
-            return Type.READ_S;
+            
         }
         public void Visit(REMINDER node) {   
-            return Type.REMINDER;
+            
         }
         public void Visit(RETURN node) {   
-            return Type.RETURN;
+            
         }
         public void Visit(SEMICOLON node) {   
-            return Type.SEMICOLON;
+            
         }
         public void Visit(SET node) {   
-            return Type.SET;
+            
         }
         public void Visit(SINGLE_QUOTE node) {   
-            return Type.SINGLE_QUOTE;
+            
         }
         public void Visit(SIZE node) {   
-            return Type.SIZE;
+            
         }
         public void Visit(STRING node) {   
-            return Type.STRING;
+            
         }
         public void Visit(TAB node) {   
-            return Type.TAB;
+            
         }
         public void Visit(THEN node) {   
-            return Type.THEN;
+            
         }
         public void Visit(TRUE node) {   
-            return Type.TRUE;
+            
         }
         public void Visit(UNARY_PLUS node) {   
-            return Type.UNARY_PLUS;
+            
         }
         public void Visit(UNARY_MINUS node) {   
-            return Type.UNARY_MINUS;
+            
         }
         public void Visit(VAR node) {   
-            return Type.VAR;
+            
         }
-        public void Visit(WHILE node) {   
-            return Type.WHILE;
+        public void Visit(WHILE node) {
+            
         }
         public void Visit(WHITE_SPACE node) {   
-            return Type.WHITE_SPACE;
+            
         }
         public void Visit(XOR node) {   
-            return Type.XOR;
+            
         }
         public void Visit(ILLEGAL_CHAR node) {   
-            return Type.ILLEGAL_CHAR;
+            
         }
     }
 }
