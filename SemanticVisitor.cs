@@ -9,12 +9,22 @@ using System.Collections.Generic;
 
 namespace Falak
 {
-    public class SemanticVisitor {
-        static readonly IDictionary<TokenCategory, Type> typeMapper =
-            new Dictionary<TokenCategory, Type>() {
-                { TokenCategory.BOOL, Type.BOOL },
-                { TokenCategory.INT, Type.INT }
-            };//Se omite
+     public class SemanticVisitor {
+		//public FunCollection(string inputName, bool inputPrimitive, int inputArity, HashSet<string> inputReference)
+        static readonly IDictionary<string, FunCollection> FGST =
+            new Dictionary<string, FunCollection>() {
+                { "printI", new FunCollection(true, 1, null)},
+                { "printC", new FunCollection(true, 1, null)},
+				{ "printS", new FunCollection(true, 1, null)},
+				{ "printLN", new FunCollection( true, 0, null)},
+				{ "readI", new FunCollection(true, 0, null)},
+				{ "readS", new FunCollection(true, 0, null)},
+				{ "new", new FunCollection(true, 1, null)},
+				{ "size", new FunCollection(true, 1, null)},
+				{ "add", new FunCollection( true, 2, null)},
+				{ "get", new FunCollection(true, 2, null)},
+				{ "set", new FunCollection(true, 3, null)},
+            };//Se omite//Se omite
         //-----------------------------------------------------------
         public IDictionary<string, string> Table {
             get;
