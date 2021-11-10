@@ -115,7 +115,14 @@ namespace Falak
             }
         }
 
-        //--------------------------Specific Nodes----------------------------
+
+//----------------------------------------------------------------------------------------------------------------
+        //--------------------------Falak Specific Nodes----------------------------
+//----------------------------------------------------------------------------------------------------------------
+
+
+
+
         public void Visit(Program node) {
             Visit((dynamic) node[0]);
             Visit((dynamic) node[1]);
@@ -345,7 +352,6 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
         }
         public void Visit(array node) 
         {   
@@ -396,7 +402,7 @@ namespace Falak
                     node.AnchorToken);
             }
             return Type.INT;
-        }        public void Visit(){}
+        }        
         public void Visit(Neg node)
         {
             if (Visit((dynamic) node[0]) != Type.INT) {
@@ -406,12 +412,12 @@ namespace Falak
             }
             return Type.INT;
         }
-        }        public void Visit(){}
+        }       
         public void Visit(Div node)
         {
             VisitBinaryOperator('/', node, Type.INT);
             return Type.INT;
-        }        public void Visit(){}
+        }        
         public Type Visit(Inc node) {
             VisitBinaryOperator('+', node, Type.INT);
             return Type.INT;
@@ -424,16 +430,16 @@ namespace Falak
         {
             VisitBinaryOperator('%', node, Type.INT);
             return Type.INT;
-        }        public void Visit(){}
+        }        
         public void Visit(Not node)
         {
             VisitBinaryOperator('!', node, Type.BOOL);
             return Type.BOOL;
-        }        public void Visit(){}
+        }        
         public void Visit(True node)
         {
             return Type.BOOL;
-        }        public void Visit(){}
+        }        
         public void Visit(False node)
         {
             return Type.BOOL;
@@ -452,22 +458,22 @@ namespace Falak
         {
             VisitBinaryOperator('<', node, Type.BOOL);
             return Type.BOOL;
-        }        public void Visit(){}
+        }        
         public void Visit(less_equal_than node)
         {
             VisitBinaryOperator('<' + '=', node, Type.BOOL);
             return Type.BOOL;
-        }        public void Visit(){}
+        }        
         public void Visit(equals_to node)
         {
             VisitBinaryOperator('=' + '=', node, Type.BOOL);
             return Type.BOOL;
-        }        public void Visit(){}
+        }        
         public void Visit(not_equal node)
         {
             VisitBinaryOperator('!' + '=', node, Type.BOOL);
             return Type.BOOL;
-        }        public void Visit(){}
+        }        
         public void Visit(Positive node)
         {
             VisitBinaryOperator('+', node, Type.BOOL);
@@ -480,7 +486,7 @@ namespace Falak
         }
         public void Visit(Or node)
         {
-            VisitBinaryOperator('|', node, Type.BOOL);
+            VisitBinaryOperator('||', node, Type.BOOL);
             return Type.BOOL;
         }
         public void Visit(Xor node)
@@ -490,7 +496,7 @@ namespace Falak
         }
         public void Visit(And node)
         {
-            VisitBinaryOperator('&', node, Type.BOOL);
+            VisitBinaryOperator('&&', node, Type.BOOL);
             return Type.BOOL;
         }
         //API primitives
