@@ -9,6 +9,8 @@ using System.Collections.Generic;
 
 namespace Falak
 {
+
+
      public class SemanticVisitor {
 		//public FunCollection(string inputName, bool inputPrimitive, int inputArity, HashSet<string> inputReference)
         static readonly IDictionary<string, FunCollection> FGST =
@@ -24,7 +26,9 @@ namespace Falak
 				{ "add", new FunCollection( true, 2, null)},
 				{ "get", new FunCollection(true, 2, null)},
 				{ "set", new FunCollection(true, 3, null)},
-            };//Se omite//Se omite
+            };
+
+
         //-----------------------------------------------------------
         public IDictionary<string, string> Table {
             get;
