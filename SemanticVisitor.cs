@@ -70,7 +70,7 @@ namespace Falak
         }
 
         //-----------------------------------------------------------
-        public void Visit(Identifier node) {
+        public void Visit(identifier node) {
 
             var variableName = node.AnchorToken.Lexeme;
 
@@ -84,7 +84,7 @@ namespace Falak
         }
 
         //-----------------------------------------------------------
-        public void Visit(IntLiteral node) {
+        public void Visit(INT node) {
 
             var intStr = node.AnchorToken.Lexeme;
             int value;
@@ -95,7 +95,6 @@ namespace Falak
                     node.AnchorToken);
             }
 
-            return Type.INT;
         }
 
         //-----------------------------------------------------------
@@ -158,7 +157,7 @@ namespace Falak
 
             if (Table.ContainsKey(variableName)) {
                 throw new SemanticError(
-                    "Duplicated variable: " + variableName,
+                    "Duplicated function: " + variableName,
                     node[0].AnchorToken);
 
             } else {
@@ -468,6 +467,7 @@ namespace Falak
             VisitBinaryOperator('||', node, Type.BOOL);
             //return Type.BOOL;
         }
+		
         public void Visit(Xor node)
         {
             VisitBinaryOperator('^', node, Type.BOOL);
