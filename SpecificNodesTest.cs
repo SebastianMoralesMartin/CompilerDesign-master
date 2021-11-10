@@ -88,9 +88,5 @@ namespace Falak
     class Add: Node { }
     class Get: Node { }
     class Set: Node { }
-    
-        
-
-    
 
 }

@@ -216,7 +216,7 @@ namespace Falak
                     node[0].AnchorToken);
 
             } else {
-                Table[variableName] = string;
+                Table[variableName] = node[0].AnchorToken;
             }
         }
 
