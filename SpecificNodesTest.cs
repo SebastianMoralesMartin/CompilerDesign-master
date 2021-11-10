@@ -74,5 +74,23 @@ namespace Falak
     
     class array: Node{ }
     class lit: Node{ }
+    
+    //----------------API
+    
+    class printI: Node{ }
+    class printC: Node { }
+    class printS: Node { }
+    class printLN: Node { }
+    class readI: Node { }
+    class readS: Node { }
+    class New: Node { }
+    class Size: Node { }
+    class Add: Node { }
+    class Get: Node { }
+    class Set: Node { }
+    
+        
+
+    
 
 }
