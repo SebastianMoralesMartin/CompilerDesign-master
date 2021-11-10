@@ -245,7 +245,7 @@ namespace Falak
 
 
                     case TokenCategory.INC:
-                        Console.WriteLine("case INC Current: " + Current);
+                        //Console.WriteLine("case INC Current: " + Current);
                         result.Add(stmtIncr());
                         break;
 
@@ -340,7 +340,7 @@ namespace Falak
 
         public Node exprListCont()
         {
-            Console.WriteLine("exprListCont running Current: " + Current);
+            //Console.WriteLine("exprListCont running Current: " + Current);
             var result = new exprListCont();
             if(Current == TokenCategory.COMMA)
             {
@@ -386,7 +386,7 @@ namespace Falak
             Console.WriteLine(result);
             while(Current == TokenCategory.PARENTHESIS_OPEN)
             {
-                Console.WriteLine("Current Should be a open parenthesis: " + Current);
+                //Console.WriteLine("Current Should be a open parenthesis: " + Current);
                 
                 
                 Expect(TokenCategory.PARENTHESIS_OPEN);
@@ -489,7 +489,7 @@ namespace Falak
 
         public Node expr()
         {
-            Console.WriteLine("expr running Current: "+  Current);
+            //Console.WriteLine("expr running Current: "+  Current);
             var result = new expr();
             result.Add(exprOr());
             return result;
@@ -550,13 +550,13 @@ namespace Falak
 
             
             var result = exprRel();
-            Console.WriteLine("EQUALSTO before Switch case Current: " + Current);
+            //Console.WriteLine("EQUALSTO before Switch case Current: " + Current);
             while(Current == TokenCategory.EQUALS_TO || 
                   Current == TokenCategory.NOT_EQUAL){
                 //Console.WriteLine("Before Switch EQUALSTO Current: " + Current);
                 switch(Current){
                     case TokenCategory.EQUALS_TO:
-                        Console.WriteLine("EQUALSTO Current: " + Current);
+                        //Console.WriteLine("EQUALSTO Current: " + Current);
                         var node1 = new equals_to()
                         {
                             AnchorToken = Expect(TokenCategory.EQUALS_TO)
@@ -641,7 +641,7 @@ namespace Falak
                 
                 switch(Current){
                     case TokenCategory.PLUS:
-                        Console.WriteLine("case plus Current: " + Current);
+                        //Console.WriteLine("case plus Current: " + Current);
                        var node1 = new Plus()
                         {
                             AnchorToken = Expect(TokenCategory.PLUS)
@@ -779,7 +779,8 @@ namespace Falak
                         }
                         
                         Expect(TokenCategory.PARENTHESIS_CLOSE);
-                        nodeId.Add(NodeexprFunCall);
+                        NodeexprFunCall.Add(nodeId);
+                        return NodeexprFunCall;
                     }
                     return nodeId;
                     ;
