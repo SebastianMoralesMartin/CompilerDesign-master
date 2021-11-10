@@ -14,7 +14,7 @@ namespace Falak
             new Dictionary<TokenCategory, Type>() {
                 { TokenCategory.BOOL, Type.BOOL },
                 { TokenCategory.INT, Type.INT }
-            };
+            };//Se omite
         //-----------------------------------------------------------
         public IDictionary<string, string> Table {
             get;
@@ -496,7 +496,7 @@ namespace Falak
         }
         public void Visit(And node)
         {
-            VisitBinaryOperator('&&', node, Type.BOOL);
+            VisitBinaryOperator("&&", node, Type.BOOL);
             return Type.BOOL;
         }
         //API primitives
@@ -552,7 +552,7 @@ namespace Falak
         }
     }
 
-    public struct Primitives()
+    public class FunCollection
         {
         
         // primitives, arity, reference
@@ -560,7 +560,7 @@ namespace Falak
         private int arity;
         private bool primitive;
         private HashSet<string> reference = null;
-        public Primitives(string inputName, bool inputPrimitive, int inputArity, HashSet<string> inputReference)
+        public FunCollection(string inputName, bool inputPrimitive, int inputArity, HashSet<string> inputReference)
         {
             name = inputName;
             primitive = inputPrimitive;
