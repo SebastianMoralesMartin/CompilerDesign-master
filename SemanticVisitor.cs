@@ -11,7 +11,7 @@ namespace Falak
 {
 
 
-     public class SemanticVisitor 
+     public class SemanticVisitor {
 
 		public int Pass =0;
 		//Constructor de FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference)
@@ -167,7 +167,8 @@ namespace Falak
 
         //public void Visit(idListCont node) { }
 
-        public void Visit(funDef node) {   
+        public void Visit(funDef node) {  
+ 
             var variableName = node[0].AnchorToken.Lexeme;
 
             if (Table.ContainsKey(variableName)) {
@@ -176,7 +177,7 @@ namespace Falak
                     node[0].AnchorToken);
 
             } else {
-                public int idListCount = node[1].Count;
+                int idListCount = node[1].Count;
                 FGST[variableName] = new funCollection(variableName, false, idListCount, null);
 				VisitChildren(node);
             }
@@ -482,7 +483,7 @@ namespace Falak
         }
         public void Visit(Or node)
         {
-            VisitBinaryOperator('||', node, Type.BOOL);
+            VisitBinaryOperator('|' + '|', node, Type.BOOL);
             //return Type.BOOL;
         }
 		
