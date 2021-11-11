@@ -16,7 +16,7 @@ namespace Falak
 		public int Pass =0;
 		//Constructor de FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference)
         static readonly IDictionary<string, FunCollection> FGST =
-            new Dictionary<string, FunCollection>() {
+            new SortedDictionary<string, FunCollection>() {
                 { "printI", new FunCollection(true, 1, null)},
                 { "printC", new FunCollection(true, 1, null)},
 				{ "printS", new FunCollection(true, 1, null)},
@@ -83,7 +83,7 @@ namespace Falak
             }
 
             return Type.VOID;
-        }*\
+        }*/
 
         //-----------------------------------------------------------
         public void Visit(identifier node) {
@@ -140,13 +140,12 @@ namespace Falak
 
         public void Visit(Program node) {
             Visit((dynamic) node[0]);
+			pass ++;
             Visit((dynamic) node[1]);
-            return Type.VOID;
         }
 
         public void Visit(defList node) {
             VisitChildren(node);
-            return Type.VOID;
         }
 
         public void Visit(varDef node) {   
@@ -158,7 +157,7 @@ namespace Falak
                     node[0].AnchorToken);
 
             } else {
-                Table[variableName] = node[0].AnchorToken;
+                FGST[variableName] = new funCollection(variableName, false, 0, null);
             }
         }
 
@@ -177,8 +176,11 @@ namespace Falak
                     node[0].AnchorToken);
 
             } else {
-                Table[variableName] = node[0].AnchorToken;
+                public int idListCount = node[1].Count;
+                FGST[variableName] = new funCollection(variableName, false, idListCount, null);
+				VisitChildren(node);
             }
+			
         }
 
         public void Visit(varDefList node)

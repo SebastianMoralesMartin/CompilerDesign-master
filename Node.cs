@@ -45,6 +45,10 @@ namespace Falak
             return sb.ToString();
         }
 
+        public int childrenLength(Node node){
+            
+        }
+
         static void TreeTraversal(Node node, string indent, StringBuilder sb) {
             sb.Append(indent);
             sb.Append(node);
