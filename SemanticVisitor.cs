@@ -11,8 +11,10 @@ namespace Falak
 {
 
 
-     public class SemanticVisitor {
-		//public FunCollection(string inputName, bool inputPrimitive, int inputArity, HashSet<string> inputReference)
+     public class SemanticVisitor 
+
+		public int Pass =0;
+		//Constructor de FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference)
         static readonly IDictionary<string, FunCollection> FGST =
             new Dictionary<string, FunCollection>() {
                 { "printI", new FunCollection(true, 1, null)},
@@ -59,7 +61,7 @@ namespace Falak
         }
 
         //-----------------------------------------------------------
-        public void Visit(Assignment node) {
+        /*public void Visit(Assignment node) {
 
             var variableName = node.AnchorToken.Lexeme;
 
@@ -81,7 +83,7 @@ namespace Falak
             }
 
             return Type.VOID;
-        }
+        }*\
 
         //-----------------------------------------------------------
         public void Visit(identifier node) {
@@ -560,6 +562,5 @@ namespace Falak
             arity = inputArity;
             reference = inputReference;
         }
-        constructor
     }
 }
