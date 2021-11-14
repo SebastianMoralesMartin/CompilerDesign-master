@@ -156,7 +156,7 @@ namespace Falak
                     node[0].AnchorToken);
 
             } else {
-                FGST[variableName] = new FunCollection(variableName, false, 0, null);
+                FGST[variableName] = new FunCollection(false, 0, null);
             }
         }
 
@@ -177,7 +177,7 @@ namespace Falak
 
             } else {
                 int idListCount = 0;
-                FGST[variableName] = new FunCollection(variableName, false, idListCount, null);
+                FGST[variableName] = new FunCollection(false, idListCount, null);
 				VisitChildren(node);
             }
 			
@@ -416,21 +416,21 @@ namespace Falak
                
         public void Visit(Div node)
         {
-            VisitBinaryOperator('/', node, Type.INT);
+            VisitBinaryOperator("/", node, Type.INT);
         }        
         public void Visit(Inc node) {
-            VisitBinaryOperator('+', node, Type.INT);
+            VisitBinaryOperator("+", node, Type.INT);
         }
         public void Visit(Minus node) {
-            VisitBinaryOperator('-', node, Type.INT);
+            VisitBinaryOperator("-", node, Type.INT);
         }
         public void Visit(Remainder node)
         {
-            VisitBinaryOperator('%', node, Type.INT);
+            VisitBinaryOperator("%", node, Type.INT);
         }        
         public void Visit(Not node)
         {
-            VisitBinaryOperator('!', node, Type.BOOL);
+            VisitBinaryOperator("!", node, Type.BOOL);
         }        
         public void Visit(TRUE node)
         {
@@ -442,53 +442,53 @@ namespace Falak
         }
         public void Visit(greater_than node)
         {
-            VisitBinaryOperator('>', node, Type.BOOL);
+            VisitBinaryOperator(">", node, Type.BOOL);
             //return Type.BOOL;
         }
         public void Visit(greater_equal_than node)
         {
-            VisitBinaryOperator('>' + '=', node, Type.BOOL);
+            VisitBinaryOperator(">=", node, Type.BOOL);
             //return Type.BOOL;
         }
         public void Visit(less_than node)
         {
-            VisitBinaryOperator('<', node, Type.BOOL);
+            VisitBinaryOperator("<", node, Type.BOOL);
             //return Type.BOOL;
         }        
         public void Visit(less_equal_than node)
         {
-            VisitBinaryOperator('<' + '=', node, Type.BOOL);
+            VisitBinaryOperator("<=", node, Type.BOOL);
             //return Type.BOOL;
         }        
         public void Visit(equals_to node)
         {
-            VisitBinaryOperator('=' + '=', node, Type.BOOL);
+            VisitBinaryOperator("==", node, Type.BOOL);
             //return Type.BOOL;
         }        
         public void Visit(not_equal node)
         {
-            VisitBinaryOperator('!' + '=', node, Type.BOOL);
+            VisitBinaryOperator("!=", node, Type.BOOL);
             //return Type.BOOL;
         }        
         public void Visit(Positive node)
         {
-            VisitBinaryOperator('+', node, Type.BOOL);
+            VisitBinaryOperator("+", node, Type.BOOL);
             //return Type.BOOL;
         }
         public void Visit(Negative node)
         {
-            VisitBinaryOperator('-', node, Type.BOOL);
+            VisitBinaryOperator("-", node, Type.BOOL);
             //return Type.BOOL;
         }
         public void Visit(Or node)
         {
-            VisitBinaryOperator('|' + '|', node, Type.BOOL);
+            VisitBinaryOperator("||", node, Type.BOOL);
             //return Type.BOOL;
         }
 		
         public void Visit(Xor node)
         {
-            VisitBinaryOperator('^', node, Type.BOOL);
+            VisitBinaryOperator("^", node, Type.BOOL);
             //return Type.BOOL;
         }
         public void Visit(And node)
