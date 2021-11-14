@@ -4,6 +4,8 @@
     A01746645 Guillermo Adrian Urbina A.
 */
 
+using System;
+
 namespace Falak
 {
     public class SemanticError: Exception

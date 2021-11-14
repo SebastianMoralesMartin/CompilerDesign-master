@@ -6,7 +6,7 @@ A01746645 Guillermo Adrian Urbina A.
 
 namespace Falak {
 
-    enum TokenCategory {
+    public enum TokenCategory {
         ADD,
         AND,
         ASSIGN,

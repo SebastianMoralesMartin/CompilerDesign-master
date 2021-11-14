@@ -9,11 +9,10 @@ using System.Collections.Generic;
 
 namespace Falak
 {
-
-
+    
      public class SemanticVisitor {
 
-		public int Pass =0;
+		public int Pass = 0;
 		//Constructor de FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference)
         static readonly IDictionary<string, FunCollection> FGST =
             new SortedDictionary<string, FunCollection>() {
@@ -43,7 +42,7 @@ namespace Falak
         }
 
         //-----------------------------------------------------------
-        public void Visit(Declaration node) {
+        /*public void Visit(Declaration node) {
 
             var variableName = node[0].AnchorToken.Lexeme;
 
@@ -58,7 +57,7 @@ namespace Falak
             }
 
             return Type.VOID;
-        }
+        }*/
 
         //-----------------------------------------------------------
         /*public void Visit(Assignment node) {
@@ -91,12 +90,12 @@ namespace Falak
             var variableName = node.AnchorToken.Lexeme;
 
             if (Table.ContainsKey(variableName)) {
-                return Table[variableName];
+                throw new SemanticError(
+                    $"Undeclared variable: {variableName}",
+                    node.AnchorToken);
             }
 
-            throw new SemanticError(
-                $"Undeclared variable: {variableName}",
-                node.AnchorToken);
+            
         }
 
         //-----------------------------------------------------------
@@ -140,7 +139,7 @@ namespace Falak
 
         public void Visit(Program node) {
             Visit((dynamic) node[0]);
-			pass ++;
+			Pass ++;
             Visit((dynamic) node[1]);
         }
 
@@ -157,7 +156,7 @@ namespace Falak
                     node[0].AnchorToken);
 
             } else {
-                FGST[variableName] = new funCollection(variableName, false, 0, null);
+                FGST[variableName] = new FunCollection(variableName, false, 0, null);
             }
         }
 
@@ -177,8 +176,8 @@ namespace Falak
                     node[0].AnchorToken);
 
             } else {
-                int idListCount = node[1].Count;
-                FGST[variableName] = new funCollection(variableName, false, idListCount, null);
+                int idListCount = 0;
+                FGST[variableName] = new FunCollection(variableName, false, idListCount, null);
 				VisitChildren(node);
             }
 			
@@ -192,19 +191,19 @@ namespace Falak
         public void Visit(stmtList node) 
         {   
             VisitChildren(node);
-            return Type.VOID;
+           
         }
 
         public void Visit(stmtIncr node) 
         {   
             VisitChildren(node);
-            return Type.VOID;
+           
         }
 
         public void Visit(stmtDecr node) 
         {   
             VisitChildren(node);
-            return Type.VOID;
+            
         }
 
         public void Visit(exprList node)
@@ -222,7 +221,7 @@ namespace Falak
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
-            return Type.VOID;
+           
         }
         public void Visit(elseIfList node)
         {
@@ -290,7 +289,7 @@ namespace Falak
         {   
             if (Visit((dynamic) node[0]) != Type.BOOL) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
@@ -299,7 +298,7 @@ namespace Falak
         {   
             if (Visit((dynamic) node[0]) != Type.BOOL) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type  in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
@@ -308,7 +307,7 @@ namespace Falak
         {   
             if (Visit((dynamic) node[0]) != Type.BOOL) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
@@ -414,7 +413,7 @@ namespace Falak
                     node.AnchorToken);
             }
         }
-        }       
+               
         public void Visit(Div node)
         {
             VisitBinaryOperator('/', node, Type.INT);
@@ -433,11 +432,11 @@ namespace Falak
         {
             VisitBinaryOperator('!', node, Type.BOOL);
         }        
-        public void Visit(True node)
+        public void Visit(TRUE node)
         {
             //return Type.BOOL;
         }        
-        public void Visit(False node)
+        public void Visit(FALSE node)
         {
             //return Type.BOOL;
         }
@@ -554,13 +553,10 @@ namespace Falak
         {
         
         // primitives, arity, reference
-        private string name;
         private int arity;
         private bool primitive;
         private HashSet<string> reference = null;
-        public FunCollection(string inputName, bool inputPrimitive, int inputArity, HashSet<string> inputReference)
-        {
-            name = inputName;
+        public FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference){
             primitive = inputPrimitive;
             arity = inputArity;
             reference = inputReference;

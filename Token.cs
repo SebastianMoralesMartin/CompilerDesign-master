@@ -6,7 +6,7 @@
 
 namespace Falak {
 
-    class Token {
+    public class Token {
 
         readonly string lexeme;
 

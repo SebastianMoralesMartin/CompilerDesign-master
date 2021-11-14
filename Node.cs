@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Falak
 {
-    class Node: IEnumerable<Node> {
+    public class Node: IEnumerable<Node> {
 
         IList<Node> children = new List<Node>();
 
@@ -45,9 +45,9 @@ namespace Falak
             return sb.ToString();
         }
 
-        public int childrenLength(Node node){
+        /*public int childrenLength(Node node){
             
-        }
+        }*/
 
         static void TreeTraversal(Node node, string indent, StringBuilder sb) {
             sb.Append(indent);

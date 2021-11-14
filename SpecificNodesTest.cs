@@ -6,91 +6,150 @@ A01746645 Guillermo Adrian Urbina A.
 
 namespace Falak
 {
-    class Program : Node { }
-    class defList : Node { }
-    class varDef: Node{ }
-    class idList: Node{ }
-    class idListCont: Node{ }
-    class funDef: Node{ }
+    public class Program : Node { }
+
+    public class defList : Node { }
+
+    public class varDef: Node{ }
+
+    public class idList: Node{ }
+
+    public class idListCont: Node{ }
+
+    public class funDef: Node{ }
     
-    class exprFunCall: Node { }
+    public class exprFunCall: Node { }
 
-    class funCall: Node { }
-    class varDefList: Node{ }
-    class stmtList: Node{ }
-    class stmtIncr: Node{ }
-    class Inc: Node { }
-    class Minus: Node { }
-    class stmtDecr: Node{ }
-    class exprList: Node{ }
-    class exprListCont: Node{ }
-    class stmtIf: Node{ }
-    class elseIfList: Node{ }
-    class stmtElse: Node{ }
-    class Var: Node { }
-    class identifier: Node { }
-    class assign: Node { }
-    class Plus: Node { }
-    class Neg: Node { }
-    class Mul: Node { }
-    class Div: Node { }
-    class Remainder: Node { }
-    class Not: Node { }
-    class TRUE: Node { }
-    class FALSE: Node { }
-    class INT: Node { }
-    class Character: Node { }
-    class STRING: Node { }
-    class greater_than: Node { }
-    class greater_equal_than: Node { }
-    class less_than: Node { }
-    class less_equal_than: Node { }
-    class equals_to: Node { }
-    class not_equal: Node { }
-    class semicolon: Node { }
-    class stmtWhile: Node{ }
-    class stmtDoWhile: Node{ }
-    class stmtBreak: Node{ }
-    class stmtReturn: Node{ }
-    class stmtEmpty: Node{ }
-    class expr: Node{ }
-    class exprOr: Node{ }
+    public class funCall: Node { }
 
-    class Or : Node { }
+    public class varDefList: Node{ }
 
-    class Xor: Node { }
-    class exprAnd: Node{ }
+    public class stmtList: Node{ }
 
-    class And : Node { }
+    public class stmtIncr: Node{ }
 
-    class exprComp: Node{ }
-    class exprRel: Node{ }
-    class exprAdd: Node{ }
-    class exprMul: Node{ }
-    class exprUnary: Node{ }
-    class exprPrimary: Node{ }
-    class Positive: Node { }
-    class Negative: Node { }
+    public class Inc: Node { }
+
+    public class Minus: Node { }
+
+    public class stmtDecr: Node{ }
+
+    public class exprList: Node{ }
+
+    public class exprListCont: Node{ }
+
+    public class stmtIf: Node{ }
+
+    public class elseIfList: Node{ }
+
+    public class stmtElse: Node{ }
+
+    public class Var: Node { }
+
+    public class identifier: Node { }
+
+    public class assign: Node { }
+
+    public class Plus: Node { }
+
+    public class Neg: Node { }
+
+    public class Mul: Node { }
+
+    public class Div: Node { }
+
+    public class Remainder: Node { }
+
+    public class Not: Node { }
+
+    public class TRUE: Node { }
+
+    public class FALSE: Node { }
+
+    public class INT: Node { }
+
+    public class Character: Node { }
+
+    public class STRING: Node { }
+
+    public class greater_than: Node { }
+
+    public class greater_equal_than: Node { }
+
+    public class less_than: Node { }
+
+    public class less_equal_than: Node { }
+
+    public class equals_to: Node { }
+
+    public class not_equal: Node { }
+
+    public class semicolon: Node { }
+
+    public class stmtWhile: Node{ }
+
+    public class stmtDoWhile: Node{ }
+
+    public class stmtBreak: Node{ }
+
+    public class stmtReturn: Node{ }
+
+    public class stmtEmpty: Node{ }
+
+   public  class expr: Node{ }
+
+    public class exprOr: Node{ }
+
+    public class Or : Node { }
+
+    public class Xor: Node { }
+
+    public class exprAnd: Node{ }
+
+    public class And : Node { }
+
+    public class exprComp: Node{ }
+
+    public class exprRel: Node{ }
+
+    public class exprAdd: Node{ }
+
+    public class exprMul: Node{ }
+
+    public class exprUnary: Node{ }
+
+    public class exprPrimary: Node{ }
+
+    public class Positive: Node { }
+
+    public class Negative: Node { }
     
-    class array: Node{ }
-    class lit: Node{ }
+    public class array: Node{ }
+
+    public class lit: Node{ }
     
     //----------------API
     
-    class printI: Node{ }
-    class printC: Node { }
-    class printS: Node { }
-    class printLN: Node { }
-    class readI: Node { }
-    class readS: Node { }
-    class New: Node { }
-    class Size: Node { }
-    class Add: Node { }
-    class Get: Node { }
-    class Set: Node { }
-    
-        
+    public class printI: Node{ }
 
-    
+    public class printC: Node { }
 
+    public class printS: Node { }
+
+    public class printLN: Node { }
+
+    public class readI: Node { }
+
+    public class readS: Node { }
+
+    public class New: Node { }
+
+    public class Size: Node { }
+
+    public class Add: Node { }
+
+    public class Get: Node { }
+
+    public class Set: Node { }
+    
 }
