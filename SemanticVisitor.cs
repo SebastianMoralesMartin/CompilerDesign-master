@@ -215,9 +215,9 @@ namespace Falak
         
         public void Visit(stmtIf node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != expr) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type {expr} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
@@ -225,9 +225,9 @@ namespace Falak
         }
         public void Visit(elseIfList node)
         {
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != expr) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type {expr} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
@@ -243,9 +243,9 @@ namespace Falak
         }
         public void Visit(stmtWhile node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != expr) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type {expr} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
@@ -287,72 +287,72 @@ namespace Falak
         }
         public void Visit(exprOr node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != exprAnd) {
                 throw new SemanticError(
-                    $"Expecting in conditional statement",
+                    $"Expecting {exprAnd} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
         }
         public void Visit(exprAnd node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != exprComp) {
                 throw new SemanticError(
-                    $"Expecting type  in conditional statement",
+                    $"Expecting type {exprComp} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
         }
         public void Visit(exprComp node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != exprRel) {
                 throw new SemanticError(
-                    $"Expecting type in conditional statement",
+                    $"Expecting type {exprRel} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
         }
         public void Visit(exprRel node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != exprAdd) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type {exprAdd} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
         }
         public void Visit(exprAdd node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != exprMul) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type {exprMul} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
         }
         public void Visit(exprMul node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != exprUnary) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type {exprUnary} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
         }
         public void Visit(exprUnary node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.INT) {
+            if (Visit((dynamic) node[0]) != exprPrimary) {
                 throw new SemanticError(
-                    $"Expecting type {Type.INT} in conditional statement",
+                    $"Expecting type {exprPrimary} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
         }
         public void Visit(exprPrimary node) 
         {   
-            if (Visit((dynamic) node[0]) != Type.BOOL) {
+            if (Visit((dynamic) node[0]) != exprList) {
                 throw new SemanticError(
-                    $"Expecting type {Type.BOOL} in conditional statement",
+                    $"Expecting type {exprList} in conditional statement",
                     node.AnchorToken);
             }
             VisitChildren(node[1]);
@@ -434,98 +434,98 @@ namespace Falak
         }        
         public void Visit(TRUE node)
         {
-            //return Type.BOOL;
+
         }        
         public void Visit(FALSE node)
         {
-            //return Type.BOOL;
+
         }
         public void Visit(greater_than node)
         {
-            VisitBinaryOperator(">", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator(">", node);
+
         }
         public void Visit(greater_equal_than node)
         {
-            VisitBinaryOperator(">=", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator(">=", node);
+
         }
         public void Visit(less_than node)
         {
-            VisitBinaryOperator("<", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("<", node);
+
         }        
         public void Visit(less_equal_than node)
         {
-            VisitBinaryOperator("<=", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("<=", node);
+
         }        
         public void Visit(equals_to node)
         {
-            VisitBinaryOperator("==", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("==", node);
+
         }        
         public void Visit(not_equal node)
         {
-            VisitBinaryOperator("!=", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("!=", node);
+
         }        
         public void Visit(Positive node)
         {
-            VisitBinaryOperator("+", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("+", node);
+
         }
         public void Visit(Negative node)
         {
-            VisitBinaryOperator("-", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("-", node);
+
         }
         public void Visit(Or node)
         {
-            VisitBinaryOperator("||", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("||", node);
+
         }
 		
         public void Visit(Xor node)
         {
-            VisitBinaryOperator("^", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("^", node);
+
         }
         public void Visit(And node)
         {
-            VisitBinaryOperator("&&", node, Type.BOOL);
-            //return Type.BOOL;
+            VisitBinaryOperator("&&", node);
+
         }
         //API primitives
         public void Visit(printI node)
         {
             Visit((dynamic) node[0]);
-            //return Type.VOID;
+            
         }
         public void Visit(printC node)
         {
             Visit((dynamic) node[0]);
-            //return Type.VOID;
+            
         }
         public void Visit(printS node)
         {
             Visit((dynamic) node[0]);
-            //return Type.VOID;
+            
         }
         public void Visit(printLN node)
         {
             Visit((dynamic) node[0]);
-            //return Type.VOID;
+            
         }
         public void Visit(readI node)
         {
             Visit((dynamic) node[0]);
-            //return Type.VOID;
+            
         }
         public void Visit(readS node)
         {
             Visit((dynamic) node[0]);
-            //return Type.VOID;
+            
         }
         public void Visit(New node)
         {
