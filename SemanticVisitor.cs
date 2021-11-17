@@ -13,7 +13,7 @@ namespace Falak
      public class SemanticVisitor {
 
 		public int Pass = 0;
-		//Constructor de FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference)
+        //Constructor de FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference)
         static readonly IDictionary<string, FunCollection> FGST =
             new SortedDictionary<string, FunCollection>() {
                 { "printI", new FunCollection(true, 1, null)},
@@ -28,6 +28,8 @@ namespace Falak
 				{ "get", new FunCollection(true, 2, null)},
 				{ "set", new FunCollection(true, 3, null)},
             };
+
+         public HashSet<string> VGST = new HashSet<string>();
 
 
         //-----------------------------------------------------------
@@ -120,11 +122,12 @@ namespace Falak
         }
 
         //-----------------------------------------------------------
-        void VisitBinaryOperator(string op, Node node, TokenCategory type) {
-            if (Visit((dynamic) node[0]) != type ||
-                Visit((dynamic) node[1]) != type) {
+        void VisitBinaryOperator(string op, Node node)
+        {
+            int children = node.childrenLength();
+            if (children < 2) {
                 throw new SemanticError(
-                    $"Operator {op} requires two operands of type {type}",
+                    $"Operator {op} requires two operands",
                     node.AnchorToken);
             }
         }
@@ -138,25 +141,30 @@ namespace Falak
 
 
         public void Visit(Program node) {
-            Visit((dynamic) node[0]);
-			Pass ++;
-            Visit((dynamic) node[1]);
+            VisitChildren(node);
         }
 
         public void Visit(defList node) {
             VisitChildren(node);
         }
 
-        public void Visit(varDef node) {   
-            var variableName = node[0].AnchorToken.Lexeme;
+        public void Visit(varDef node)
+        {
+            VisitIdListVar(node[0]);
+        }
 
-            if (Table.ContainsKey(variableName)) {
-                throw new SemanticError(
-                    "Duplicated variable: " + variableName,
-                    node[0].AnchorToken);
-
-            } else {
-                FGST[variableName] = new FunCollection(false, 0, null);
+        public void VisitIdListVar(Node node)
+        {
+            foreach (var identifier in node.children) {
+                var variableName = identifier[0].AnchorToken.Lexeme;
+                if (VGST.Contains(variableName)) {
+                    throw new SemanticError(
+                        "Duplicated variable: " + variableName,
+                        identifier[0].AnchorToken);
+                } else
+                {
+                    VGST.Add(variableName);
+                }
             }
         }
 
@@ -348,21 +356,21 @@ namespace Falak
                
         public void Visit(Div node)
         {
-            VisitBinaryOperator("/", node, Type.INT);
+            VisitBinaryOperator("/", node);
         }        
         public void Visit(Inc node) {
-            VisitBinaryOperator("+", node, Type.INT);
+            VisitBinaryOperator("+", node);
         }
         public void Visit(Minus node) {
-            VisitBinaryOperator("-", node, Type.INT);
+            VisitBinaryOperator("-", node);
         }
         public void Visit(Remainder node)
         {
-            VisitBinaryOperator("%", node, Type.INT);
+            VisitBinaryOperator("%", node);
         }        
         public void Visit(Not node)
         {
-            VisitBinaryOperator("!", node, Type.BOOL);
+            VisitBinaryOperator("!", node);
         }        
         public void Visit(TRUE node)
         {

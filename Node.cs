@@ -12,7 +12,7 @@ namespace Falak
 {
     public class Node: IEnumerable<Node> {
 
-        IList<Node> children = new List<Node>();
+        public IList<Node> children = new List<Node>();
 
         public Node this[int index] {
             get {
@@ -45,9 +45,13 @@ namespace Falak
             return sb.ToString();
         }
 
-        /*public int childrenLength(Node node){
-            
-        }*/
+        public int childrenLength(){
+            int sum = 0;
+			foreach (var child in this.children) {
+                sum ++;
+            }
+			return sum;
+        }
 
         static void TreeTraversal(Node node, string indent, StringBuilder sb) {
             sb.Append(indent);

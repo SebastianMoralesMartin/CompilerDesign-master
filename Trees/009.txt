@@ -1,0 +1,1060 @@
+Program
+  defList
+    varDef {VAR, "var", @(7, 1)}
+      idList
+        identifier {IDENTIFIER, "fails", @(7, 5)}
+    varDef {VAR, "var", @(8, 1)}
+      idList
+        identifier {IDENTIFIER, "asserts", @(8, 5)}
+    funDef
+      identifier {IDENTIFIER, "assert", @(10, 1)}
+      idList
+        identifier {IDENTIFIER, "value1", @(10, 8)}
+        identifier {IDENTIFIER, "value2", @(10, 16)}
+        identifier {IDENTIFIER, "message", @(10, 24)}
+      varDefList
+      stmtList
+        stmtIncr {INC, "inc", @(11, 5)}
+          identifier {IDENTIFIER, "asserts", @(11, 9)}
+        stmtIf {IF, "if", @(12, 5)}
+          expr
+            not_equal {NOT_EQUAL, "!=", @(12, 16)}
+              identifier {IDENTIFIER, "value1", @(12, 9)}
+              identifier {IDENTIFIER, "value2", @(12, 19)}
+          stmtList
+            stmtIncr {INC, "inc", @(13, 9)}
+              identifier {IDENTIFIER, "fails", @(13, 13)}
+            funCall
+              identifier {IDENTIFIER, "prints", @(14, 9)}
+              exprList
+                expr
+                  lit
+                    STRING {STRING, ""Assertion failure: "", @(14, 16)}
+            stmtEmpty {SEMICOLON, ";", @(14, 38)}
+            funCall
+              identifier {IDENTIFIER, "prints", @(15, 9)}
+              exprList
+                expr
+                  identifier {IDENTIFIER, "message", @(15, 16)}
+            stmtEmpty {SEMICOLON, ";", @(15, 24)}
+            funCall
+              identifier {IDENTIFIER, "println", @(16, 9)}
+              exprList
+            stmtEmpty {SEMICOLON, ";", @(16, 18)}
+    funDef
+      identifier {IDENTIFIER, "some_fun", @(21, 1)}
+      idList
+      varDefList
+      stmtList
+    funDef
+      identifier {IDENTIFIER, "true_fun", @(25, 1)}
+      idList
+      varDefList
+      stmtList
+        stmtReturn {RETURN, "return", @(26, 5)}
+          expr
+            lit
+              TRUE {TRUE, "true", @(26, 12)}
+    funDef
+      identifier {IDENTIFIER, "false_fun", @(30, 1)}
+      idList
+      varDefList
+      stmtList
+        stmtReturn {RETURN, "return", @(31, 5)}
+          expr
+            lit
+              FALSE {FALSE, "false", @(31, 12)}
+    funDef
+      identifier {IDENTIFIER, "never_called", @(35, 1)}
+      idList
+      varDefList
+      stmtList
+        funCall
+          identifier {IDENTIFIER, "assert", @(36, 5)}
+          exprList
+            expr
+              lit
+                FALSE {FALSE, "false", @(36, 12)}
+            expr
+              lit
+                TRUE {TRUE, "true", @(36, 19)}
+            expr
+              lit
+                STRING {STRING, ""error in short circuit operator"", @(36, 25)}
+        stmtEmpty {SEMICOLON, ";", @(36, 59)}
+    funDef
+      identifier {IDENTIFIER, "main", @(39, 1)}
+      idList
+      varDefList
+      stmtList
+        assign {ASSIGN, "=", @(41, 11)}
+          identifier {IDENTIFIER, "fails", @(41, 5)}
+          expr
+            lit
+              INT {INT, "0", @(41, 13)}
+        stmtEmpty {SEMICOLON, ";", @(41, 14)}
+        assign {ASSIGN, "=", @(42, 13)}
+          identifier {IDENTIFIER, "asserts", @(42, 5)}
+          expr
+            lit
+              INT {INT, "0", @(42, 15)}
+        stmtEmpty {SEMICOLON, ";", @(42, 16)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(44, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-0", @(44, 12)}
+            expr
+              lit
+                INT {INT, "0", @(44, 16)}
+            expr
+              lit
+                STRING {STRING, ""error in unary minus"", @(44, 19)}
+        stmtEmpty {SEMICOLON, ";", @(44, 42)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(45, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-5", @(45, 12)}
+            expr
+              Negative {NEG, "-", @(45, 16)}
+                Negative {NEG, "-", @(45, 18)}
+                  Negative {NEG, "-", @(45, 20)}
+                    lit
+                      INT {INT, "5", @(45, 22)}
+            expr
+              lit
+                STRING {STRING, ""error in unary minus"", @(45, 25)}
+        stmtEmpty {SEMICOLON, ";", @(45, 48)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(46, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "7", @(46, 12)}
+            expr
+              Negative {NEG, "-", @(46, 15)}
+                Negative {NEG, "-", @(46, 17)}
+                  lit
+                    INT {INT, "7", @(46, 19)}
+            expr
+              lit
+                STRING {STRING, ""error in unary minus"", @(46, 22)}
+        stmtEmpty {SEMICOLON, ";", @(46, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(48, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(48, 12)}
+            expr
+              lit
+                INT {INT, "+0", @(48, 15)}
+            expr
+              lit
+                STRING {STRING, ""error in unary plus"", @(48, 19)}
+        stmtEmpty {SEMICOLON, ";", @(48, 41)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(49, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "5", @(49, 12)}
+            expr
+              Positive {PLUS, "+", @(49, 15)}
+                Positive {PLUS, "+", @(49, 17)}
+                  Positive {PLUS, "+", @(49, 19)}
+                    lit
+                      INT {INT, "5", @(49, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in unary plus"", @(49, 24)}
+        stmtEmpty {SEMICOLON, ";", @(49, 46)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(50, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "7", @(50, 12)}
+            expr
+              Positive {PLUS, "+", @(50, 15)}
+                Positive {PLUS, "+", @(50, 17)}
+                  lit
+                    INT {INT, "7", @(50, 19)}
+            expr
+              lit
+                STRING {STRING, ""error in unary plus"", @(50, 22)}
+        stmtEmpty {SEMICOLON, ";", @(50, 44)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(52, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(52, 12)}
+            expr
+              Mul {MUL, "*", @(52, 18)}
+                lit
+                  INT {INT, "42", @(52, 15)}
+                lit
+                  INT {INT, "0", @(52, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in multiplication"", @(52, 23)}
+        stmtEmpty {SEMICOLON, ";", @(52, 49)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(53, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "42", @(53, 12)}
+            expr
+              Mul {MUL, "*", @(53, 18)}
+                lit
+                  INT {INT, "6", @(53, 16)}
+                lit
+                  INT {INT, "7", @(53, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in multiplication"", @(53, 23)}
+        stmtEmpty {SEMICOLON, ";", @(53, 49)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(54, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "42", @(54, 12)}
+            expr
+              Mul {MUL, "*", @(54, 19)}
+                lit
+                  INT {INT, "-6", @(54, 16)}
+                lit
+                  INT {INT, "-7", @(54, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in multiplication"", @(54, 25)}
+        stmtEmpty {SEMICOLON, ";", @(54, 51)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(55, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-42", @(55, 12)}
+            expr
+              Mul {MUL, "*", @(55, 19)}
+                lit
+                  INT {INT, "6", @(55, 17)}
+                lit
+                  INT {INT, "-7", @(55, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in multiplication"", @(55, 25)}
+        stmtEmpty {SEMICOLON, ";", @(55, 51)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(57, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(57, 12)}
+            expr
+              Div {DIV, "/", @(57, 17)}
+                lit
+                  INT {INT, "1", @(57, 15)}
+                lit
+                  INT {INT, "2", @(57, 19)}
+            expr
+              lit
+                STRING {STRING, ""error in division"", @(57, 22)}
+        stmtEmpty {SEMICOLON, ";", @(57, 42)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(58, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "6", @(58, 12)}
+            expr
+              Div {DIV, "/", @(58, 18)}
+                lit
+                  INT {INT, "20", @(58, 15)}
+                lit
+                  INT {INT, "3", @(58, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in division"", @(58, 23)}
+        stmtEmpty {SEMICOLON, ";", @(58, 43)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(59, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-6", @(59, 12)}
+            expr
+              Div {DIV, "/", @(59, 20)}
+                lit
+                  INT {INT, "-20", @(59, 16)}
+                lit
+                  INT {INT, "3", @(59, 22)}
+            expr
+              lit
+                STRING {STRING, ""error in division"", @(59, 25)}
+        stmtEmpty {SEMICOLON, ";", @(59, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(60, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "6", @(60, 12)}
+            expr
+              Div {DIV, "/", @(60, 19)}
+                lit
+                  INT {INT, "-20", @(60, 15)}
+                lit
+                  INT {INT, "-3", @(60, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in division"", @(60, 25)}
+        stmtEmpty {SEMICOLON, ";", @(60, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(62, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "2", @(62, 12)}
+            expr
+              Remainder {REMAINDER, "%", @(62, 18)}
+                lit
+                  INT {INT, "20", @(62, 15)}
+                lit
+                  INT {INT, "3", @(62, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in remainder"", @(62, 23)}
+        stmtEmpty {SEMICOLON, ";", @(62, 44)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(63, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-2", @(63, 12)}
+            expr
+              Remainder {REMAINDER, "%", @(63, 20)}
+                lit
+                  INT {INT, "-20", @(63, 16)}
+                lit
+                  INT {INT, "3", @(63, 22)}
+            expr
+              lit
+                STRING {STRING, ""error in remainder"", @(63, 25)}
+        stmtEmpty {SEMICOLON, ";", @(63, 46)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(64, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-2", @(64, 12)}
+            expr
+              Remainder {REMAINDER, "%", @(64, 20)}
+                lit
+                  INT {INT, "-20", @(64, 16)}
+                lit
+                  INT {INT, "-3", @(64, 22)}
+            expr
+              lit
+                STRING {STRING, ""error in remainder"", @(64, 26)}
+        stmtEmpty {SEMICOLON, ";", @(64, 47)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(66, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "42", @(66, 12)}
+            expr
+              Positive {PLUS, "+", @(66, 19)}
+                lit
+                  INT {INT, "20", @(66, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in addition"", @(66, 25)}
+        stmtEmpty {SEMICOLON, ";", @(66, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(67, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "2", @(67, 12)}
+            expr
+              Positive {PLUS, "+", @(67, 18)}
+                lit
+                  INT {INT, "-20", @(67, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in addition"", @(67, 25)}
+        stmtEmpty {SEMICOLON, ";", @(67, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(68, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-42", @(68, 12)}
+            expr
+              Positive {PLUS, "+", @(68, 21)}
+                lit
+                  INT {INT, "-20", @(68, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in addition"", @(68, 28)}
+        stmtEmpty {SEMICOLON, ";", @(68, 48)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(70, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "42", @(70, 12)}
+            expr
+              Negative {NEG, "-", @(70, 19)}
+                lit
+                  INT {INT, "38", @(70, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in substraction"", @(70, 25)}
+        stmtEmpty {SEMICOLON, ";", @(70, 49)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(71, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-118", @(71, 12)}
+            expr
+              Negative {NEG, "-", @(71, 22)}
+                lit
+                  INT {INT, "38", @(71, 24)}
+            expr
+              lit
+                STRING {STRING, ""error in substraction"", @(71, 28)}
+        stmtEmpty {SEMICOLON, ";", @(71, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(72, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "-42", @(72, 12)}
+            expr
+              Negative {NEG, "-", @(72, 21)}
+                lit
+                  INT {INT, "-38", @(72, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in substraction"", @(72, 28)}
+        stmtEmpty {SEMICOLON, ";", @(72, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(74, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(74, 12)}
+            expr
+              Not {NOT, "!", @(74, 15)}
+                lit
+                  TRUE {TRUE, "true", @(74, 16)}
+            expr
+              lit
+                STRING {STRING, ""error in logical NOT"", @(74, 22)}
+        stmtEmpty {SEMICOLON, ";", @(74, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(75, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(75, 12)}
+            expr
+              Not {NOT, "!", @(75, 15)}
+                lit
+                  FALSE {FALSE, "false", @(75, 16)}
+            expr
+              lit
+                STRING {STRING, ""error in logical NOT"", @(75, 23)}
+        stmtEmpty {SEMICOLON, ";", @(75, 46)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(76, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(76, 12)}
+            expr
+              Not {NOT, "!", @(76, 15)}
+                Not {NOT, "!", @(76, 16)}
+                  Not {NOT, "!", @(76, 17)}
+                    lit
+                      TRUE {TRUE, "true", @(76, 18)}
+            expr
+              lit
+                STRING {STRING, ""error in logical NOT"", @(76, 24)}
+        stmtEmpty {SEMICOLON, ";", @(76, 47)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(78, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(78, 12)}
+            expr
+              And {AND, "&&", @(78, 21)}
+                lit
+                  FALSE {FALSE, "false", @(78, 15)}
+                lit
+                  FALSE {FALSE, "false", @(78, 24)}
+            expr
+              lit
+                STRING {STRING, ""error in logical AND"", @(78, 31)}
+        stmtEmpty {SEMICOLON, ";", @(78, 54)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(79, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(79, 12)}
+            expr
+              And {AND, "&&", @(79, 20)}
+                lit
+                  TRUE {TRUE, "true", @(79, 15)}
+                lit
+                  FALSE {FALSE, "false", @(79, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in logical AND"", @(79, 30)}
+        stmtEmpty {SEMICOLON, ";", @(79, 53)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(80, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(80, 12)}
+            expr
+              And {AND, "&&", @(80, 21)}
+                lit
+                  FALSE {FALSE, "false", @(80, 15)}
+                lit
+                  TRUE {TRUE, "true", @(80, 24)}
+            expr
+              lit
+                STRING {STRING, ""error in logical AND"", @(80, 30)}
+        stmtEmpty {SEMICOLON, ";", @(80, 53)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(81, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(81, 12)}
+            expr
+              And {AND, "&&", @(81, 20)}
+                lit
+                  TRUE {TRUE, "true", @(81, 15)}
+                lit
+                  TRUE {TRUE, "true", @(81, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in logical AND"", @(81, 29)}
+        stmtEmpty {SEMICOLON, ";", @(81, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(82, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(82, 12)}
+            expr
+              And {AND, "&&", @(82, 27)}
+                identifier {IDENTIFIER, "false_fun", @(82, 15)}
+                  exprFunCall
+                    exprList
+                identifier {IDENTIFIER, "never_called", @(82, 30)}
+                  exprFunCall
+                    exprList
+            expr
+              lit
+                STRING {STRING, ""error in logical AND"", @(82, 46)}
+        stmtEmpty {SEMICOLON, ";", @(82, 69)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(84, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(84, 12)}
+            expr
+              Or {OR, "||", @(84, 21)}
+                lit
+                  FALSE {FALSE, "false", @(84, 15)}
+                lit
+                  FALSE {FALSE, "false", @(84, 24)}
+            expr
+              lit
+                STRING {STRING, ""error in logical OR"", @(84, 31)}
+        stmtEmpty {SEMICOLON, ";", @(84, 53)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(85, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(85, 12)}
+            expr
+              Or {OR, "||", @(85, 20)}
+                lit
+                  TRUE {TRUE, "true", @(85, 15)}
+                lit
+                  FALSE {FALSE, "false", @(85, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in logical OR"", @(85, 30)}
+        stmtEmpty {SEMICOLON, ";", @(85, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(86, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(86, 12)}
+            expr
+              Or {OR, "||", @(86, 21)}
+                lit
+                  FALSE {FALSE, "false", @(86, 15)}
+                lit
+                  TRUE {TRUE, "true", @(86, 24)}
+            expr
+              lit
+                STRING {STRING, ""error in logical OR"", @(86, 30)}
+        stmtEmpty {SEMICOLON, ";", @(86, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(87, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(87, 12)}
+            expr
+              Or {OR, "||", @(87, 20)}
+                lit
+                  TRUE {TRUE, "true", @(87, 15)}
+                lit
+                  TRUE {TRUE, "true", @(87, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in logical OR"", @(87, 29)}
+        stmtEmpty {SEMICOLON, ";", @(87, 51)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(88, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(88, 12)}
+            expr
+              Or {OR, "||", @(88, 26)}
+                identifier {IDENTIFIER, "true_fun", @(88, 15)}
+                  exprFunCall
+                    exprList
+                identifier {IDENTIFIER, "never_called", @(88, 29)}
+                  exprFunCall
+                    exprList
+            expr
+              lit
+                STRING {STRING, ""error in logical OR"", @(88, 45)}
+        stmtEmpty {SEMICOLON, ";", @(88, 67)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(90, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(90, 12)}
+            expr
+              Xor {XOR, "^", @(90, 21)}
+                lit
+                  FALSE {FALSE, "false", @(90, 15)}
+                lit
+                  FALSE {FALSE, "false", @(90, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(90, 30)}
+        stmtEmpty {SEMICOLON, ";", @(90, 53)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(91, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(91, 12)}
+            expr
+              Xor {XOR, "^", @(91, 20)}
+                lit
+                  TRUE {TRUE, "true", @(91, 15)}
+                lit
+                  FALSE {FALSE, "false", @(91, 22)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(91, 29)}
+        stmtEmpty {SEMICOLON, ";", @(91, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(92, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(92, 12)}
+            expr
+              Xor {XOR, "^", @(92, 21)}
+                lit
+                  FALSE {FALSE, "false", @(92, 15)}
+                lit
+                  TRUE {TRUE, "true", @(92, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(92, 29)}
+        stmtEmpty {SEMICOLON, ";", @(92, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(93, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(93, 12)}
+            expr
+              Xor {XOR, "^", @(93, 20)}
+                lit
+                  TRUE {TRUE, "true", @(93, 15)}
+                lit
+                  TRUE {TRUE, "true", @(93, 22)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(93, 28)}
+        stmtEmpty {SEMICOLON, ";", @(93, 51)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(95, 5)}
+          exprList
+            expr
+              lit
+                FALSE {FALSE, "false", @(95, 12)}
+            expr
+              Xor {XOR, "^", @(95, 21)}
+                lit
+                  INT {INT, "0", @(95, 19)}
+                lit
+                  INT {INT, "0", @(95, 23)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(95, 26)}
+        stmtEmpty {SEMICOLON, ";", @(95, 49)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(96, 5)}
+          exprList
+            expr
+              lit
+                TRUE {TRUE, "true", @(96, 12)}
+            expr
+              Xor {XOR, "^", @(96, 24)}
+                Mul {MUL, "*", @(96, 20)}
+                  lit
+                    INT {INT, "6", @(96, 18)}
+                  lit
+                    INT {INT, "7", @(96, 22)}
+                lit
+                  INT {INT, "0", @(96, 26)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(96, 29)}
+        stmtEmpty {SEMICOLON, ";", @(96, 52)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(97, 5)}
+          exprList
+            expr
+              lit
+                TRUE {TRUE, "true", @(97, 12)}
+            expr
+              Xor {XOR, "^", @(97, 28)}
+                Mul {MUL, "*", @(97, 24)}
+                  Negative {NEG, "-", @(97, 20)}
+                    lit
+                      INT {INT, "3", @(97, 22)}
+                  lit
+                    INT {INT, "2", @(97, 26)}
+                Positive {PLUS, "+", @(97, 33)}
+                  lit
+                    INT {INT, "2", @(97, 35)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(97, 38)}
+        stmtEmpty {SEMICOLON, ";", @(97, 61)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(98, 5)}
+          exprList
+            expr
+              lit
+                FALSE {FALSE, "false", @(98, 12)}
+            expr
+              Xor {XOR, "^", @(98, 21)}
+                lit
+                  INT {INT, "7", @(98, 19)}
+                Mul {MUL, "*", @(98, 25)}
+                  lit
+                    INT {INT, "2", @(98, 23)}
+                  lit
+                    INT {INT, "21", @(98, 27)}
+            expr
+              lit
+                STRING {STRING, ""error in logical XOR"", @(98, 31)}
+        stmtEmpty {SEMICOLON, ";", @(98, 54)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(100, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(100, 12)}
+            expr
+              equals_to {EQUALS_TO, "==", @(100, 18)}
+                lit
+                  INT {INT, "42", @(100, 15)}
+                lit
+                  INT {INT, "42", @(100, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in equal to"", @(100, 25)}
+        stmtEmpty {SEMICOLON, ";", @(100, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(101, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(101, 12)}
+            expr
+              equals_to {EQUALS_TO, "==", @(101, 18)}
+                lit
+                  INT {INT, "42", @(101, 15)}
+                lit
+                  INT {INT, "43", @(101, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in equal to"", @(101, 25)}
+        stmtEmpty {SEMICOLON, ";", @(101, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(102, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(102, 12)}
+            expr
+              not_equal {NOT_EQUAL, "!=", @(102, 18)}
+                lit
+                  INT {INT, "42", @(102, 15)}
+                lit
+                  INT {INT, "43", @(102, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in not equal to"", @(102, 25)}
+        stmtEmpty {SEMICOLON, ";", @(102, 49)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(103, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(103, 12)}
+            expr
+              not_equal {NOT_EQUAL, "!=", @(103, 18)}
+                lit
+                  INT {INT, "42", @(103, 15)}
+                lit
+                  INT {INT, "42", @(103, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in not equal to"", @(103, 25)}
+        stmtEmpty {SEMICOLON, ";", @(103, 49)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(104, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(104, 12)}
+            expr
+              greater_than {GREATER_THAN, ">", @(104, 18)}
+                lit
+                  INT {INT, "43", @(104, 15)}
+                lit
+                  INT {INT, "42", @(104, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in greater than"", @(104, 24)}
+        stmtEmpty {SEMICOLON, ";", @(104, 48)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(105, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(105, 12)}
+            expr
+              greater_than {GREATER_THAN, ">", @(105, 18)}
+                lit
+                  INT {INT, "42", @(105, 15)}
+                lit
+                  INT {INT, "42", @(105, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in greater than"", @(105, 24)}
+        stmtEmpty {SEMICOLON, ";", @(105, 48)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(106, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(106, 12)}
+            expr
+              less_than {LESS_THAN, "<", @(106, 18)}
+                lit
+                  INT {INT, "42", @(106, 15)}
+                lit
+                  INT {INT, "43", @(106, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in less than"", @(106, 24)}
+        stmtEmpty {SEMICOLON, ";", @(106, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(107, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(107, 12)}
+            expr
+              less_than {LESS_THAN, "<", @(107, 18)}
+                lit
+                  INT {INT, "42", @(107, 15)}
+                lit
+                  INT {INT, "42", @(107, 20)}
+            expr
+              lit
+                STRING {STRING, ""error in less than"", @(107, 24)}
+        stmtEmpty {SEMICOLON, ";", @(107, 45)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(108, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(108, 12)}
+            expr
+              greater_equal_than {GREATER_EQUAL_THAN, ">=", @(108, 18)}
+                lit
+                  INT {INT, "43", @(108, 15)}
+                lit
+                  INT {INT, "42", @(108, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in greater or equal"", @(108, 25)}
+        stmtEmpty {SEMICOLON, ";", @(108, 53)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(109, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(109, 12)}
+            expr
+              greater_equal_than {GREATER_EQUAL_THAN, ">=", @(109, 18)}
+                lit
+                  INT {INT, "42", @(109, 15)}
+                lit
+                  INT {INT, "42", @(109, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in greater or equal"", @(109, 25)}
+        stmtEmpty {SEMICOLON, ";", @(109, 53)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(110, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(110, 12)}
+            expr
+              greater_equal_than {GREATER_EQUAL_THAN, ">=", @(110, 18)}
+                lit
+                  INT {INT, "42", @(110, 15)}
+                lit
+                  INT {INT, "43", @(110, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in greater or equal"", @(110, 25)}
+        stmtEmpty {SEMICOLON, ";", @(110, 53)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(111, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(111, 12)}
+            expr
+              less_equal_than {LESS_EQUAL_THAN, "<=", @(111, 18)}
+                lit
+                  INT {INT, "42", @(111, 15)}
+                lit
+                  INT {INT, "43", @(111, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in less or equal"", @(111, 25)}
+        stmtEmpty {SEMICOLON, ";", @(111, 50)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(112, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "1", @(112, 12)}
+            expr
+              less_equal_than {LESS_EQUAL_THAN, "<=", @(112, 18)}
+                lit
+                  INT {INT, "42", @(112, 15)}
+                lit
+                  INT {INT, "42", @(112, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in less or equal"", @(112, 25)}
+        stmtEmpty {SEMICOLON, ";", @(112, 50)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(113, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(113, 12)}
+            expr
+              less_equal_than {LESS_EQUAL_THAN, "<=", @(113, 18)}
+                lit
+                  INT {INT, "43", @(113, 15)}
+                lit
+                  INT {INT, "42", @(113, 21)}
+            expr
+              lit
+                STRING {STRING, ""error in less or equal"", @(113, 25)}
+        stmtEmpty {SEMICOLON, ";", @(113, 50)}
+        funCall
+          identifier {IDENTIFIER, "assert", @(115, 5)}
+          exprList
+            expr
+              lit
+                INT {INT, "0", @(115, 12)}
+            expr
+              identifier {IDENTIFIER, "some_fun", @(115, 15)}
+                exprFunCall
+                  exprList
+            expr
+              lit
+                STRING {STRING, ""error in function call"", @(115, 27)}
+        stmtEmpty {SEMICOLON, ";", @(115, 52)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(117, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "fails", @(117, 12)}
+        stmtEmpty {SEMICOLON, ";", @(117, 18)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(118, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, "" failure(s) found in "", @(118, 12)}
+        stmtEmpty {SEMICOLON, ";", @(118, 36)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(119, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "asserts", @(119, 12)}
+        stmtEmpty {SEMICOLON, ";", @(119, 20)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(120, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, "" assertion(s).\n"", @(120, 12)}
+        stmtEmpty {SEMICOLON, ";", @(120, 31)}

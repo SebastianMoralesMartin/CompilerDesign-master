@@ -1,0 +1,195 @@
+Program
+  defList
+    varDef {VAR, "var", @(6, 1)}
+      idList
+        identifier {IDENTIFIER, "a", @(6, 5)}
+    funDef
+      identifier {IDENTIFIER, "x", @(8, 1)}
+      idList
+        identifier {IDENTIFIER, "b", @(8, 3)}
+      varDefList
+        varDef {VAR, "var", @(9, 5)}
+          idList
+            identifier {IDENTIFIER, "c", @(9, 9)}
+      stmtList
+        assign {ASSIGN, "=", @(10, 7)}
+          identifier {IDENTIFIER, "c", @(10, 5)}
+          expr
+            lit
+              INT {INT, "5", @(10, 9)}
+        stmtEmpty {SEMICOLON, ";", @(10, 10)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(11, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""Function x\n"", @(11, 12)}
+        stmtEmpty {SEMICOLON, ";", @(11, 27)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(12, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""a = "", @(12, 12)}
+        stmtEmpty {SEMICOLON, ";", @(12, 19)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(13, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "a", @(13, 12)}
+        stmtEmpty {SEMICOLON, ";", @(13, 14)}
+        funCall
+          identifier {IDENTIFIER, "println", @(14, 5)}
+          exprList
+        stmtEmpty {SEMICOLON, ";", @(14, 14)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(15, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""b = "", @(15, 12)}
+        stmtEmpty {SEMICOLON, ";", @(15, 19)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(16, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "b", @(16, 12)}
+        stmtEmpty {SEMICOLON, ";", @(16, 14)}
+        funCall
+          identifier {IDENTIFIER, "println", @(17, 5)}
+          exprList
+        stmtEmpty {SEMICOLON, ";", @(17, 14)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(18, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""c = "", @(18, 12)}
+        stmtEmpty {SEMICOLON, ";", @(18, 19)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(19, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "c", @(19, 12)}
+        stmtEmpty {SEMICOLON, ";", @(19, 14)}
+        funCall
+          identifier {IDENTIFIER, "println", @(20, 5)}
+          exprList
+        stmtEmpty {SEMICOLON, ";", @(20, 14)}
+    varDef {VAR, "var", @(23, 1)}
+      idList
+        identifier {IDENTIFIER, "b", @(23, 5)}
+        identifier {IDENTIFIER, "c", @(23, 8)}
+    funDef
+      identifier {IDENTIFIER, "main", @(25, 1)}
+      idList
+      varDefList
+        varDef {VAR, "var", @(26, 5)}
+          idList
+            identifier {IDENTIFIER, "x", @(26, 9)}
+      stmtList
+        assign {ASSIGN, "=", @(27, 7)}
+          identifier {IDENTIFIER, "a", @(27, 5)}
+          expr
+            lit
+              INT {INT, "1", @(27, 9)}
+        stmtEmpty {SEMICOLON, ";", @(27, 10)}
+        assign {ASSIGN, "=", @(28, 7)}
+          identifier {IDENTIFIER, "b", @(28, 5)}
+          expr
+            lit
+              INT {INT, "2", @(28, 9)}
+        stmtEmpty {SEMICOLON, ";", @(28, 10)}
+        assign {ASSIGN, "=", @(29, 7)}
+          identifier {IDENTIFIER, "c", @(29, 5)}
+          expr
+            lit
+              INT {INT, "3", @(29, 9)}
+        stmtEmpty {SEMICOLON, ";", @(29, 10)}
+        assign {ASSIGN, "=", @(30, 7)}
+          identifier {IDENTIFIER, "x", @(30, 5)}
+          expr
+            lit
+              INT {INT, "4", @(30, 9)}
+        stmtEmpty {SEMICOLON, ";", @(30, 10)}
+        funCall
+          identifier {IDENTIFIER, "x", @(31, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "x", @(31, 7)}
+        stmtEmpty {SEMICOLON, ";", @(31, 9)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(32, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""Function main\n"", @(32, 12)}
+        stmtEmpty {SEMICOLON, ";", @(32, 30)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(33, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""a = "", @(33, 12)}
+        stmtEmpty {SEMICOLON, ";", @(33, 19)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(34, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "a", @(34, 12)}
+        stmtEmpty {SEMICOLON, ";", @(34, 14)}
+        funCall
+          identifier {IDENTIFIER, "println", @(35, 5)}
+          exprList
+        stmtEmpty {SEMICOLON, ";", @(35, 14)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(36, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""b = "", @(36, 12)}
+        stmtEmpty {SEMICOLON, ";", @(36, 19)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(37, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "b", @(37, 12)}
+        stmtEmpty {SEMICOLON, ";", @(37, 14)}
+        funCall
+          identifier {IDENTIFIER, "println", @(38, 5)}
+          exprList
+        stmtEmpty {SEMICOLON, ";", @(38, 14)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(39, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""c = "", @(39, 12)}
+        stmtEmpty {SEMICOLON, ";", @(39, 19)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(40, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "c", @(40, 12)}
+        stmtEmpty {SEMICOLON, ";", @(40, 14)}
+        funCall
+          identifier {IDENTIFIER, "println", @(41, 5)}
+          exprList
+        stmtEmpty {SEMICOLON, ";", @(41, 14)}
+        funCall
+          identifier {IDENTIFIER, "prints", @(42, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""x = "", @(42, 12)}
+        stmtEmpty {SEMICOLON, ";", @(42, 19)}
+        funCall
+          identifier {IDENTIFIER, "printi", @(43, 5)}
+          exprList
+            expr
+              identifier {IDENTIFIER, "x", @(43, 12)}
+        stmtEmpty {SEMICOLON, ";", @(43, 14)}
+        funCall
+          identifier {IDENTIFIER, "println", @(44, 5)}
+          exprList
+        stmtEmpty {SEMICOLON, ";", @(44, 14)}
