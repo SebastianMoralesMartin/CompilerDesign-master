@@ -1,0 +1,204 @@
+Program 
+  defList 
+    funDef 
+      identifier {IDENTIFIER, "reverse", @(7, 1)}
+      idList 
+        identifier {IDENTIFIER, "array", @(7, 9)}
+      varDefList 
+        varDef {VAR, "var", @(8, 5)}
+          idList 
+            identifier {IDENTIFIER, "start", @(8, 9)}
+            identifier {IDENTIFIER, "finish", @(8, 16)}
+            identifier {IDENTIFIER, "temp", @(8, 24)}
+      stmtList 
+        assign {ASSIGN, "=", @(9, 11)}
+          identifier {IDENTIFIER, "start", @(9, 5)}
+          expr 
+            INT {INT, "0", @(9, 13)}
+        assign {ASSIGN, "=", @(10, 12)}
+          identifier {IDENTIFIER, "finish", @(10, 5)}
+          expr 
+            Positive {PLUS, "+", @(10, 26)}
+              INT {INT, "1", @(10, 28)}
+        stmtWhile {WHILE, "while", @(11, 5)}
+          expr 
+            less_than {LESS_THAN, "<", @(11, 18)}
+              identifier {IDENTIFIER, "start", @(11, 12)}
+              identifier {IDENTIFIER, "finish", @(11, 20)}
+          stmtList 
+            assign {ASSIGN, "=", @(12, 14)}
+              identifier {IDENTIFIER, "temp", @(12, 9)}
+              expr 
+                exprFunCall 
+                  exprList 
+                    expr 
+                      identifier {IDENTIFIER, "array", @(12, 20)}
+                    expr 
+                      identifier {IDENTIFIER, "start", @(12, 27)}
+                  identifier {IDENTIFIER, "get", @(12, 16)}
+            funCall 
+              identifier {IDENTIFIER, "set", @(13, 9)}
+              exprList 
+                expr 
+                  identifier {IDENTIFIER, "array", @(13, 13)}
+                expr 
+                  identifier {IDENTIFIER, "start", @(13, 20)}
+                expr 
+                  exprFunCall 
+                    exprList 
+                      expr 
+                        identifier {IDENTIFIER, "array", @(13, 31)}
+                      expr 
+                        identifier {IDENTIFIER, "finish", @(13, 38)}
+                    identifier {IDENTIFIER, "get", @(13, 27)}
+            funCall 
+              identifier {IDENTIFIER, "set", @(14, 9)}
+              exprList 
+                expr 
+                  identifier {IDENTIFIER, "array", @(14, 13)}
+                expr 
+                  identifier {IDENTIFIER, "finish", @(14, 20)}
+                expr 
+                  identifier {IDENTIFIER, "temp", @(14, 28)}
+            stmtIncr {INC, "inc", @(15, 9)}
+              identifier {IDENTIFIER, "start", @(15, 13)}
+            stmtDecr {DEC, "dec", @(16, 9)}
+              identifier {IDENTIFIER, "finish", @(16, 13)}
+    funDef 
+      identifier {IDENTIFIER, "binary", @(21, 1)}
+      idList 
+        identifier {IDENTIFIER, "num", @(21, 8)}
+      varDefList 
+        varDef {VAR, "var", @(22, 5)}
+          idList 
+            identifier {IDENTIFIER, "result", @(22, 9)}
+            identifier {IDENTIFIER, "remainder", @(22, 17)}
+      stmtList 
+        stmtIf {IF, "if", @(23, 5)}
+          expr 
+            less_equal_than {LESS_EQUAL_THAN, "<=", @(23, 13)}
+              identifier {IDENTIFIER, "num", @(23, 9)}
+              INT {INT, "0", @(23, 16)}
+          stmtList 
+            stmtReturn {RETURN, "return", @(24, 9)}
+              expr 
+                STRING {STRING, ""0"", @(24, 16)}
+        assign {ASSIGN, "=", @(26, 12)}
+          identifier {IDENTIFIER, "result", @(26, 5)}
+          expr 
+            STRING {STRING, """", @(26, 14)}
+        stmtWhile {WHILE, "while", @(27, 5)}
+          expr 
+            greater_than {GREATER_THAN, ">", @(27, 16)}
+              identifier {IDENTIFIER, "num", @(27, 12)}
+              INT {INT, "0", @(27, 18)}
+          stmtList 
+            assign {ASSIGN, "=", @(28, 19)}
+              identifier {IDENTIFIER, "remainder", @(28, 9)}
+              expr 
+                Remainder {REMAINDER, "%", @(28, 25)}
+                  identifier {IDENTIFIER, "num", @(28, 21)}
+                  INT {INT, "2", @(28, 27)}
+            funCall 
+              identifier {IDENTIFIER, "add", @(29, 9)}
+              exprList 
+                expr 
+                  identifier {IDENTIFIER, "result", @(29, 13)}
+                expr 
+                  Positive {PLUS, "+", @(29, 31)}
+                    Character {CHARACTER, "'0'", @(29, 33)}
+            assign {ASSIGN, "=", @(30, 13)}
+              identifier {IDENTIFIER, "num", @(30, 9)}
+              expr 
+                Div {DIV, "/", @(30, 19)}
+                  identifier {IDENTIFIER, "num", @(30, 15)}
+                  INT {INT, "2", @(30, 21)}
+        funCall 
+          identifier {IDENTIFIER, "reverse", @(32, 5)}
+          exprList 
+            expr 
+              identifier {IDENTIFIER, "result", @(32, 13)}
+        stmtReturn {RETURN, "return", @(33, 5)}
+          expr 
+            identifier {IDENTIFIER, "result", @(33, 12)}
+    funDef 
+      identifier {IDENTIFIER, "main", @(36, 1)}
+      idList 
+      varDefList 
+        varDef {VAR, "var", @(37, 5)}
+          idList 
+            identifier {IDENTIFIER, "option", @(37, 9)}
+            identifier {IDENTIFIER, "num", @(37, 17)}
+      stmtList 
+        stmtDoWhile {DO, "do", @(38, 5)}
+          stmtList 
+            funCall 
+              identifier {IDENTIFIER, "prints", @(39, 9)}
+              exprList 
+                expr 
+                  STRING {STRING, ""Input a number: "", @(39, 16)}
+            assign {ASSIGN, "=", @(40, 13)}
+              identifier {IDENTIFIER, "num", @(40, 9)}
+              expr 
+                exprFunCall 
+                  identifier {IDENTIFIER, "readi", @(40, 15)}
+            funCall 
+              identifier {IDENTIFIER, "prints", @(41, 9)}
+              exprList 
+                expr 
+                  STRING {STRING, ""Conversion to binary of that number: "", @(41, 16)}
+            funCall 
+              identifier {IDENTIFIER, "prints", @(42, 9)}
+              exprList 
+                expr 
+                  exprFunCall 
+                    exprList 
+                      expr 
+                        identifier {IDENTIFIER, "num", @(42, 23)}
+                    identifier {IDENTIFIER, "binary", @(42, 16)}
+            funCall 
+              identifier {IDENTIFIER, "println", @(43, 9)}
+            funCall 
+              identifier {IDENTIFIER, "prints", @(44, 9)}
+              exprList 
+                expr 
+                  STRING {STRING, ""Convert another number? "", @(44, 16)}
+            assign {ASSIGN, "=", @(45, 16)}
+              identifier {IDENTIFIER, "option", @(45, 9)}
+              expr 
+                exprFunCall 
+                  identifier {IDENTIFIER, "reads", @(45, 18)}
+            stmtIf {IF, "if", @(46, 9)}
+              expr 
+                equals_to {EQUALS_TO, "==", @(46, 26)}
+                  exprFunCall 
+                    exprList 
+                      expr 
+                        identifier {IDENTIFIER, "option", @(46, 18)}
+                    identifier {IDENTIFIER, "size", @(46, 13)}
+                  INT {INT, "0", @(46, 29)}
+              stmtList 
+                assign {ASSIGN, "=", @(47, 20)}
+                  identifier {IDENTIFIER, "option", @(47, 13)}
+                  expr 
+                    Character {CHARACTER, "'N'", @(47, 22)}
+              stmtElse {ELSE, "else", @(48, 11)}
+                stmtList 
+                  assign {ASSIGN, "=", @(49, 20)}
+                    identifier {IDENTIFIER, "option", @(49, 13)}
+                    expr 
+                      exprFunCall 
+                        exprList 
+                          expr 
+                            identifier {IDENTIFIER, "option", @(49, 26)}
+                          expr 
+                            INT {INT, "0", @(49, 34)}
+                        identifier {IDENTIFIER, "get", @(49, 22)}
+          expr 
+            Or {OR, "||", @(51, 28)}
+              equals_to {EQUALS_TO, "==", @(51, 21)}
+                identifier {IDENTIFIER, "option", @(51, 14)}
+                Character {CHARACTER, "'Y'", @(51, 24)}
+              equals_to {EQUALS_TO, "==", @(51, 38)}
+                identifier {IDENTIFIER, "option", @(51, 31)}
+                Character {CHARACTER, "'y'", @(51, 41)}

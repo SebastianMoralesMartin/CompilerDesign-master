@@ -215,48 +215,28 @@ namespace Falak
         
         public void Visit(stmtIf node) 
         {   
-            if (Visit((dynamic) node[0]) != expr) {
-                throw new SemanticError(
-                    $"Expecting type {expr} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
            
         }
         public void Visit(elseIfList node)
         {
-            if (Visit((dynamic) node[0]) != expr) {
-                throw new SemanticError(
-                    $"Expecting type {expr} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(stmtElse node) 
         {   
-            if (Visit((dynamic) node[0]) != stmtList) {
-                throw new SemanticError(
-                    $"Expecting type {stmtList} in statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(stmtWhile node) 
         {   
-            if (Visit((dynamic) node[0]) != expr) {
-                throw new SemanticError(
-                    $"Expecting type {expr} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(stmtDoWhile node) 
         {
-            if (Visit((dynamic) node[0]) != stmtList) {
-                throw new SemanticError(
-                    $"Expecting type {stmtList} in statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(stmtBreak node) 
@@ -265,11 +245,7 @@ namespace Falak
         }
         public void Visit(stmtReturn node) 
         {   
-            if (Visit((dynamic) node[0]) != expr) {
-                throw new SemanticError(
-                    $"Expecting type {expr} in statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(stmtEmpty node) 
@@ -278,83 +254,47 @@ namespace Falak
         }
         public void Visit(expr node) 
         {   
-            if (Visit((dynamic) node[0]) != exprAdd | exprAnd | exprComp | exprRel | exprMul | exprUnary) {
-                throw new SemanticError(
-                    $"Expecting type {expr} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(exprOr node) 
         {   
-            if (Visit((dynamic) node[0]) != exprAnd) {
-                throw new SemanticError(
-                    $"Expecting {exprAnd} in conditional statement",
-                    node.AnchorToken);
-            }
+           
             VisitChildren(node[1]);
         }
         public void Visit(exprAnd node) 
         {   
-            if (Visit((dynamic) node[0]) != exprComp) {
-                throw new SemanticError(
-                    $"Expecting type {exprComp} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(exprComp node) 
         {   
-            if (Visit((dynamic) node[0]) != exprRel) {
-                throw new SemanticError(
-                    $"Expecting type {exprRel} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(exprRel node) 
         {   
-            if (Visit((dynamic) node[0]) != exprAdd) {
-                throw new SemanticError(
-                    $"Expecting type {exprAdd} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(exprAdd node) 
         {   
-            if (Visit((dynamic) node[0]) != exprMul) {
-                throw new SemanticError(
-                    $"Expecting type {exprMul} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(exprMul node) 
         {   
-            if (Visit((dynamic) node[0]) != exprUnary) {
-                throw new SemanticError(
-                    $"Expecting type {exprUnary} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(exprUnary node) 
         {   
-            if (Visit((dynamic) node[0]) != exprPrimary) {
-                throw new SemanticError(
-                    $"Expecting type {exprPrimary} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(exprPrimary node) 
         {   
-            if (Visit((dynamic) node[0]) != exprList) {
-                throw new SemanticError(
-                    $"Expecting type {exprList} in conditional statement",
-                    node.AnchorToken);
-            }
+            
             VisitChildren(node[1]);
         }
         public void Visit(array node) 
@@ -399,19 +339,11 @@ namespace Falak
         
         public void Visit(Plus node)
         {
-            if (Visit((dynamic) node[0]) != Type.INT) {
-                throw new SemanticError(
-                    $"Operator - requires an operand of type {Type.INT}",
-                    node.AnchorToken);
-            }
+            
         }        
         public void Visit(Neg node)
         {
-            if (Visit((dynamic) node[0]) != Type.INT) {
-                throw new SemanticError(
-                    $"Operator - requires an operand of type {Type.INT}",
-                    node.AnchorToken);
-            }
+            
         }
                
         public void Visit(Div node)

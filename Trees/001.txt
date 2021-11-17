@@ -1,0 +1,18 @@
+Program
+  defList
+    funDef
+      identifier {IDENTIFIER, "main", @(6, 1)}
+      idList
+      varDefList
+      stmtList
+        funCall
+          identifier {IDENTIFIER, "prints", @(7, 5)}
+          exprList
+            expr
+              lit
+                STRING {STRING, ""hello, world\n"", @(7, 12)}
+        stmtEmpty {SEMICOLON, ";", @(7, 29)}
+        stmtReturn {RETURN, "return", @(8, 5)}
+          expr
+            lit
+              INT {INT, "42", @(8, 12)}

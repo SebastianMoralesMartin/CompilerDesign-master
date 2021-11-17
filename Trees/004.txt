@@ -1,0 +1,194 @@
+Program
+  defList
+    funDef
+      identifier {IDENTIFIER, "iterative_factorial", @(7, 1)}
+      idList
+        identifier {IDENTIFIER, "n", @(7, 21)}
+      varDefList
+        varDef {VAR, "var", @(8, 5)}
+          idList
+            identifier {IDENTIFIER, "result", @(8, 9)}
+            identifier {IDENTIFIER, "i", @(8, 17)}
+      stmtList
+        assign {ASSIGN, "=", @(9, 12)}
+          identifier {IDENTIFIER, "result", @(9, 5)}
+          expr
+            lit
+              INT {INT, "1", @(9, 14)}
+        stmtEmpty {SEMICOLON, ";", @(9, 15)}
+        assign {ASSIGN, "=", @(10, 7)}
+          identifier {IDENTIFIER, "i", @(10, 5)}
+          expr
+            lit
+              INT {INT, "2", @(10, 9)}
+        stmtEmpty {SEMICOLON, ";", @(10, 10)}
+        stmtWhile {WHILE, "while", @(11, 5)}
+          expr
+            less_equal_than {LESS_EQUAL_THAN, "<=", @(11, 14)}
+              identifier {IDENTIFIER, "i", @(11, 12)}
+              identifier {IDENTIFIER, "n", @(11, 17)}
+          stmtList
+            assign {ASSIGN, "=", @(12, 16)}
+              identifier {IDENTIFIER, "result", @(12, 9)}
+              expr
+                Mul {MUL, "*", @(12, 25)}
+                  identifier {IDENTIFIER, "result", @(12, 18)}
+                  identifier {IDENTIFIER, "i", @(12, 27)}
+            stmtEmpty {SEMICOLON, ";", @(12, 28)}
+            stmtIncr {INC, "inc", @(13, 9)}
+              identifier {IDENTIFIER, "i", @(13, 13)}
+        stmtReturn {RETURN, "return", @(15, 5)}
+          expr
+            identifier {IDENTIFIER, "result", @(15, 12)}
+    funDef
+      identifier {IDENTIFIER, "recursive_factorial", @(19, 1)}
+      idList
+        identifier {IDENTIFIER, "n", @(19, 21)}
+      varDefList
+      stmtList
+        stmtIf {IF, "if", @(20, 5)}
+          expr
+            less_equal_than {LESS_EQUAL_THAN, "<=", @(20, 11)}
+              identifier {IDENTIFIER, "n", @(20, 9)}
+              lit
+                INT {INT, "0", @(20, 14)}
+          stmtList
+            stmtReturn {RETURN, "return", @(21, 9)}
+              expr
+                lit
+                  INT {INT, "1", @(21, 16)}
+          stmtElse {ELSE, "else", @(22, 7)}
+            stmtList
+              stmtReturn {RETURN, "return", @(23, 9)}
+                expr
+                  Mul {MUL, "*", @(23, 18)}
+                    identifier {IDENTIFIER, "n", @(23, 16)}
+                    identifier {IDENTIFIER, "recursive_factorial", @(23, 20)}
+                      exprFunCall
+                        exprList
+                          expr
+                            Negative {NEG, "-", @(23, 42)}
+                              lit
+                                INT {INT, "1", @(23, 44)}
+    funDef
+      identifier {IDENTIFIER, "main", @(27, 1)}
+      idList
+      varDefList
+        varDef {VAR, "var", @(28, 5)}
+          idList
+            identifier {IDENTIFIER, "num", @(28, 9)}
+            identifier {IDENTIFIER, "option", @(28, 14)}
+      stmtList
+        stmtDoWhile {DO, "do", @(29, 5)}
+          stmtList
+            funCall
+              identifier {IDENTIFIER, "prints", @(30, 9)}
+              exprList
+                expr
+                  lit
+                    STRING {STRING, ""Input a number: "", @(30, 16)}
+            stmtEmpty {SEMICOLON, ";", @(30, 35)}
+            assign {ASSIGN, "=", @(31, 13)}
+              identifier {IDENTIFIER, "num", @(31, 9)}
+              expr
+                identifier {IDENTIFIER, "readi", @(31, 15)}
+                  exprFunCall
+                    exprList
+            stmtEmpty {SEMICOLON, ";", @(31, 22)}
+            funCall
+              identifier {IDENTIFIER, "prints", @(32, 9)}
+              exprList
+                expr
+                  lit
+                    STRING {STRING, ""Iterative factorial: "", @(32, 16)}
+            stmtEmpty {SEMICOLON, ";", @(32, 40)}
+            funCall
+              identifier {IDENTIFIER, "printi", @(33, 9)}
+              exprList
+                expr
+                  identifier {IDENTIFIER, "iterative_factorial", @(33, 16)}
+                    exprFunCall
+                      exprList
+                        expr
+                          identifier {IDENTIFIER, "num", @(33, 36)}
+            stmtEmpty {SEMICOLON, ";", @(33, 41)}
+            funCall
+              identifier {IDENTIFIER, "println", @(34, 9)}
+              exprList
+            stmtEmpty {SEMICOLON, ";", @(34, 18)}
+            funCall
+              identifier {IDENTIFIER, "prints", @(35, 9)}
+              exprList
+                expr
+                  lit
+                    STRING {STRING, ""Recursive factorial: "", @(35, 16)}
+            stmtEmpty {SEMICOLON, ";", @(35, 40)}
+            funCall
+              identifier {IDENTIFIER, "printi", @(36, 9)}
+              exprList
+                expr
+                  identifier {IDENTIFIER, "recursive_factorial", @(36, 16)}
+                    exprFunCall
+                      exprList
+                        expr
+                          identifier {IDENTIFIER, "num", @(36, 36)}
+            stmtEmpty {SEMICOLON, ";", @(36, 41)}
+            funCall
+              identifier {IDENTIFIER, "println", @(37, 9)}
+              exprList
+            stmtEmpty {SEMICOLON, ";", @(37, 18)}
+            funCall
+              identifier {IDENTIFIER, "prints", @(38, 9)}
+              exprList
+                expr
+                  lit
+                    STRING {STRING, ""Compute another factorial? "", @(38, 16)}
+            stmtEmpty {SEMICOLON, ";", @(38, 46)}
+            assign {ASSIGN, "=", @(39, 16)}
+              identifier {IDENTIFIER, "option", @(39, 9)}
+              expr
+                identifier {IDENTIFIER, "reads", @(39, 18)}
+                  exprFunCall
+                    exprList
+            stmtEmpty {SEMICOLON, ";", @(39, 25)}
+            stmtIf {IF, "if", @(40, 9)}
+              expr
+                equals_to {EQUALS_TO, "==", @(40, 26)}
+                  identifier {IDENTIFIER, "size", @(40, 13)}
+                    exprFunCall
+                      exprList
+                        expr
+                          identifier {IDENTIFIER, "option", @(40, 18)}
+                  lit
+                    INT {INT, "0", @(40, 29)}
+              stmtList
+                assign {ASSIGN, "=", @(41, 20)}
+                  identifier {IDENTIFIER, "option", @(41, 13)}
+                  expr
+                    lit
+                      Character {CHARACTER, "'N'", @(41, 22)}
+                stmtEmpty {SEMICOLON, ";", @(41, 25)}
+              stmtElse {ELSE, "else", @(42, 11)}
+                stmtList
+                  assign {ASSIGN, "=", @(43, 20)}
+                    identifier {IDENTIFIER, "option", @(43, 13)}
+                    expr
+                      identifier {IDENTIFIER, "get", @(43, 22)}
+                        exprFunCall
+                          exprList
+                            expr
+                              identifier {IDENTIFIER, "option", @(43, 26)}
+                            expr
+                              lit
+                                INT {INT, "0", @(43, 34)}
+                  stmtEmpty {SEMICOLON, ";", @(43, 36)}
+          expr
+            Or {OR, "||", @(45, 28)}
+              equals_to {EQUALS_TO, "==", @(45, 21)}
+                identifier {IDENTIFIER, "option", @(45, 14)}
+                lit
+                  Character {CHARACTER, "'Y'", @(45, 24)}
+              equals_to {EQUALS_TO, "==", @(45, 38)}
+                identifier {IDENTIFIER, "option", @(45, 31)}
+                lit
+                  Character {CHARACTER, "'y'", @(45, 41)}
