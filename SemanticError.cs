@@ -15,10 +15,13 @@ namespace Falak
                  + $"at row {token.Row}, column {token.Column}.") {
         }
 
-        public SemanticError(string message) :
-            base("$Semantic Error: Dont know what went wrong :/")
-        {
-            
+        public SemanticError(string message):
+            base(String.Format(
+                "Semantic Error: {0} \n",
+                message)) {
         }
+
+
+        
     }
 }

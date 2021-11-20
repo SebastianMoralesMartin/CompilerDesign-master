@@ -58,7 +58,7 @@ namespace Falak {
                 var program = parser.Program();
                 Console.WriteLine("Syntax OK.");
 
-                var semantic = new SemanticVisitor();
+                var semantic = new FirstVisitor();
                 semantic.Visit((dynamic) program);
 
                 Console.WriteLine("Semantics OK.");

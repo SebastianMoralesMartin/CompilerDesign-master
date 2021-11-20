@@ -1,18 +1,23 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
 namespace Falak
 {
     public class GlobalVarTable
     {
-        private HashSet<Type> table;
-    }
+        HashSet<string> table;
+    
+
     public GlobalVarTable(){
-        table = new HashSet<Type>();
+        table = new HashSet<string>();
     }
     
     public override string ToString()
     {
     var sb = new StringBuilder();
     sb.Append("---------GLOBAL-VARS------------------\n");
-    foreach (string entry in tableSet)
+    foreach (string entry in table)
     {
         sb.Append(String.Format("{0}\n",
             entry));
@@ -25,12 +30,12 @@ namespace Falak
         return table.Contains(name);
     }
 
-    public bool Add (string Name){
+    public bool Add (string name){
         return table.Add(name);
     }
 
     public IEnumerator<string> GetEnumerator()
         {
-            return tableSet.GetEnumerator();
+            return table.GetEnumerator();
         }
-}
+}}

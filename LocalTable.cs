@@ -1,3 +1,7 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
 namespace Falak
 {
     public class LocalTable
@@ -7,7 +11,7 @@ namespace Falak
         {
             var sb = new StringBuilder();
             
-            foreach (Type entry in tableSet) {
+            foreach (Type entry in table) {
                 sb.Append("|-|" + String.Join(", ",entry.CustomArray) + "|-|\n");
             }
             return sb.ToString();

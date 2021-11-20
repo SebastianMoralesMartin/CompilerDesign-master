@@ -67,12 +67,17 @@ namespace Falak
         public void Visit(Program node)
         {
             Visit((dynamic)node[0]);
+            
             if (!mainPresent)
             {
                 throw new SemanticError(
-                    "No main function found"
+                    "No main"
                 );
             }
+        }
+
+        public void Visit(defList node){
+            VisitChildren(node); 
         }
 
         public void Visit(idList node)
@@ -82,7 +87,9 @@ namespace Falak
         
         public void Visit(funDef node) {  
  
-            var functionName = node.AnchorToken.Lexeme;
+            string functionName = node[0].AnchorToken.Lexeme;
+
+            Console.WriteLine(functionName);
 
             if (functionName == "main")
             {
@@ -97,15 +104,27 @@ namespace Falak
             } else {
 
                 tempContainer = new Type(new List<object>(){functionName, "false"});
-                //int idListCount = 0;
-                //FGST[functionName] = new FunCollection(false, idListCount, null);
                 Visit((dynamic) node[0]);
             }
 			
         }
+
+        public void Visit(varDef node){
+            var variableName = node.AnchorToken.Lexeme;
+
+            if(GlobalVars.Contains(variableName)){
+                throw new SemanticError(
+                    "Duplicated variable: " + variableName,
+                    node.AnchorToken);
+            }
+            else{
+                GlobalVars.Add(variableName);
+            }
+        }
         
         public void Visit(ParameterList node)
         {
+            Console.WriteLine("This should print");
             int children = 0;
             int parameters = 0;
             foreach (var n in node)
@@ -134,18 +153,20 @@ namespace Falak
             }
             else
             {
+                
                 tempContainer.CustomArray.Add("0");
             }
+
             tempContainer.CustomArray.Add(new LocalTable());
             GlobalFunctionsTable.Add(tempContainer);
-            flagIsMain = false;
+            visitingMain = false;
         }
 
 
 
         public void VisitChildren(Node node){
-            foreach(var n in node){
-                Visit((dynamic)n);
+            foreach(var i in node){
+                Visit((dynamic)i);
             }
         }
     }
