@@ -20,7 +20,8 @@ x(b) {
     println();
 }
 
-var b, c;
+var b;
+var c;
 
 main() {
     var x;

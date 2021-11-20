@@ -63,7 +63,7 @@ namespace Falak {
 
                 Console.WriteLine("Semantics OK.");
                 Console.WriteLine();
-                Console.WriteLine("Symbol Table");
+                //Console.WriteLine("Symbol Table");
                 Console.WriteLine("============");
                 /*foreach (var entry in semantic.Table) {
                     Console.WriteLine(entry);

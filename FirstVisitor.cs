@@ -104,7 +104,8 @@ namespace Falak
             } else {
 
                 tempContainer = new Type(new List<object>(){functionName, "false"});
-                Visit((dynamic) node[0]);
+                Console.WriteLine("En la funcion " + functionName + "\nQuieres Visitar a " + node[1]);
+                Visit((dynamic) node[1]);
             }
 			
         }
@@ -120,6 +121,7 @@ namespace Falak
             else{
                 GlobalVars.Add(variableName);
             }
+            
         }
         
         public void Visit(ParameterList node)
@@ -160,13 +162,23 @@ namespace Falak
             tempContainer.CustomArray.Add(new LocalTable());
             GlobalFunctionsTable.Add(tempContainer);
             visitingMain = false;
+            Console.WriteLine("A verr Sebo :O \nChildren: " + children + "/nParam: " + parameters);
+            Console.WriteLine("Tabla: \n" + GlobalFunctionsTable.ToString());
+            Console.WriteLine("Tabla Variables \n" + GlobalVars.ToString());
+        }
+
+        public void Visit(identifier node)
+        {
+            
         }
 
 
 
         public void VisitChildren(Node node){
-            foreach(var i in node){
+            foreach(var i in node)
+            {
                 Visit((dynamic)i);
+                
             }
         }
     }

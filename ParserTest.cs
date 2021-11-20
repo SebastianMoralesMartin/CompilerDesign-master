@@ -117,9 +117,10 @@ namespace Falak
 
         public Node varDef()
         {
+            Expect(TokenCategory.VAR);
             var result = new varDef()
             {
-                AnchorToken = Expect(TokenCategory.VAR)
+                AnchorToken = Expect(TokenCategory.IDENTIFIER)
             };
             result.Add(idList());
             Expect(TokenCategory.SEMICOLON);
