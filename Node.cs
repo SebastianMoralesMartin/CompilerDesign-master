@@ -47,7 +47,7 @@ namespace Falak
 
         public int childrenLength(){
             int sum = 0;
-			foreach (var child in this.children) {
+			foreach (var child in this) {
                 sum ++;
             }
 			return sum;
