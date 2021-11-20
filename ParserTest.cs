@@ -12,8 +12,8 @@
  *  varDef ::= 'var' idList ';'
  *  idList ::= id (',' id)*
  *  
- *  *funDef ::= id '(' idList? ')' '{' varDefList stmtList '}'
- *
+ *  *funDef ::= id '(' ParamList ')' '{' varDefList stmtList '}'
+ *	ParamList ::= idList?
  *  varDefList ::= ( varDef )*
  * 
  *  stmtList ::= ( id ( ( '=' expr ';' ) | ( '(' exprList ';' ')' ) |
@@ -174,7 +174,7 @@ namespace Falak
             });
             
             Expect(TokenCategory.PARENTHESIS_OPEN);
-            result.Add(idList());
+            result.Add(Param_List());
             Expect(TokenCategory.PARENTHESIS_CLOSE);
             Expect(TokenCategory.KEY_LEFT);
             result.Add(varDefList());
@@ -183,6 +183,17 @@ namespace Falak
             
             return result;
         }
+
+		public Node Param_List(){
+            var result = new ParameterList();
+            if (Current == TokenCategory.IDENTIFIER){
+                result.Add(idList());
+            }
+
+            return result;
+        }
+
+
 
         public Node varDefList()
         {
@@ -835,5 +846,6 @@ namespace Falak
                     return out5;
                 default: throw new SyntaxError(Current, tokenStream.Current);
             }
-            
         }
+    }
+}
