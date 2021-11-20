@@ -13,6 +13,10 @@ namespace Falak
      public class SemanticVisitor {
 
 		public int Pass = 0;
+
+        public bool mainPresent = false;
+
+        public bool visitingMain = false;
         //Constructor de FunCollection(bool inputPrimitive, int inputArity, HashSet<string> inputReference)
         static readonly IDictionary<string, FunCollection> FGST =
             new SortedDictionary<string, FunCollection>() {
@@ -140,17 +144,22 @@ namespace Falak
 
 
 
-        public void Visit(Program node) {
-            VisitChildren(node);
+        public void Visit(Program node)
+        {
+            Visit((dynamic) node[0]);
+            if (!mainPresent)
+            {
+                throw new SemanticError("No main :(");
+            }
         }
 
         public void Visit(defList node) {
-            VisitChildren(node);
+            VisitChildren(node);//hijo de Program, puede ir a VarDef o a funDef
         }
 
         public void Visit(varDef node)
         {
-            VisitIdListVar(node[0]);
+            VisitIdListVar(node[0]); //Va a idList, pero se creo una funcion especial 
         }
 
         public void VisitIdListVar(Node node)
@@ -176,16 +185,21 @@ namespace Falak
 
         public void Visit(funDef node) {  
  
-            var variableName = node[0].AnchorToken.Lexeme;
+            var functionName = node.AnchorToken.Lexeme;
 
-            if (Table.ContainsKey(variableName)) {
+            if (functionName == "main")
+            {
+                mainPresent = true;
+                visitingMain = true;
+            }
+            if (Table.ContainsKey(functionName)) {
                 throw new SemanticError(
-                    "Duplicated function: " + variableName,
-                    node[0].AnchorToken);
+                    "Duplicated function: " + functionName,
+                    node.AnchorToken);
 
             } else {
                 int idListCount = 0;
-                FGST[variableName] = new FunCollection(false, idListCount, null);
+                FGST[functionName] = new FunCollection(false, idListCount, null);
 				VisitChildren(node);
             }
 			
@@ -193,12 +207,12 @@ namespace Falak
 
         public void Visit(varDefList node)
         {
-            VisitChildren(node);
+            VisitChildren(node); //Goes to VarDef
         }
 
         public void Visit(stmtList node) 
         {   
-            VisitChildren(node);
+            VisitChildren(node); //Can goe to different children
            
         }
 

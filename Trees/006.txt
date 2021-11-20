@@ -7,57 +7,50 @@ Program
       varDefList
       stmtList
         stmtIf {IF, "if", @(8, 5)}
-          expr
-            equals_to {EQUALS_TO, "==", @(8, 15)}
-              Remainder {REMAINDER, "%", @(8, 11)}
-                identifier {IDENTIFIER, "y", @(8, 9)}
-                lit
-                  INT {INT, "4", @(8, 13)}
+          equals_to {EQUALS_TO, "==", @(8, 15)}
+            Remainder {REMAINDER, "%", @(8, 11)}
+              identifier {IDENTIFIER, "y", @(8, 9)}
               lit
-                INT {INT, "0", @(8, 18)}
+                INT {INT, "4", @(8, 13)}
+            lit
+              INT {INT, "0", @(8, 18)}
           stmtList
             stmtIf {IF, "if", @(9, 9)}
-              expr
-                equals_to {EQUALS_TO, "==", @(9, 21)}
-                  Remainder {REMAINDER, "%", @(9, 15)}
-                    identifier {IDENTIFIER, "y", @(9, 13)}
-                    lit
-                      INT {INT, "100", @(9, 17)}
+              equals_to {EQUALS_TO, "==", @(9, 21)}
+                Remainder {REMAINDER, "%", @(9, 15)}
+                  identifier {IDENTIFIER, "y", @(9, 13)}
                   lit
-                    INT {INT, "0", @(9, 24)}
+                    INT {INT, "100", @(9, 17)}
+                lit
+                  INT {INT, "0", @(9, 24)}
               stmtList
                 stmtIf {IF, "if", @(10, 13)}
-                  expr
-                    equals_to {EQUALS_TO, "==", @(10, 25)}
-                      Remainder {REMAINDER, "%", @(10, 19)}
-                        identifier {IDENTIFIER, "y", @(10, 17)}
-                        lit
-                          INT {INT, "400", @(10, 21)}
+                  equals_to {EQUALS_TO, "==", @(10, 25)}
+                    Remainder {REMAINDER, "%", @(10, 19)}
+                      identifier {IDENTIFIER, "y", @(10, 17)}
                       lit
-                        INT {INT, "0", @(10, 28)}
+                        INT {INT, "400", @(10, 21)}
+                    lit
+                      INT {INT, "0", @(10, 28)}
                   stmtList
                     stmtReturn {RETURN, "return", @(11, 17)}
-                      expr
-                        lit
-                          TRUE {TRUE, "true", @(11, 24)}
+                      lit
+                        TRUE {TRUE, "true", @(11, 24)}
                   stmtElse {ELSE, "else", @(12, 15)}
                     stmtList
                       stmtReturn {RETURN, "return", @(13, 17)}
-                        expr
-                          lit
-                            FALSE {FALSE, "false", @(13, 24)}
+                        lit
+                          FALSE {FALSE, "false", @(13, 24)}
               stmtElse {ELSE, "else", @(15, 11)}
                 stmtList
                   stmtReturn {RETURN, "return", @(16, 13)}
-                    expr
-                      lit
-                        TRUE {TRUE, "true", @(16, 20)}
+                    lit
+                      TRUE {TRUE, "true", @(16, 20)}
           stmtElse {ELSE, "else", @(18, 7)}
             stmtList
               stmtReturn {RETURN, "return", @(19, 9)}
-                expr
-                  lit
-                    FALSE {FALSE, "false", @(19, 16)}
+                lit
+                  FALSE {FALSE, "false", @(19, 16)}
     funDef
       identifier {IDENTIFIER, "number_of_days_in_month", @(24, 1)}
       idList
@@ -69,73 +62,64 @@ Program
             identifier {IDENTIFIER, "result", @(25, 9)}
       stmtList
         stmtIf {IF, "if", @(26, 5)}
-          expr
-            equals_to {EQUALS_TO, "==", @(26, 11)}
-              identifier {IDENTIFIER, "m", @(26, 9)}
-              lit
-                INT {INT, "2", @(26, 14)}
+          equals_to {EQUALS_TO, "==", @(26, 11)}
+            identifier {IDENTIFIER, "m", @(26, 9)}
+            lit
+              INT {INT, "2", @(26, 14)}
           stmtList
             stmtIf {IF, "if", @(27, 9)}
-              expr
-                identifier {IDENTIFIER, "is_leap_year", @(27, 13)}
-                  exprFunCall
-                    exprList
-                      expr
-                        identifier {IDENTIFIER, "y", @(27, 26)}
+              identifier {IDENTIFIER, "is_leap_year", @(27, 13)}
+                exprFunCall
+                  exprList
+                    identifier {IDENTIFIER, "y", @(27, 26)}
               stmtList
                 assign {ASSIGN, "=", @(28, 20)}
                   identifier {IDENTIFIER, "result", @(28, 13)}
-                  expr
-                    lit
-                      INT {INT, "29", @(28, 22)}
+                  lit
+                    INT {INT, "29", @(28, 22)}
                 stmtEmpty {SEMICOLON, ";", @(28, 24)}
               stmtElse {ELSE, "else", @(29, 11)}
                 stmtList
                   assign {ASSIGN, "=", @(30, 20)}
                     identifier {IDENTIFIER, "result", @(30, 13)}
-                    expr
-                      lit
-                        INT {INT, "28", @(30, 22)}
+                    lit
+                      INT {INT, "28", @(30, 22)}
                   stmtEmpty {SEMICOLON, ";", @(30, 24)}
           elseIfList {ELSEIF, "elseif", @(32, 7)}
-            expr
-              Or {OR, "||", @(32, 42)}
-                Or {OR, "||", @(32, 32)}
-                  Or {OR, "||", @(32, 22)}
-                    equals_to {EQUALS_TO, "==", @(32, 17)}
-                      identifier {IDENTIFIER, "m", @(32, 15)}
-                      lit
-                        INT {INT, "4", @(32, 20)}
-                    equals_to {EQUALS_TO, "==", @(32, 27)}
-                      identifier {IDENTIFIER, "m", @(32, 25)}
-                      lit
-                        INT {INT, "6", @(32, 30)}
-                  equals_to {EQUALS_TO, "==", @(32, 37)}
-                    identifier {IDENTIFIER, "m", @(32, 35)}
+            Or {OR, "||", @(32, 42)}
+              Or {OR, "||", @(32, 32)}
+                Or {OR, "||", @(32, 22)}
+                  equals_to {EQUALS_TO, "==", @(32, 17)}
+                    identifier {IDENTIFIER, "m", @(32, 15)}
                     lit
-                      INT {INT, "9", @(32, 40)}
-                equals_to {EQUALS_TO, "==", @(32, 47)}
-                  identifier {IDENTIFIER, "m", @(32, 45)}
+                      INT {INT, "4", @(32, 20)}
+                  equals_to {EQUALS_TO, "==", @(32, 27)}
+                    identifier {IDENTIFIER, "m", @(32, 25)}
+                    lit
+                      INT {INT, "6", @(32, 30)}
+                equals_to {EQUALS_TO, "==", @(32, 37)}
+                  identifier {IDENTIFIER, "m", @(32, 35)}
                   lit
-                    INT {INT, "11", @(32, 50)}
+                    INT {INT, "9", @(32, 40)}
+              equals_to {EQUALS_TO, "==", @(32, 47)}
+                identifier {IDENTIFIER, "m", @(32, 45)}
+                lit
+                  INT {INT, "11", @(32, 50)}
             stmtList
               assign {ASSIGN, "=", @(33, 16)}
                 identifier {IDENTIFIER, "result", @(33, 9)}
-                expr
-                  lit
-                    INT {INT, "30", @(33, 18)}
+                lit
+                  INT {INT, "30", @(33, 18)}
               stmtEmpty {SEMICOLON, ";", @(33, 20)}
           stmtElse {ELSE, "else", @(34, 7)}
             stmtList
               assign {ASSIGN, "=", @(35, 16)}
                 identifier {IDENTIFIER, "result", @(35, 9)}
-                expr
-                  lit
-                    INT {INT, "31", @(35, 18)}
+                lit
+                  INT {INT, "31", @(35, 18)}
               stmtEmpty {SEMICOLON, ";", @(35, 20)}
         stmtReturn {RETURN, "return", @(37, 5)}
-          expr
-            identifier {IDENTIFIER, "result", @(37, 12)}
+          identifier {IDENTIFIER, "result", @(37, 12)}
     funDef
       identifier {IDENTIFIER, "next_day", @(42, 1)}
       idList
@@ -145,67 +129,51 @@ Program
       varDefList
       stmtList
         stmtIf {IF, "if", @(43, 5)}
-          expr
-            equals_to {EQUALS_TO, "==", @(43, 11)}
-              identifier {IDENTIFIER, "d", @(43, 9)}
-              identifier {IDENTIFIER, "number_of_days_in_month", @(43, 14)}
-                exprFunCall
-                  exprList
-                    expr
-                      identifier {IDENTIFIER, "y", @(43, 38)}
-                    expr
-                      identifier {IDENTIFIER, "m", @(43, 41)}
+          equals_to {EQUALS_TO, "==", @(43, 11)}
+            identifier {IDENTIFIER, "d", @(43, 9)}
+            identifier {IDENTIFIER, "number_of_days_in_month", @(43, 14)}
+              exprFunCall
+                exprList
+                  identifier {IDENTIFIER, "y", @(43, 38)}
+                  identifier {IDENTIFIER, "m", @(43, 41)}
           stmtList
             stmtIf {IF, "if", @(44, 9)}
-              expr
-                equals_to {EQUALS_TO, "==", @(44, 15)}
-                  identifier {IDENTIFIER, "m", @(44, 13)}
-                  lit
-                    INT {INT, "12", @(44, 18)}
+              equals_to {EQUALS_TO, "==", @(44, 15)}
+                identifier {IDENTIFIER, "m", @(44, 13)}
+                lit
+                  INT {INT, "12", @(44, 18)}
               stmtList
                 stmtReturn {RETURN, "return", @(45, 13)}
-                  expr
-                    array
-                      exprList
-                        expr
-                          Positive {PLUS, "+", @(45, 23)}
-                            lit
-                              INT {INT, "1", @(45, 25)}
-                        expr
-                          lit
-                            INT {INT, "1", @(45, 28)}
-                        expr
-                          lit
-                            INT {INT, "1", @(45, 31)}
+                  array
+                    exprList
+                      Positive {PLUS, "+", @(45, 23)}
+                        lit
+                          INT {INT, "1", @(45, 25)}
+                      lit
+                        INT {INT, "1", @(45, 28)}
+                      lit
+                        INT {INT, "1", @(45, 31)}
               stmtElse {ELSE, "else", @(46, 11)}
                 stmtList
                   stmtReturn {RETURN, "return", @(47, 13)}
-                    expr
-                      array
-                        exprList
-                          expr
-                            identifier {IDENTIFIER, "y", @(47, 21)}
-                          expr
-                            Positive {PLUS, "+", @(47, 26)}
-                              lit
-                                INT {INT, "1", @(47, 28)}
-                          expr
-                            lit
-                              INT {INT, "1", @(47, 31)}
+                    array
+                      exprList
+                        identifier {IDENTIFIER, "y", @(47, 21)}
+                        Positive {PLUS, "+", @(47, 26)}
+                          lit
+                            INT {INT, "1", @(47, 28)}
+                        lit
+                          INT {INT, "1", @(47, 31)}
           stmtElse {ELSE, "else", @(49, 7)}
             stmtList
               stmtReturn {RETURN, "return", @(50, 9)}
-                expr
-                  array
-                    exprList
-                      expr
-                        identifier {IDENTIFIER, "y", @(50, 17)}
-                      expr
-                        identifier {IDENTIFIER, "m", @(50, 20)}
-                      expr
-                        Positive {PLUS, "+", @(50, 25)}
-                          lit
-                            INT {INT, "1", @(50, 27)}
+                array
+                  exprList
+                    identifier {IDENTIFIER, "y", @(50, 17)}
+                    identifier {IDENTIFIER, "m", @(50, 20)}
+                    Positive {PLUS, "+", @(50, 25)}
+                      lit
+                        INT {INT, "1", @(50, 27)}
     funDef
       identifier {IDENTIFIER, "print_next_day", @(55, 1)}
       idList
@@ -220,114 +188,92 @@ Program
         funCall
           identifier {IDENTIFIER, "prints", @(57, 5)}
           exprList
-            expr
-              lit
-                STRING {STRING, ""The day after "", @(57, 12)}
+            lit
+              STRING {STRING, ""The day after "", @(57, 12)}
         stmtEmpty {SEMICOLON, ";", @(57, 29)}
         funCall
           identifier {IDENTIFIER, "printi", @(58, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "y", @(58, 12)}
+            identifier {IDENTIFIER, "y", @(58, 12)}
         stmtEmpty {SEMICOLON, ";", @(58, 14)}
         funCall
           identifier {IDENTIFIER, "printc", @(59, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'/'", @(59, 12)}
+            lit
+              Character {CHARACTER, "'/'", @(59, 12)}
         stmtEmpty {SEMICOLON, ";", @(59, 16)}
         funCall
           identifier {IDENTIFIER, "printi", @(60, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "m", @(60, 12)}
+            identifier {IDENTIFIER, "m", @(60, 12)}
         stmtEmpty {SEMICOLON, ";", @(60, 14)}
         funCall
           identifier {IDENTIFIER, "printc", @(61, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'/'", @(61, 12)}
+            lit
+              Character {CHARACTER, "'/'", @(61, 12)}
         stmtEmpty {SEMICOLON, ";", @(61, 16)}
         funCall
           identifier {IDENTIFIER, "printi", @(62, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "d", @(62, 12)}
+            identifier {IDENTIFIER, "d", @(62, 12)}
         stmtEmpty {SEMICOLON, ";", @(62, 14)}
         funCall
           identifier {IDENTIFIER, "prints", @(63, 5)}
           exprList
-            expr
-              lit
-                STRING {STRING, "" is "", @(63, 12)}
+            lit
+              STRING {STRING, "" is "", @(63, 12)}
         stmtEmpty {SEMICOLON, ";", @(63, 19)}
         assign {ASSIGN, "=", @(64, 10)}
           identifier {IDENTIFIER, "next", @(64, 5)}
-          expr
-            identifier {IDENTIFIER, "next_day", @(64, 12)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "y", @(64, 21)}
-                  expr
-                    identifier {IDENTIFIER, "m", @(64, 24)}
-                  expr
-                    identifier {IDENTIFIER, "d", @(64, 27)}
+          identifier {IDENTIFIER, "next_day", @(64, 12)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "y", @(64, 21)}
+                identifier {IDENTIFIER, "m", @(64, 24)}
+                identifier {IDENTIFIER, "d", @(64, 27)}
         stmtEmpty {SEMICOLON, ";", @(64, 29)}
         funCall
           identifier {IDENTIFIER, "printi", @(65, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "get", @(65, 12)}
-                exprFunCall
-                  exprList
-                    expr
-                      identifier {IDENTIFIER, "next", @(65, 16)}
-                    expr
-                      lit
-                        INT {INT, "0", @(65, 22)}
+            identifier {IDENTIFIER, "get", @(65, 12)}
+              exprFunCall
+                exprList
+                  identifier {IDENTIFIER, "next", @(65, 16)}
+                  lit
+                    INT {INT, "0", @(65, 22)}
         stmtEmpty {SEMICOLON, ";", @(65, 25)}
         funCall
           identifier {IDENTIFIER, "printc", @(66, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'/'", @(66, 12)}
+            lit
+              Character {CHARACTER, "'/'", @(66, 12)}
         stmtEmpty {SEMICOLON, ";", @(66, 16)}
         funCall
           identifier {IDENTIFIER, "printi", @(67, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "get", @(67, 12)}
-                exprFunCall
-                  exprList
-                    expr
-                      identifier {IDENTIFIER, "next", @(67, 16)}
-                    expr
-                      lit
-                        INT {INT, "1", @(67, 22)}
+            identifier {IDENTIFIER, "get", @(67, 12)}
+              exprFunCall
+                exprList
+                  identifier {IDENTIFIER, "next", @(67, 16)}
+                  lit
+                    INT {INT, "1", @(67, 22)}
         stmtEmpty {SEMICOLON, ";", @(67, 25)}
         funCall
           identifier {IDENTIFIER, "printc", @(68, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'/'", @(68, 12)}
+            lit
+              Character {CHARACTER, "'/'", @(68, 12)}
         stmtEmpty {SEMICOLON, ";", @(68, 16)}
         funCall
           identifier {IDENTIFIER, "printi", @(69, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "get", @(69, 12)}
-                exprFunCall
-                  exprList
-                    expr
-                      identifier {IDENTIFIER, "next", @(69, 16)}
-                    expr
-                      lit
-                        INT {INT, "2", @(69, 22)}
+            identifier {IDENTIFIER, "get", @(69, 12)}
+              exprFunCall
+                exprList
+                  identifier {IDENTIFIER, "next", @(69, 16)}
+                  lit
+                    INT {INT, "2", @(69, 22)}
         stmtEmpty {SEMICOLON, ";", @(69, 25)}
         funCall
           identifier {IDENTIFIER, "println", @(70, 5)}
@@ -341,52 +287,40 @@ Program
         funCall
           identifier {IDENTIFIER, "print_next_day", @(74, 5)}
           exprList
-            expr
-              lit
-                INT {INT, "2020", @(74, 20)}
-            expr
-              lit
-                INT {INT, "2", @(74, 26)}
-            expr
-              lit
-                INT {INT, "28", @(74, 29)}
+            lit
+              INT {INT, "2020", @(74, 20)}
+            lit
+              INT {INT, "2", @(74, 26)}
+            lit
+              INT {INT, "28", @(74, 29)}
         stmtEmpty {SEMICOLON, ";", @(74, 32)}
         funCall
           identifier {IDENTIFIER, "print_next_day", @(75, 5)}
           exprList
-            expr
-              lit
-                INT {INT, "2021", @(75, 20)}
-            expr
-              lit
-                INT {INT, "2", @(75, 26)}
-            expr
-              lit
-                INT {INT, "13", @(75, 29)}
+            lit
+              INT {INT, "2021", @(75, 20)}
+            lit
+              INT {INT, "2", @(75, 26)}
+            lit
+              INT {INT, "13", @(75, 29)}
         stmtEmpty {SEMICOLON, ";", @(75, 32)}
         funCall
           identifier {IDENTIFIER, "print_next_day", @(76, 5)}
           exprList
-            expr
-              lit
-                INT {INT, "2021", @(76, 20)}
-            expr
-              lit
-                INT {INT, "2", @(76, 26)}
-            expr
-              lit
-                INT {INT, "28", @(76, 29)}
+            lit
+              INT {INT, "2021", @(76, 20)}
+            lit
+              INT {INT, "2", @(76, 26)}
+            lit
+              INT {INT, "28", @(76, 29)}
         stmtEmpty {SEMICOLON, ";", @(76, 32)}
         funCall
           identifier {IDENTIFIER, "print_next_day", @(77, 5)}
           exprList
-            expr
-              lit
-                INT {INT, "2021", @(77, 20)}
-            expr
-              lit
-                INT {INT, "12", @(77, 26)}
-            expr
-              lit
-                INT {INT, "31", @(77, 30)}
+            lit
+              INT {INT, "2021", @(77, 20)}
+            lit
+              INT {INT, "12", @(77, 26)}
+            lit
+              INT {INT, "31", @(77, 30)}
         stmtEmpty {SEMICOLON, ";", @(77, 33)}

@@ -12,53 +12,43 @@ Program
       stmtList
         assign {ASSIGN, "=", @(9, 11)}
           identifier {IDENTIFIER, "start", @(9, 5)}
-          expr
-            lit
-              INT {INT, "0", @(9, 13)}
+          lit
+            INT {INT, "0", @(9, 13)}
         stmtEmpty {SEMICOLON, ";", @(9, 14)}
         assign {ASSIGN, "=", @(10, 12)}
           identifier {IDENTIFIER, "finish", @(10, 5)}
-          expr
-            Negative {NEG, "-", @(10, 24)}
-              lit
-                INT {INT, "1", @(10, 26)}
+          Negative {NEG, "-", @(10, 24)}
+            lit
+              INT {INT, "1", @(10, 26)}
         stmtEmpty {SEMICOLON, ";", @(10, 27)}
         stmtWhile {WHILE, "while", @(11, 5)}
-          expr
-            less_than {LESS_THAN, "<", @(11, 18)}
-              identifier {IDENTIFIER, "start", @(11, 12)}
-              identifier {IDENTIFIER, "finish", @(11, 20)}
+          less_than {LESS_THAN, "<", @(11, 18)}
+            identifier {IDENTIFIER, "start", @(11, 12)}
+            identifier {IDENTIFIER, "finish", @(11, 20)}
           stmtList
             stmtIf {IF, "if", @(12, 9)}
-              expr
-                not_equal {NOT_EQUAL, "!=", @(12, 29)}
-                  identifier {IDENTIFIER, "get", @(12, 13)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "str", @(12, 17)}
-                        expr
-                          identifier {IDENTIFIER, "start", @(12, 22)}
-                  identifier {IDENTIFIER, "get", @(12, 32)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "str", @(12, 36)}
-                        expr
-                          identifier {IDENTIFIER, "finish", @(12, 41)}
+              not_equal {NOT_EQUAL, "!=", @(12, 29)}
+                identifier {IDENTIFIER, "get", @(12, 13)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "str", @(12, 17)}
+                      identifier {IDENTIFIER, "start", @(12, 22)}
+                identifier {IDENTIFIER, "get", @(12, 32)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "str", @(12, 36)}
+                      identifier {IDENTIFIER, "finish", @(12, 41)}
               stmtList
                 stmtReturn {RETURN, "return", @(13, 13)}
-                  expr
-                    lit
-                      FALSE {FALSE, "false", @(13, 20)}
+                  lit
+                    FALSE {FALSE, "false", @(13, 20)}
             stmtIncr {INC, "inc", @(15, 9)}
               identifier {IDENTIFIER, "start", @(15, 13)}
             stmtDecr {DEC, "dec", @(16, 9)}
               identifier {IDENTIFIER, "finish", @(16, 13)}
         stmtReturn {RETURN, "return", @(18, 5)}
-          expr
-            lit
-              TRUE {TRUE, "true", @(18, 12)}
+          lit
+            TRUE {TRUE, "true", @(18, 12)}
     funDef
       identifier {IDENTIFIER, "main", @(21, 1)}
       idList
@@ -73,112 +63,96 @@ Program
             funCall
               identifier {IDENTIFIER, "prints", @(24, 9)}
               exprList
-                expr
-                  lit
-                    STRING {STRING, ""Input a string: "", @(24, 16)}
+                lit
+                  STRING {STRING, ""Input a string: "", @(24, 16)}
             stmtEmpty {SEMICOLON, ";", @(24, 35)}
             assign {ASSIGN, "=", @(25, 13)}
               identifier {IDENTIFIER, "str", @(25, 9)}
-              expr
-                identifier {IDENTIFIER, "reads", @(25, 15)}
-                  exprFunCall
-                    exprList
+              identifier {IDENTIFIER, "reads", @(25, 15)}
+                exprFunCall
+                  exprList
             stmtEmpty {SEMICOLON, ";", @(25, 22)}
             funCall
               identifier {IDENTIFIER, "prints", @(26, 9)}
               exprList
-                expr
-                  lit
-                    STRING {STRING, ""The string \""", @(26, 16)}
+                lit
+                  STRING {STRING, ""The string \""", @(26, 16)}
             stmtEmpty {SEMICOLON, ";", @(26, 32)}
             funCall
               identifier {IDENTIFIER, "prints", @(27, 9)}
               exprList
-                expr
-                  identifier {IDENTIFIER, "str", @(27, 16)}
+                identifier {IDENTIFIER, "str", @(27, 16)}
             stmtEmpty {SEMICOLON, ";", @(27, 20)}
             funCall
               identifier {IDENTIFIER, "prints", @(28, 9)}
               exprList
-                expr
-                  lit
-                    STRING {STRING, ""\" is "", @(28, 16)}
+                lit
+                  STRING {STRING, ""\" is "", @(28, 16)}
             stmtEmpty {SEMICOLON, ";", @(28, 25)}
             stmtIf {IF, "if", @(29, 9)}
-              expr
-                Not {NOT, "!", @(29, 13)}
-                  identifier {IDENTIFIER, "is_palindrome", @(29, 14)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "str", @(29, 28)}
+              Not {NOT, "!", @(29, 13)}
+                identifier {IDENTIFIER, "is_palindrome", @(29, 14)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "str", @(29, 28)}
               stmtList
                 funCall
                   identifier {IDENTIFIER, "prints", @(30, 13)}
                   exprList
-                    expr
-                      lit
-                        STRING {STRING, ""NOT "", @(30, 20)}
+                    lit
+                      STRING {STRING, ""NOT "", @(30, 20)}
                 stmtEmpty {SEMICOLON, ";", @(30, 27)}
             funCall
               identifier {IDENTIFIER, "prints", @(32, 9)}
               exprList
-                expr
-                  lit
-                    STRING {STRING, ""a palindrome.\n"", @(32, 16)}
+                lit
+                  STRING {STRING, ""a palindrome.\n"", @(32, 16)}
             stmtEmpty {SEMICOLON, ";", @(32, 34)}
             funCall
               identifier {IDENTIFIER, "prints", @(33, 9)}
               exprList
-                expr
-                  lit
-                    STRING {STRING, ""Check another string? "", @(33, 16)}
+                lit
+                  STRING {STRING, ""Check another string? "", @(33, 16)}
             stmtEmpty {SEMICOLON, ";", @(33, 41)}
             assign {ASSIGN, "=", @(34, 16)}
               identifier {IDENTIFIER, "option", @(34, 9)}
-              expr
-                identifier {IDENTIFIER, "reads", @(34, 18)}
-                  exprFunCall
-                    exprList
+              identifier {IDENTIFIER, "reads", @(34, 18)}
+                exprFunCall
+                  exprList
             stmtEmpty {SEMICOLON, ";", @(34, 25)}
             stmtIf {IF, "if", @(35, 9)}
-              expr
-                equals_to {EQUALS_TO, "==", @(35, 26)}
-                  identifier {IDENTIFIER, "size", @(35, 13)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "option", @(35, 18)}
-                  lit
-                    INT {INT, "0", @(35, 29)}
+              equals_to {EQUALS_TO, "==", @(35, 26)}
+                identifier {IDENTIFIER, "size", @(35, 13)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "option", @(35, 18)}
+                lit
+                  INT {INT, "0", @(35, 29)}
               stmtList
                 assign {ASSIGN, "=", @(36, 20)}
                   identifier {IDENTIFIER, "option", @(36, 13)}
-                  expr
-                    lit
-                      Character {CHARACTER, "'N'", @(36, 22)}
+                  lit
+                    Character {CHARACTER, "'N'", @(36, 22)}
                 stmtEmpty {SEMICOLON, ";", @(36, 25)}
               stmtElse {ELSE, "else", @(37, 11)}
                 stmtList
                   assign {ASSIGN, "=", @(38, 20)}
                     identifier {IDENTIFIER, "option", @(38, 13)}
-                    expr
-                      identifier {IDENTIFIER, "get", @(38, 22)}
-                        exprFunCall
-                          exprList
-                            expr
-                              identifier {IDENTIFIER, "option", @(38, 26)}
-                            expr
-                              lit
-                                INT {INT, "0", @(38, 34)}
+                    identifier {IDENTIFIER, "get", @(38, 22)}
+                      exprFunCall
+                        exprList
+                          identifier {IDENTIFIER, "option", @(38, 26)}
+                          lit
+                            INT {INT, "0", @(38, 34)}
                   stmtEmpty {SEMICOLON, ";", @(38, 36)}
-          expr
-            Or {OR, "||", @(40, 28)}
-              equals_to {EQUALS_TO, "==", @(40, 21)}
-                identifier {IDENTIFIER, "option", @(40, 14)}
-                lit
-                  Character {CHARACTER, "'Y'", @(40, 24)}
-              equals_to {EQUALS_TO, "==", @(40, 38)}
-                identifier {IDENTIFIER, "option", @(40, 31)}
-                lit
-                  Character {CHARACTER, "'y'", @(40, 41)}
+          Or {OR, "||", @(40, 28)}
+            equals_to {EQUALS_TO, "==", @(40, 21)}
+              identifier {IDENTIFIER, "option", @(40, 14)}
+              lit
+                Character {CHARACTER, "'Y'", @(40, 24)}
+            equals_to {EQUALS_TO, "==", @(40, 38)}
+              identifier {IDENTIFIER, "option", @(40, 31)}
+              lit
+                Character {CHARACTER, "'y'", @(40, 41)}
+
+

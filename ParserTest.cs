@@ -172,18 +172,15 @@ namespace Falak
             {
                 AnchorToken = Expect(TokenCategory.IDENTIFIER)
             });
+            
             Expect(TokenCategory.PARENTHESIS_OPEN);
-            
             result.Add(idList());
-            
             Expect(TokenCategory.PARENTHESIS_CLOSE);
-            
             Expect(TokenCategory.KEY_LEFT);
             result.Add(varDefList());
-            
             result.Add(stmtList());
-
             Expect(TokenCategory.KEY_RIGHT);
+            
             return result;
         }
 
@@ -489,10 +486,10 @@ namespace Falak
 
         public Node expr()
         {
-            //Console.WriteLine("expr running Current: "+  Current);
-            var result = new expr();
+            /*var result = new expr();
             result.Add(exprOr());
-            return result;
+            return result;*/
+            return exprOr();
         }
 
         public Node exprOr()

@@ -13,77 +13,64 @@ Program
       stmtList
         assign {ASSIGN, "=", @(9, 11)}
           identifier {IDENTIFIER, "first", @(9, 5)}
-          expr
-            lit
-              TRUE {TRUE, "true", @(9, 13)}
+          lit
+            TRUE {TRUE, "true", @(9, 13)}
         stmtEmpty {SEMICOLON, ";", @(9, 17)}
         funCall
           identifier {IDENTIFIER, "printc", @(10, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'['", @(10, 12)}
+            lit
+              Character {CHARACTER, "'['", @(10, 12)}
         stmtEmpty {SEMICOLON, ";", @(10, 16)}
         assign {ASSIGN, "=", @(11, 7)}
           identifier {IDENTIFIER, "i", @(11, 5)}
-          expr
-            lit
-              INT {INT, "0", @(11, 9)}
+          lit
+            INT {INT, "0", @(11, 9)}
         stmtEmpty {SEMICOLON, ";", @(11, 10)}
         assign {ASSIGN, "=", @(12, 7)}
           identifier {IDENTIFIER, "n", @(12, 5)}
-          expr
-            identifier {IDENTIFIER, "size", @(12, 9)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "a", @(12, 14)}
+          identifier {IDENTIFIER, "size", @(12, 9)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "a", @(12, 14)}
         stmtEmpty {SEMICOLON, ";", @(12, 16)}
         stmtWhile {WHILE, "while", @(13, 5)}
-          expr
-            less_than {LESS_THAN, "<", @(13, 14)}
-              identifier {IDENTIFIER, "i", @(13, 12)}
-              identifier {IDENTIFIER, "n", @(13, 16)}
+          less_than {LESS_THAN, "<", @(13, 14)}
+            identifier {IDENTIFIER, "i", @(13, 12)}
+            identifier {IDENTIFIER, "n", @(13, 16)}
           stmtList
             stmtIf {IF, "if", @(14, 9)}
-              expr
-                identifier {IDENTIFIER, "first", @(14, 13)}
+              identifier {IDENTIFIER, "first", @(14, 13)}
               stmtList
                 assign {ASSIGN, "=", @(15, 19)}
                   identifier {IDENTIFIER, "first", @(15, 13)}
-                  expr
-                    lit
-                      FALSE {FALSE, "false", @(15, 21)}
+                  lit
+                    FALSE {FALSE, "false", @(15, 21)}
                 stmtEmpty {SEMICOLON, ";", @(15, 26)}
               stmtElse {ELSE, "else", @(16, 11)}
                 stmtList
                   funCall
                     identifier {IDENTIFIER, "prints", @(17, 13)}
                     exprList
-                      expr
-                        lit
-                          STRING {STRING, "", "", @(17, 20)}
+                      lit
+                        STRING {STRING, "", "", @(17, 20)}
                   stmtEmpty {SEMICOLON, ";", @(17, 25)}
             funCall
               identifier {IDENTIFIER, "printi", @(19, 9)}
               exprList
-                expr
-                  identifier {IDENTIFIER, "get", @(19, 16)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "a", @(19, 20)}
-                        expr
-                          identifier {IDENTIFIER, "i", @(19, 23)}
+                identifier {IDENTIFIER, "get", @(19, 16)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "a", @(19, 20)}
+                      identifier {IDENTIFIER, "i", @(19, 23)}
             stmtEmpty {SEMICOLON, ";", @(19, 26)}
             stmtIncr {INC, "inc", @(20, 9)}
               identifier {IDENTIFIER, "i", @(20, 13)}
         funCall
           identifier {IDENTIFIER, "printc", @(22, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "']'", @(22, 12)}
+            lit
+              Character {CHARACTER, "']'", @(22, 12)}
         stmtEmpty {SEMICOLON, ";", @(22, 16)}
     funDef
       identifier {IDENTIFIER, "sum_array", @(26, 1)}
@@ -98,48 +85,39 @@ Program
       stmtList
         assign {ASSIGN, "=", @(28, 9)}
           identifier {IDENTIFIER, "sum", @(28, 5)}
-          expr
-            lit
-              INT {INT, "0", @(28, 11)}
+          lit
+            INT {INT, "0", @(28, 11)}
         stmtEmpty {SEMICOLON, ";", @(28, 12)}
         assign {ASSIGN, "=", @(29, 7)}
           identifier {IDENTIFIER, "i", @(29, 5)}
-          expr
-            lit
-              INT {INT, "0", @(29, 9)}
+          lit
+            INT {INT, "0", @(29, 9)}
         stmtEmpty {SEMICOLON, ";", @(29, 10)}
         assign {ASSIGN, "=", @(30, 7)}
           identifier {IDENTIFIER, "n", @(30, 5)}
-          expr
-            identifier {IDENTIFIER, "size", @(30, 9)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "a", @(30, 14)}
+          identifier {IDENTIFIER, "size", @(30, 9)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "a", @(30, 14)}
         stmtEmpty {SEMICOLON, ";", @(30, 16)}
         stmtWhile {WHILE, "while", @(31, 5)}
-          expr
-            less_than {LESS_THAN, "<", @(31, 14)}
-              identifier {IDENTIFIER, "i", @(31, 12)}
-              identifier {IDENTIFIER, "n", @(31, 16)}
+          less_than {LESS_THAN, "<", @(31, 14)}
+            identifier {IDENTIFIER, "i", @(31, 12)}
+            identifier {IDENTIFIER, "n", @(31, 16)}
           stmtList
             assign {ASSIGN, "=", @(32, 13)}
               identifier {IDENTIFIER, "sum", @(32, 9)}
-              expr
-                Positive {PLUS, "+", @(32, 19)}
-                  identifier {IDENTIFIER, "get", @(32, 21)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "a", @(32, 25)}
-                        expr
-                          identifier {IDENTIFIER, "i", @(32, 28)}
+              Positive {PLUS, "+", @(32, 19)}
+                identifier {IDENTIFIER, "get", @(32, 21)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "a", @(32, 25)}
+                      identifier {IDENTIFIER, "i", @(32, 28)}
             stmtEmpty {SEMICOLON, ";", @(32, 30)}
             stmtIncr {INC, "inc", @(33, 9)}
               identifier {IDENTIFIER, "i", @(33, 13)}
         stmtReturn {RETURN, "return", @(35, 5)}
-          expr
-            identifier {IDENTIFIER, "sum", @(35, 12)}
+          identifier {IDENTIFIER, "sum", @(35, 12)}
     funDef
       identifier {IDENTIFIER, "max_array", @(39, 1)}
       idList
@@ -154,64 +132,51 @@ Program
       stmtList
         assign {ASSIGN, "=", @(41, 9)}
           identifier {IDENTIFIER, "max", @(41, 5)}
-          expr
-            identifier {IDENTIFIER, "get", @(41, 11)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "a", @(41, 15)}
-                  expr
-                    lit
-                      INT {INT, "0", @(41, 18)}
+          identifier {IDENTIFIER, "get", @(41, 11)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "a", @(41, 15)}
+                lit
+                  INT {INT, "0", @(41, 18)}
         stmtEmpty {SEMICOLON, ";", @(41, 20)}
         assign {ASSIGN, "=", @(42, 7)}
           identifier {IDENTIFIER, "i", @(42, 5)}
-          expr
-            lit
-              INT {INT, "0", @(42, 9)}
+          lit
+            INT {INT, "0", @(42, 9)}
         stmtEmpty {SEMICOLON, ";", @(42, 10)}
         assign {ASSIGN, "=", @(43, 7)}
           identifier {IDENTIFIER, "n", @(43, 5)}
-          expr
-            identifier {IDENTIFIER, "size", @(43, 9)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "a", @(43, 14)}
+          identifier {IDENTIFIER, "size", @(43, 9)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "a", @(43, 14)}
         stmtEmpty {SEMICOLON, ";", @(43, 16)}
         stmtWhile {WHILE, "while", @(44, 5)}
-          expr
-            less_than {LESS_THAN, "<", @(44, 14)}
-              identifier {IDENTIFIER, "i", @(44, 12)}
-              identifier {IDENTIFIER, "n", @(44, 16)}
+          less_than {LESS_THAN, "<", @(44, 14)}
+            identifier {IDENTIFIER, "i", @(44, 12)}
+            identifier {IDENTIFIER, "n", @(44, 16)}
           stmtList
             assign {ASSIGN, "=", @(45, 11)}
               identifier {IDENTIFIER, "x", @(45, 9)}
-              expr
-                identifier {IDENTIFIER, "get", @(45, 13)}
-                  exprFunCall
-                    exprList
-                      expr
-                        identifier {IDENTIFIER, "a", @(45, 17)}
-                      expr
-                        identifier {IDENTIFIER, "i", @(45, 20)}
+              identifier {IDENTIFIER, "get", @(45, 13)}
+                exprFunCall
+                  exprList
+                    identifier {IDENTIFIER, "a", @(45, 17)}
+                    identifier {IDENTIFIER, "i", @(45, 20)}
             stmtEmpty {SEMICOLON, ";", @(45, 22)}
             stmtIf {IF, "if", @(46, 9)}
-              expr
-                greater_than {GREATER_THAN, ">", @(46, 15)}
-                  identifier {IDENTIFIER, "x", @(46, 13)}
-                  identifier {IDENTIFIER, "max", @(46, 17)}
+              greater_than {GREATER_THAN, ">", @(46, 15)}
+                identifier {IDENTIFIER, "x", @(46, 13)}
+                identifier {IDENTIFIER, "max", @(46, 17)}
               stmtList
                 assign {ASSIGN, "=", @(47, 17)}
                   identifier {IDENTIFIER, "max", @(47, 13)}
-                  expr
-                    identifier {IDENTIFIER, "x", @(47, 19)}
+                  identifier {IDENTIFIER, "x", @(47, 19)}
                 stmtEmpty {SEMICOLON, ";", @(47, 20)}
             stmtIncr {INC, "inc", @(49, 9)}
               identifier {IDENTIFIER, "i", @(49, 13)}
         stmtReturn {RETURN, "return", @(51, 5)}
-          expr
-            identifier {IDENTIFIER, "max", @(51, 12)}
+          identifier {IDENTIFIER, "max", @(51, 12)}
     funDef
       identifier {IDENTIFIER, "sort_array", @(55, 1)}
       idList
@@ -227,122 +192,97 @@ Program
       stmtList
         assign {ASSIGN, "=", @(57, 7)}
           identifier {IDENTIFIER, "n", @(57, 5)}
-          expr
-            identifier {IDENTIFIER, "size", @(57, 9)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "a", @(57, 14)}
+          identifier {IDENTIFIER, "size", @(57, 9)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "a", @(57, 14)}
         stmtEmpty {SEMICOLON, ";", @(57, 16)}
         assign {ASSIGN, "=", @(58, 7)}
           identifier {IDENTIFIER, "i", @(58, 5)}
-          expr
-            lit
-              INT {INT, "0", @(58, 9)}
+          lit
+            INT {INT, "0", @(58, 9)}
         stmtEmpty {SEMICOLON, ";", @(58, 10)}
         stmtWhile {WHILE, "while", @(59, 5)}
-          expr
-            less_than {LESS_THAN, "<", @(59, 14)}
-              identifier {IDENTIFIER, "i", @(59, 12)}
-              Negative {NEG, "-", @(59, 18)}
-                lit
-                  INT {INT, "1", @(59, 20)}
+          less_than {LESS_THAN, "<", @(59, 14)}
+            identifier {IDENTIFIER, "i", @(59, 12)}
+            Negative {NEG, "-", @(59, 18)}
+              lit
+                INT {INT, "1", @(59, 20)}
           stmtList
             assign {ASSIGN, "=", @(60, 11)}
               identifier {IDENTIFIER, "j", @(60, 9)}
-              expr
-                lit
-                  INT {INT, "0", @(60, 13)}
+              lit
+                INT {INT, "0", @(60, 13)}
             stmtEmpty {SEMICOLON, ";", @(60, 14)}
             assign {ASSIGN, "=", @(61, 14)}
               identifier {IDENTIFIER, "swap", @(61, 9)}
-              expr
-                lit
-                  FALSE {FALSE, "false", @(61, 16)}
+              lit
+                FALSE {FALSE, "false", @(61, 16)}
             stmtEmpty {SEMICOLON, ";", @(61, 21)}
             stmtWhile {WHILE, "while", @(62, 9)}
-              expr
-                less_than {LESS_THAN, "<", @(62, 18)}
-                  identifier {IDENTIFIER, "j", @(62, 16)}
-                  Minus {NEG, "-", @(62, 26)}
-                    Negative {NEG, "-", @(62, 22)}
-                      identifier {IDENTIFIER, "i", @(62, 24)}
-                    lit
-                      INT {INT, "1", @(62, 28)}
+              less_than {LESS_THAN, "<", @(62, 18)}
+                identifier {IDENTIFIER, "j", @(62, 16)}
+                Minus {NEG, "-", @(62, 26)}
+                  Negative {NEG, "-", @(62, 22)}
+                    identifier {IDENTIFIER, "i", @(62, 24)}
+                  lit
+                    INT {INT, "1", @(62, 28)}
               stmtList
                 stmtIf {IF, "if", @(63, 13)}
-                  expr
-                    greater_than {GREATER_THAN, ">", @(63, 27)}
-                      identifier {IDENTIFIER, "get", @(63, 17)}
-                        exprFunCall
-                          exprList
-                            expr
-                              identifier {IDENTIFIER, "a", @(63, 21)}
-                            expr
-                              identifier {IDENTIFIER, "j", @(63, 24)}
-                      identifier {IDENTIFIER, "get", @(63, 29)}
-                        exprFunCall
-                          exprList
-                            expr
-                              identifier {IDENTIFIER, "a", @(63, 33)}
-                            expr
-                              Positive {PLUS, "+", @(63, 38)}
-                                lit
-                                  INT {INT, "1", @(63, 40)}
+                  greater_than {GREATER_THAN, ">", @(63, 27)}
+                    identifier {IDENTIFIER, "get", @(63, 17)}
+                      exprFunCall
+                        exprList
+                          identifier {IDENTIFIER, "a", @(63, 21)}
+                          identifier {IDENTIFIER, "j", @(63, 24)}
+                    identifier {IDENTIFIER, "get", @(63, 29)}
+                      exprFunCall
+                        exprList
+                          identifier {IDENTIFIER, "a", @(63, 33)}
+                          Positive {PLUS, "+", @(63, 38)}
+                            lit
+                              INT {INT, "1", @(63, 40)}
                   stmtList
                     assign {ASSIGN, "=", @(64, 19)}
                       identifier {IDENTIFIER, "t", @(64, 17)}
-                      expr
-                        identifier {IDENTIFIER, "get", @(64, 21)}
-                          exprFunCall
-                            exprList
-                              expr
-                                identifier {IDENTIFIER, "a", @(64, 25)}
-                              expr
-                                identifier {IDENTIFIER, "j", @(64, 28)}
+                      identifier {IDENTIFIER, "get", @(64, 21)}
+                        exprFunCall
+                          exprList
+                            identifier {IDENTIFIER, "a", @(64, 25)}
+                            identifier {IDENTIFIER, "j", @(64, 28)}
                     stmtEmpty {SEMICOLON, ";", @(64, 30)}
                     funCall
                       identifier {IDENTIFIER, "set", @(65, 17)}
                       exprList
-                        expr
-                          identifier {IDENTIFIER, "a", @(65, 21)}
-                        expr
-                          identifier {IDENTIFIER, "j", @(65, 24)}
-                        expr
-                          identifier {IDENTIFIER, "get", @(65, 27)}
-                            exprFunCall
-                              exprList
-                                expr
-                                  identifier {IDENTIFIER, "a", @(65, 31)}
-                                expr
-                                  Positive {PLUS, "+", @(65, 36)}
-                                    lit
-                                      INT {INT, "1", @(65, 38)}
+                        identifier {IDENTIFIER, "a", @(65, 21)}
+                        identifier {IDENTIFIER, "j", @(65, 24)}
+                        identifier {IDENTIFIER, "get", @(65, 27)}
+                          exprFunCall
+                            exprList
+                              identifier {IDENTIFIER, "a", @(65, 31)}
+                              Positive {PLUS, "+", @(65, 36)}
+                                lit
+                                  INT {INT, "1", @(65, 38)}
                     stmtEmpty {SEMICOLON, ";", @(65, 41)}
                     funCall
                       identifier {IDENTIFIER, "set", @(66, 17)}
                       exprList
-                        expr
-                          identifier {IDENTIFIER, "a", @(66, 21)}
-                        expr
-                          Positive {PLUS, "+", @(66, 26)}
-                            lit
-                              INT {INT, "1", @(66, 28)}
-                        expr
-                          identifier {IDENTIFIER, "t", @(66, 31)}
+                        identifier {IDENTIFIER, "a", @(66, 21)}
+                        Positive {PLUS, "+", @(66, 26)}
+                          lit
+                            INT {INT, "1", @(66, 28)}
+                        identifier {IDENTIFIER, "t", @(66, 31)}
                     stmtEmpty {SEMICOLON, ";", @(66, 33)}
                     assign {ASSIGN, "=", @(67, 22)}
                       identifier {IDENTIFIER, "swap", @(67, 17)}
-                      expr
-                        lit
-                          TRUE {TRUE, "true", @(67, 24)}
+                      lit
+                        TRUE {TRUE, "true", @(67, 24)}
                     stmtEmpty {SEMICOLON, ";", @(67, 28)}
                 stmtIncr {INC, "inc", @(69, 13)}
                   identifier {IDENTIFIER, "j", @(69, 17)}
             stmtIf {IF, "if", @(71, 9)}
-              expr
-                Not {NOT, "!", @(71, 13)}
-                  identifier {IDENTIFIER, "swap", @(71, 14)}
+              Not {NOT, "!", @(71, 13)}
+                identifier {IDENTIFIER, "swap", @(71, 14)}
               stmtList
                 stmtBreak {BREAK, "break", @(72, 13)}
             stmtIncr {INC, "inc", @(74, 9)}
@@ -359,82 +299,59 @@ Program
       stmtList
         assign {ASSIGN, "=", @(80, 11)}
           identifier {IDENTIFIER, "array", @(80, 5)}
-          expr
-            array
-              exprList
-                expr
-                  lit
-                    INT {INT, "73", @(80, 14)}
-                expr
-                  lit
-                    INT {INT, "77", @(80, 18)}
-                expr
-                  lit
-                    INT {INT, "56", @(80, 22)}
-                expr
-                  lit
-                    INT {INT, "10", @(80, 26)}
-                expr
-                  lit
-                    INT {INT, "14", @(80, 30)}
-                expr
-                  lit
-                    INT {INT, "54", @(81, 14)}
-                expr
-                  lit
-                    INT {INT, "75", @(81, 18)}
-                expr
-                  lit
-                    INT {INT, "62", @(81, 22)}
-                expr
-                  lit
-                    INT {INT, "71", @(81, 26)}
-                expr
-                  lit
-                    INT {INT, "10", @(81, 30)}
-                expr
-                  lit
-                    INT {INT, "3", @(82, 15)}
-                expr
-                  lit
-                    INT {INT, "71", @(82, 18)}
-                expr
-                  lit
-                    INT {INT, "16", @(82, 22)}
-                expr
-                  lit
-                    INT {INT, "49", @(82, 26)}
-                expr
-                  lit
-                    INT {INT, "66", @(82, 30)}
-                expr
-                  lit
-                    INT {INT, "91", @(83, 14)}
-                expr
-                  lit
-                    INT {INT, "69", @(83, 18)}
-                expr
-                  lit
-                    INT {INT, "62", @(83, 22)}
-                expr
-                  lit
-                    INT {INT, "25", @(83, 26)}
-                expr
-                  lit
-                    INT {INT, "65", @(83, 30)}
+          array
+            exprList
+              lit
+                INT {INT, "73", @(80, 14)}
+              lit
+                INT {INT, "77", @(80, 18)}
+              lit
+                INT {INT, "56", @(80, 22)}
+              lit
+                INT {INT, "10", @(80, 26)}
+              lit
+                INT {INT, "14", @(80, 30)}
+              lit
+                INT {INT, "54", @(81, 14)}
+              lit
+                INT {INT, "75", @(81, 18)}
+              lit
+                INT {INT, "62", @(81, 22)}
+              lit
+                INT {INT, "71", @(81, 26)}
+              lit
+                INT {INT, "10", @(81, 30)}
+              lit
+                INT {INT, "3", @(82, 15)}
+              lit
+                INT {INT, "71", @(82, 18)}
+              lit
+                INT {INT, "16", @(82, 22)}
+              lit
+                INT {INT, "49", @(82, 26)}
+              lit
+                INT {INT, "66", @(82, 30)}
+              lit
+                INT {INT, "91", @(83, 14)}
+              lit
+                INT {INT, "69", @(83, 18)}
+              lit
+                INT {INT, "62", @(83, 22)}
+              lit
+                INT {INT, "25", @(83, 26)}
+              lit
+                INT {INT, "65", @(83, 30)}
         stmtEmpty {SEMICOLON, ";", @(83, 33)}
         funCall
           identifier {IDENTIFIER, "prints", @(84, 5)}
           exprList
-            expr
-              lit
-                STRING {STRING, ""Original array: "", @(84, 12)}
+            lit
+              STRING {STRING, ""Original array: "", @(84, 12)}
         stmtEmpty {SEMICOLON, ";", @(84, 31)}
         funCall
           identifier {IDENTIFIER, "print_array", @(85, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "array", @(85, 17)}
+            identifier {IDENTIFIER, "array", @(85, 17)}
         stmtEmpty {SEMICOLON, ";", @(85, 23)}
         funCall
           identifier {IDENTIFIER, "println", @(86, 5)}
@@ -442,34 +359,28 @@ Program
         stmtEmpty {SEMICOLON, ";", @(86, 14)}
         assign {ASSIGN, "=", @(87, 9)}
           identifier {IDENTIFIER, "sum", @(87, 5)}
-          expr
-            identifier {IDENTIFIER, "sum_array", @(87, 11)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "array", @(87, 21)}
+          identifier {IDENTIFIER, "sum_array", @(87, 11)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "array", @(87, 21)}
         stmtEmpty {SEMICOLON, ";", @(87, 27)}
         assign {ASSIGN, "=", @(88, 9)}
           identifier {IDENTIFIER, "max", @(88, 5)}
-          expr
-            identifier {IDENTIFIER, "max_array", @(88, 11)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "array", @(88, 21)}
+          identifier {IDENTIFIER, "max_array", @(88, 11)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "array", @(88, 21)}
         stmtEmpty {SEMICOLON, ";", @(88, 27)}
         funCall
           identifier {IDENTIFIER, "prints", @(89, 5)}
           exprList
-            expr
-              lit
-                STRING {STRING, ""Sum of array:   "", @(89, 12)}
+            lit
+              STRING {STRING, ""Sum of array:   "", @(89, 12)}
         stmtEmpty {SEMICOLON, ";", @(89, 31)}
         funCall
           identifier {IDENTIFIER, "printi", @(90, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "sum", @(90, 12)}
+            identifier {IDENTIFIER, "sum", @(90, 12)}
         stmtEmpty {SEMICOLON, ";", @(90, 16)}
         funCall
           identifier {IDENTIFIER, "println", @(91, 5)}
@@ -478,15 +389,13 @@ Program
         funCall
           identifier {IDENTIFIER, "prints", @(92, 5)}
           exprList
-            expr
-              lit
-                STRING {STRING, ""Max of array:   "", @(92, 12)}
+            lit
+              STRING {STRING, ""Max of array:   "", @(92, 12)}
         stmtEmpty {SEMICOLON, ";", @(92, 31)}
         funCall
           identifier {IDENTIFIER, "printi", @(93, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "max", @(93, 12)}
+            identifier {IDENTIFIER, "max", @(93, 12)}
         stmtEmpty {SEMICOLON, ";", @(93, 16)}
         funCall
           identifier {IDENTIFIER, "println", @(94, 5)}
@@ -495,21 +404,18 @@ Program
         funCall
           identifier {IDENTIFIER, "sort_array", @(95, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "array", @(95, 16)}
+            identifier {IDENTIFIER, "array", @(95, 16)}
         stmtEmpty {SEMICOLON, ";", @(95, 22)}
         funCall
           identifier {IDENTIFIER, "prints", @(96, 5)}
           exprList
-            expr
-              lit
-                STRING {STRING, ""Sorted array:   "", @(96, 12)}
+            lit
+              STRING {STRING, ""Sorted array:   "", @(96, 12)}
         stmtEmpty {SEMICOLON, ";", @(96, 31)}
         funCall
           identifier {IDENTIFIER, "print_array", @(97, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "array", @(97, 17)}
+            identifier {IDENTIFIER, "array", @(97, 17)}
         stmtEmpty {SEMICOLON, ";", @(97, 23)}
         funCall
           identifier {IDENTIFIER, "println", @(98, 5)}

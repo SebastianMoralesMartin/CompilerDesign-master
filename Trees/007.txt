@@ -12,25 +12,22 @@ Program
       varDefList
       stmtList
         stmtIf {IF, "if", @(10, 5)}
-          expr
-            not_equal {NOT_EQUAL, "!=", @(10, 16)}
-              identifier {IDENTIFIER, "value1", @(10, 9)}
-              identifier {IDENTIFIER, "value2", @(10, 19)}
+          not_equal {NOT_EQUAL, "!=", @(10, 16)}
+            identifier {IDENTIFIER, "value1", @(10, 9)}
+            identifier {IDENTIFIER, "value2", @(10, 19)}
           stmtList
             stmtIncr {INC, "inc", @(11, 9)}
               identifier {IDENTIFIER, "fails", @(11, 13)}
             funCall
               identifier {IDENTIFIER, "prints", @(12, 9)}
               exprList
-                expr
-                  lit
-                    STRING {STRING, ""Assertion failure: "", @(12, 16)}
+                lit
+                  STRING {STRING, ""Assertion failure: "", @(12, 16)}
             stmtEmpty {SEMICOLON, ";", @(12, 38)}
             funCall
               identifier {IDENTIFIER, "prints", @(13, 9)}
               exprList
-                expr
-                  identifier {IDENTIFIER, "message", @(13, 16)}
+                identifier {IDENTIFIER, "message", @(13, 16)}
             stmtEmpty {SEMICOLON, ";", @(13, 24)}
             funCall
               identifier {IDENTIFIER, "println", @(14, 9)}
@@ -49,265 +46,198 @@ Program
       stmtList
         assign {ASSIGN, "=", @(20, 11)}
           identifier {IDENTIFIER, "fails", @(20, 5)}
-          expr
-            lit
-              INT {INT, "0", @(20, 13)}
+          lit
+            INT {INT, "0", @(20, 13)}
         stmtEmpty {SEMICOLON, ";", @(20, 14)}
         funCall
           identifier {IDENTIFIER, "assert", @(21, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\n'", @(21, 12)}
-            expr
-              lit
-                INT {INT, "10", @(21, 18)}
-            expr
-              lit
-                STRING {STRING, ""error in newline literal"", @(21, 22)}
+            lit
+              Character {CHARACTER, "'\n'", @(21, 12)}
+            lit
+              INT {INT, "10", @(21, 18)}
+            lit
+              STRING {STRING, ""error in newline literal"", @(21, 22)}
         stmtEmpty {SEMICOLON, ";", @(21, 49)}
         funCall
           identifier {IDENTIFIER, "assert", @(22, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\r'", @(22, 12)}
-            expr
-              lit
-                INT {INT, "13", @(22, 18)}
-            expr
-              lit
-                STRING {STRING, ""error in carriage return literal"", @(22, 22)}
+            lit
+              Character {CHARACTER, "'\r'", @(22, 12)}
+            lit
+              INT {INT, "13", @(22, 18)}
+            lit
+              STRING {STRING, ""error in carriage return literal"", @(22, 22)}
         stmtEmpty {SEMICOLON, ";", @(22, 57)}
         funCall
           identifier {IDENTIFIER, "assert", @(23, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\t'", @(23, 12)}
-            expr
-              lit
-                INT {INT, "9", @(23, 18)}
-            expr
-              lit
-                STRING {STRING, ""error in tab literal"", @(23, 21)}
+            lit
+              Character {CHARACTER, "'\t'", @(23, 12)}
+            lit
+              INT {INT, "9", @(23, 18)}
+            lit
+              STRING {STRING, ""error in tab literal"", @(23, 21)}
         stmtEmpty {SEMICOLON, ";", @(23, 44)}
         funCall
           identifier {IDENTIFIER, "assert", @(24, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\\'", @(24, 12)}
-            expr
-              lit
-                INT {INT, "92", @(24, 18)}
-            expr
-              lit
-                STRING {STRING, ""error in backslash literal"", @(24, 22)}
+            lit
+              Character {CHARACTER, "'\\'", @(24, 12)}
+            lit
+              INT {INT, "92", @(24, 18)}
+            lit
+              STRING {STRING, ""error in backslash literal"", @(24, 22)}
         stmtEmpty {SEMICOLON, ";", @(24, 51)}
         funCall
           identifier {IDENTIFIER, "assert", @(25, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\''", @(25, 12)}
-            expr
-              lit
-                INT {INT, "39", @(25, 18)}
-            expr
-              lit
-                STRING {STRING, ""error in single quote literal"", @(25, 22)}
+            lit
+              Character {CHARACTER, "'\''", @(25, 12)}
+            lit
+              INT {INT, "39", @(25, 18)}
+            lit
+              STRING {STRING, ""error in single quote literal"", @(25, 22)}
         stmtEmpty {SEMICOLON, ";", @(25, 54)}
         funCall
           identifier {IDENTIFIER, "assert", @(26, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\"'", @(26, 12)}
-            expr
-              lit
-                INT {INT, "34", @(26, 18)}
-            expr
-              lit
-                STRING {STRING, ""error in double quote literal"", @(26, 22)}
+            lit
+              Character {CHARACTER, "'\"'", @(26, 12)}
+            lit
+              INT {INT, "34", @(26, 18)}
+            lit
+              STRING {STRING, ""error in double quote literal"", @(26, 22)}
         stmtEmpty {SEMICOLON, ";", @(26, 54)}
         funCall
           identifier {IDENTIFIER, "assert", @(27, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\u000041'", @(27, 12)}
-            expr
-              lit
-                Character {CHARACTER, "'A'", @(27, 24)}
-            expr
-              lit
-                STRING {STRING, ""error in letter A literal code point"", @(27, 29)}
+            lit
+              Character {CHARACTER, "'\u000041'", @(27, 12)}
+            lit
+              Character {CHARACTER, "'A'", @(27, 24)}
+            lit
+              STRING {STRING, ""error in letter A literal code point"", @(27, 29)}
         stmtEmpty {SEMICOLON, ";", @(27, 68)}
         funCall
           identifier {IDENTIFIER, "assert", @(28, 5)}
           exprList
-            expr
-              lit
-                Character {CHARACTER, "'\u0020AC'", @(28, 12)}
-            expr
-              lit
-                INT {INT, "8364", @(28, 24)}
-            expr
-              lit
-                STRING {STRING, ""error in euro literal code point"", @(28, 30)}
+            lit
+              Character {CHARACTER, "'\u0020AC'", @(28, 12)}
+            lit
+              INT {INT, "8364", @(28, 24)}
+            lit
+              STRING {STRING, ""error in euro literal code point"", @(28, 30)}
         stmtEmpty {SEMICOLON, ";", @(28, 65)}
         assign {ASSIGN, "=", @(29, 7)}
           identifier {IDENTIFIER, "s", @(29, 5)}
-          expr
-            lit
-              STRING {STRING, ""\u0000A1\u0020ACste ni\u0000F1o \u0020ACst\u0000E1 bien \u0000D1o\u0000F1o!\n"", @(29, 9)}
+          lit
+            STRING {STRING, ""\u0000A1\u0020ACste ni\u0000F1o \u0020ACst\u0000E1 bien \u0000D1o\u0000F1o!\n"", @(29, 9)}
         stmtEmpty {SEMICOLON, ";", @(29, 88)}
         assign {ASSIGN, "=", @(30, 7)}
           identifier {IDENTIFIER, "a", @(30, 5)}
-          expr
-            array
-              exprList
-                expr
-                  lit
-                    INT {INT, "161", @(30, 10)}
-                expr
-                  lit
-                    INT {INT, "8364", @(30, 15)}
-                expr
-                  lit
-                    INT {INT, "115", @(30, 21)}
-                expr
-                  lit
-                    INT {INT, "116", @(30, 26)}
-                expr
-                  lit
-                    INT {INT, "101", @(30, 31)}
-                expr
-                  lit
-                    INT {INT, "32", @(30, 36)}
-                expr
-                  lit
-                    INT {INT, "110", @(30, 40)}
-                expr
-                  lit
-                    INT {INT, "105", @(30, 45)}
-                expr
-                  lit
-                    INT {INT, "241", @(30, 50)}
-                expr
-                  lit
-                    INT {INT, "111", @(30, 55)}
-                expr
-                  lit
-                    INT {INT, "32", @(30, 60)}
-                expr
-                  lit
-                    INT {INT, "8364", @(30, 64)}
-                expr
-                  lit
-                    INT {INT, "115", @(31, 10)}
-                expr
-                  lit
-                    INT {INT, "116", @(31, 15)}
-                expr
-                  lit
-                    INT {INT, "225", @(31, 20)}
-                expr
-                  lit
-                    INT {INT, "32", @(31, 25)}
-                expr
-                  lit
-                    INT {INT, "98", @(31, 29)}
-                expr
-                  lit
-                    INT {INT, "105", @(31, 33)}
-                expr
-                  lit
-                    INT {INT, "101", @(31, 38)}
-                expr
-                  lit
-                    INT {INT, "110", @(31, 43)}
-                expr
-                  lit
-                    INT {INT, "32", @(31, 48)}
-                expr
-                  lit
-                    INT {INT, "209", @(31, 52)}
-                expr
-                  lit
-                    INT {INT, "111", @(31, 57)}
-                expr
-                  lit
-                    INT {INT, "241", @(31, 62)}
-                expr
-                  lit
-                    INT {INT, "111", @(31, 67)}
-                expr
-                  lit
-                    INT {INT, "33", @(32, 10)}
-                expr
-                  lit
-                    INT {INT, "10", @(32, 14)}
+          array
+            exprList
+              lit
+                INT {INT, "161", @(30, 10)}
+              lit
+                INT {INT, "8364", @(30, 15)}
+              lit
+                INT {INT, "115", @(30, 21)}
+              lit
+                INT {INT, "116", @(30, 26)}
+              lit
+                INT {INT, "101", @(30, 31)}
+              lit
+                INT {INT, "32", @(30, 36)}
+              lit
+                INT {INT, "110", @(30, 40)}
+              lit
+                INT {INT, "105", @(30, 45)}
+              lit
+                INT {INT, "241", @(30, 50)}
+              lit
+                INT {INT, "111", @(30, 55)}
+              lit
+                INT {INT, "32", @(30, 60)}
+              lit
+                INT {INT, "8364", @(30, 64)}
+              lit
+                INT {INT, "115", @(31, 10)}
+              lit
+                INT {INT, "116", @(31, 15)}
+              lit
+                INT {INT, "225", @(31, 20)}
+              lit
+                INT {INT, "32", @(31, 25)}
+              lit
+                INT {INT, "98", @(31, 29)}
+              lit
+                INT {INT, "105", @(31, 33)}
+              lit
+                INT {INT, "101", @(31, 38)}
+              lit
+                INT {INT, "110", @(31, 43)}
+              lit
+                INT {INT, "32", @(31, 48)}
+              lit
+                INT {INT, "209", @(31, 52)}
+              lit
+                INT {INT, "111", @(31, 57)}
+              lit
+                INT {INT, "241", @(31, 62)}
+              lit
+                INT {INT, "111", @(31, 67)}
+              lit
+                INT {INT, "33", @(32, 10)}
+              lit
+                INT {INT, "10", @(32, 14)}
         stmtEmpty {SEMICOLON, ";", @(32, 17)}
         assign {ASSIGN, "=", @(33, 7)}
           identifier {IDENTIFIER, "i", @(33, 5)}
-          expr
-            lit
-              INT {INT, "0", @(33, 9)}
+          lit
+            INT {INT, "0", @(33, 9)}
         stmtEmpty {SEMICOLON, ";", @(33, 10)}
         assign {ASSIGN, "=", @(34, 7)}
           identifier {IDENTIFIER, "n", @(34, 5)}
-          expr
-            identifier {IDENTIFIER, "size", @(34, 9)}
-              exprFunCall
-                exprList
-                  expr
-                    identifier {IDENTIFIER, "s", @(34, 14)}
+          identifier {IDENTIFIER, "size", @(34, 9)}
+            exprFunCall
+              exprList
+                identifier {IDENTIFIER, "s", @(34, 14)}
         stmtEmpty {SEMICOLON, ";", @(34, 16)}
         stmtWhile {WHILE, "while", @(35, 5)}
-          expr
-            less_than {LESS_THAN, "<", @(35, 14)}
-              identifier {IDENTIFIER, "i", @(35, 12)}
-              identifier {IDENTIFIER, "n", @(35, 16)}
+          less_than {LESS_THAN, "<", @(35, 14)}
+            identifier {IDENTIFIER, "i", @(35, 12)}
+            identifier {IDENTIFIER, "n", @(35, 16)}
           stmtList
             funCall
               identifier {IDENTIFIER, "assert", @(36, 9)}
               exprList
-                expr
-                  identifier {IDENTIFIER, "get", @(36, 16)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "a", @(36, 20)}
-                        expr
-                          identifier {IDENTIFIER, "i", @(36, 23)}
-                expr
-                  identifier {IDENTIFIER, "get", @(36, 27)}
-                    exprFunCall
-                      exprList
-                        expr
-                          identifier {IDENTIFIER, "s", @(36, 31)}
-                        expr
-                          identifier {IDENTIFIER, "i", @(36, 34)}
-                expr
-                  lit
-                    STRING {STRING, ""error in string literal"", @(36, 38)}
+                identifier {IDENTIFIER, "get", @(36, 16)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "a", @(36, 20)}
+                      identifier {IDENTIFIER, "i", @(36, 23)}
+                identifier {IDENTIFIER, "get", @(36, 27)}
+                  exprFunCall
+                    exprList
+                      identifier {IDENTIFIER, "s", @(36, 31)}
+                      identifier {IDENTIFIER, "i", @(36, 34)}
+                lit
+                  STRING {STRING, ""error in string literal"", @(36, 38)}
             stmtEmpty {SEMICOLON, ";", @(36, 64)}
             stmtIncr {INC, "inc", @(37, 9)}
               identifier {IDENTIFIER, "i", @(37, 13)}
         funCall
           identifier {IDENTIFIER, "printi", @(39, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "fails", @(39, 12)}
+            identifier {IDENTIFIER, "fails", @(39, 12)}
         stmtEmpty {SEMICOLON, ";", @(39, 18)}
         funCall
           identifier {IDENTIFIER, "prints", @(40, 5)}
           exprList
-            expr
-              lit
-                STRING {STRING, "" assertion failure(s) found."", @(40, 12)}
+            lit
+              STRING {STRING, "" assertion failure(s) found."", @(40, 12)}
         stmtEmpty {SEMICOLON, ";", @(40, 43)}
         funCall
           identifier {IDENTIFIER, "println", @(41, 5)}
@@ -316,6 +246,6 @@ Program
         funCall
           identifier {IDENTIFIER, "prints", @(42, 5)}
           exprList
-            expr
-              identifier {IDENTIFIER, "a", @(42, 12)}
+            identifier {IDENTIFIER, "a", @(42, 12)}
         stmtEmpty {SEMICOLON, ";", @(42, 14)}
+
