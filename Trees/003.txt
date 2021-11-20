@@ -154,5 +154,3 @@ Program
               identifier {IDENTIFIER, "option", @(40, 31)}
               lit
                 Character {CHARACTER, "'y'", @(40, 41)}
-
-

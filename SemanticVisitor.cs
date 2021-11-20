@@ -162,7 +162,7 @@ namespace Falak
             VisitIdListVar(node[0]); //Va a idList, pero se creo una funcion especial 
         }
 
-        public void VisitIdListVar(Node node)
+        public void VisitIdListVar(idList node)
         {
             foreach (var identifier in node.children) {
                 var variableName = identifier[0].AnchorToken.Lexeme;
@@ -212,7 +212,7 @@ namespace Falak
 
         public void Visit(stmtList node) 
         {   
-            VisitChildren(node); //Can goe to different children
+            VisitChildren(node); //Can go to different children
            
         }
 
