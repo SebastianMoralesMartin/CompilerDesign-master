@@ -61,6 +61,9 @@ using System.Collections.Generic;
 namespace Falak
 {
     class ParserTest{
+
+		bool def = false;
+		
         IEnumerator<Token> tokenStream;
 
         public ParserTest(IEnumerator<Token> tokenStream) {
@@ -118,37 +121,43 @@ namespace Falak
         public Node varDef()
         {
             Expect(TokenCategory.VAR);
-            var result = new varDef()
-            {
-                AnchorToken = Expect(TokenCategory.IDENTIFIER)
-            };
-            result.Add(idList());
+			def = true;
+            var result = idList();
+			def = false;
+            
             Expect(TokenCategory.SEMICOLON);
             return result;
         }
 
         public Node idList()
         {
-            var result = new idList();
-            if (Current == TokenCategory.IDENTIFIER)
-            {
-                result.Add(new identifier()
-                {
-                    AnchorToken = Expect(TokenCategory.IDENTIFIER)
-                });
-                while (Current == TokenCategory.COMMA)
+			Node idNode;
+			var name = Expect(TokenCategory.IDENTIFIER);
+			if(def){
+				idNode = new varDef(){ 
+				AnchorToken = name
+				};
+			} else {
+				idNode = new identifier(){ AnchorToken = name };	
+			}
+			var result = new idList();
+			result.Add(idNode);
+			while (Current == TokenCategory.COMMA)
                 {
                     Expect(TokenCategory.COMMA);
-                    result.Add(new identifier()
+					if(def){
+						idNode = new varDef(){ 
+						AnchorToken = Expect(TokenCategory.IDENTIFIER)
+						};
+					} else {result.Add(new identifier()
                     {
                         AnchorToken = Expect(TokenCategory.IDENTIFIER)
-                    });
+                    }); }
+                    
+					result.Add(idNode);
                 }
-                
-            }
-
-            return result;
-        }
+			return result;
+		}
 
         /*public Node idListCont()
         {

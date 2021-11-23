@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
+
 namespace Falak {
 
     public class Driver {
@@ -61,10 +62,19 @@ namespace Falak {
                 var semantic = new FirstVisitor();
                 semantic.Visit((dynamic) program);
 
+				
+
+				var semantic2 = new SecondVisitor(semantic.GlobalFunctionsTable, semantic.GlobalVars);
+				semantic2.Visit((dynamic) program);
+
                 Console.WriteLine("Semantics OK.");
-                Console.WriteLine();
+				Console.WriteLine("============");
+				Console.WriteLine("\nGlobal: ");
+				Console.WriteLine(semantic.GlobalFunctionsTable.ToString());
+				Console.WriteLine(semantic.GlobalVars.ToString());
+                Console.WriteLine("");
                 //Console.WriteLine("Symbol Table");
-                Console.WriteLine("============");
+                
                 /*foreach (var entry in semantic.Table) {
                     Console.WriteLine(entry);
                 }*/

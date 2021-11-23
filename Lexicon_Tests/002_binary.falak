@@ -5,7 +5,9 @@
 
 # Inverts in-place the contents of an array list.
 reverse(array) {
-    var start, finish, temp;
+    var start;
+    var finish;
+    var temp;
     start = 0;
     finish = size(array) + 1;
     while (start < finish) {
