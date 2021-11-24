@@ -1,3 +1,22 @@
 ﻿var a,b,c;
+
+functionTest(x, y, z){
+    
+    return x;
+}
+
 main(){
+    var a;
+    a = 3;
+    b = functionTest(a, a, a);
+    do{
+        ;
+    } while(a > 0);
+    set(a, a, a);
+    prints("");
+    ;
+    if(a > 2){
+        ;
+    }
+    println();
 }

@@ -87,9 +87,9 @@ namespace Falak
         
         public void Visit(funDef node) {  
  
-            string functionName = node[0].AnchorToken.Lexeme;
+            string functionName = node.AnchorToken.Lexeme;
 
-            Console.WriteLine(functionName);
+            //Console.WriteLine(functionName);
 
             if (functionName == "main")
             {
@@ -104,8 +104,8 @@ namespace Falak
             } else {
 
                 tempContainer = new Type(new List<object>(){functionName, "false"});
-                Console.WriteLine("En la funcion " + functionName + "\nQuieres Visitar a " + node[1]);
-                Visit((dynamic) node[1]);
+                //Console.WriteLine("En la funcion " + functionName + "\nQuieres Visitar a " + node[1]);
+                Visit((dynamic) node[0]);
             }
 			
         }
@@ -126,7 +126,7 @@ namespace Falak
         
         public void Visit(ParameterList node)
         {
-            Console.WriteLine("This should print");
+            //Console.WriteLine("This should print");
             int children = 0;
             int parameters = 0;
             foreach (var n in node)
@@ -162,9 +162,9 @@ namespace Falak
             tempContainer.CustomArray.Add(new LocalTable());
             GlobalFunctionsTable.Add(tempContainer);
             visitingMain = false;
-            Console.WriteLine("A verr Sebo :O \nChildren: " + children + "/nParam: " + parameters);
+            /*Console.WriteLine("A verr Sebo :O \nChildren: " + children + "/nParam: " + parameters);
             Console.WriteLine("Tabla: \n" + GlobalFunctionsTable.ToString());
-            Console.WriteLine("Tabla Variables \n" + GlobalVars.ToString());
+            Console.WriteLine("Tabla Variables \n" + GlobalVars.ToString());*/
         }
 
         public void Visit(identifier node)

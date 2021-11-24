@@ -61,17 +61,20 @@ namespace Falak {
 
                 var semantic = new FirstVisitor();
                 semantic.Visit((dynamic) program);
-
-				
-
-				var semantic2 = new SecondVisitor(semantic.GlobalFunctionsTable, semantic.GlobalVars);
-				semantic2.Visit((dynamic) program);
-
-                Console.WriteLine("Semantics OK.");
+                Console.WriteLine("Global Semantics OK.");
 				Console.WriteLine("============");
 				Console.WriteLine("\nGlobal: ");
 				Console.WriteLine(semantic.GlobalFunctionsTable.ToString());
 				Console.WriteLine(semantic.GlobalVars.ToString());
+				
+
+				var semantic2 = new SecondVisitor(semantic.GlobalFunctionsTable, semantic.GlobalVars);
+				semantic2.Visit((dynamic) program);
+    
+                Console.WriteLine(semantic2.globalFunctions.ToString());
+                Console.WriteLine(semantic2.globalVariables.ToString());
+                Console.WriteLine(semantic2.localFuncTable.ToString());
+
                 Console.WriteLine("");
                 //Console.WriteLine("Symbol Table");
                 
@@ -98,3 +101,4 @@ namespace Falak {
         }
     }
 }
+
