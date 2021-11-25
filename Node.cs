@@ -46,11 +46,7 @@ namespace Falak
         }
 
         public int childrenLength(){
-            int sum = 0;
-			foreach (var child in this) {
-                sum ++;
-            }
-			return sum;
+            return children.Count;
         }
 
         static void TreeTraversal(Node node, string indent, StringBuilder sb) {

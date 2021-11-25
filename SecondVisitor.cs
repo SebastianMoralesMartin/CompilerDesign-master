@@ -175,7 +175,7 @@ namespace Falak
                     Visit((dynamic) node[0]);
                     inFunctionCall = false;
                     int arity = 0;
-                    Console.WriteLine("Before foreach1" + name);
+                    Console.WriteLine("Before foreach 1" + name);
                     foreach (var i in node[0]){
                         arity +=1;
                     }
@@ -188,10 +188,13 @@ namespace Falak
                 containerFun = Type.GetFromSet(globalFunctions.getTable(), name);
                 inFunctionCall = true;
                 numberParameters[numberFunctionCall - 1] += 1;
-                Visit((dynamic) node[0]);
+                if (node.childrenLength() > 0){
+                    Visit((dynamic) node[0]);
+                }
+
                 inFunctionCall = false;
                 int arity = 0;
-                Console.WriteLine("Before foreach2  " + (string)containerFun.CustomArray[2] );
+                Console.WriteLine("Before foreach 2  " + name + (string)containerFun.CustomArray[2] );
                 if((string)containerFun.CustomArray[2] != "0"){
                     foreach (var i in node[0]){
                         arity +=1;
@@ -224,7 +227,9 @@ namespace Falak
                 } else {
                     inFunctionCall = true;
                     numberParameters[numberFunctionCall - 1] = 1;
-                    Visit((dynamic) node[0]);
+                    if (node.childrenLength() > 0){
+                        Visit((dynamic) node[0]);
+                    }
                     inFunctionCall = false;
                     int arity = 0;
                     foreach (var i in node[0]){arity += 1;}
@@ -237,10 +242,15 @@ namespace Falak
                 containerFun = Type.GetFromSet(globalFunctions.getTable(), name);
                 inFunctionCall = true;
                 numberParameters[numberFunctionCall - 1] += 1;
-                Visit( (dynamic) node[0]);
+                if (node.childrenLength() > 0){
+                    Visit((dynamic) node[0]);
+                }
                 inFunctionCall = false;
                 int arity = 0;
-                foreach (var item in node[0]) { arity += 1; }
+                if (node.childrenLength() > 0){
+                    foreach (var item in node[0]) { arity += 1; }
+                }
+                
                 if (!((string)containerFun.CustomArray[2]).Equals(arity.ToString()))
                 {
                     throw new SemanticError(
@@ -301,35 +311,38 @@ namespace Falak
         {
             if(inFunctionCall){
                 numberParameters[numberFunctionCall - 1] = 0;
-                foreach (var n in node){
+                if (node.childrenLength() > 0){
+                    foreach (var n in node){
                     Visit( (dynamic) n);
                     numberParameters[numberFunctionCall - 1] += 1;
                 }
+                }
+                
             } else {
                 VisitChildren(node);
             }
         }
 
-        public void Visit(exprOr node)
+        public void Visit(Or node)
         {
             VisitChildren(node);
         }
 
-        public void Visit(exprAnd node)
+        public void Visit(And node)
         {
             VisitChildren(node);
         }
         
         public void Visit(identifier node)
         {
-            /*var id = node.AnchorToken.Lexeme;
+            var id = node.AnchorToken.Lexeme;
             if ( ! localFuncTable.Contains(id)){
                 if( ! globalVariables.Contains(id)){
                     throw new SemanticError("undeclared identifier " + id + node.AnchorToken);
                        //if (inFunction && ! globalFunctions.Contains(id)){}
                        
                 }
-            }*/
+            }
         }
         
         public void Visit(INT node)
@@ -404,6 +417,9 @@ namespace Falak
         {
             Visit((dynamic) node[0]);
         }
+        public void Visit(Xor node){
+            VisitChildren(node);
+        }
         
         // ---Bunch of empty stuff --------------------------------------------
         
@@ -417,5 +433,8 @@ namespace Falak
         public void Visit(stmtBreak node){}
         public void Visit(Positive node){}
         public void Visit(Negative node){}
+        public void Visit(Not node){}
+        public void Visit(Minus node){}
+
     }
 }

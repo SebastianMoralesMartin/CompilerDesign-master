@@ -42,7 +42,6 @@ main() {
         num = readi();
         prints("Conversion to binary of that number: ");
         prints(binary(num));
-        println();
         prints("Convert another number? ");
         option = reads();
         if (size(option) == 0) {

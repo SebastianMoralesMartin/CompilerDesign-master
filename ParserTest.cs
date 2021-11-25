@@ -342,7 +342,7 @@ namespace Falak
                 Current == TokenCategory.NOT ||
                 Current == TokenCategory.IDENTIFIER ||
                 Current == TokenCategory.BRACKET_LEFT ||
-                Current == TokenCategory.INT_LITERAL ||
+                Current == TokenCategory.INT ||
                 Current == TokenCategory.CHARACTER ||
                 Current == TokenCategory.STRING ||
                 Current == TokenCategory.PARENTHESIS_OPEN ||

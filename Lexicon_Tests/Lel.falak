@@ -7,7 +7,7 @@ functionTest(x, y, z){
 
 main(){
     var a;
-    a = 3;
+    a = [];
     b = functionTest(a, a, a);
     do{
         ;
@@ -18,5 +18,4 @@ main(){
     if(a > 2){
         ;
     }
-    println();
 }
