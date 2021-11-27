@@ -6,7 +6,6 @@
 
 var fails;
 var asserts;
-
 assert(value1, value2, message) {
     inc asserts;
     if (value1 != value2) {

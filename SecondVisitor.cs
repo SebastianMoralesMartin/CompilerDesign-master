@@ -287,6 +287,12 @@ namespace Falak
             loops -= 1;
         }
 
+		public void Visit(stmtBreak node){
+            if (loops == 0){
+                throw new SemanticError("Break statement is not inside a while or do while" + node + node.AnchorToken);
+            }
+        }
+
         public void Visit(stmtIf node)
         {
             VisitChildren(node);
@@ -430,7 +436,7 @@ namespace Falak
         public void Visit(TRUE node){}
         public void Visit(FALSE node){}
         public void Visit(stmtEmpty node){}
-        public void Visit(stmtBreak node){}
+        
         public void Visit(Positive node){}
         public void Visit(Negative node){}
         public void Visit(Not node){}
